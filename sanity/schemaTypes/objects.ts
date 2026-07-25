@@ -1,0 +1,137 @@
+import { defineField, defineType } from "sanity";
+
+export const ICON_OPTIONS = [
+  "leaf",
+  "shield",
+  "shield-plus",
+  "shield-alert",
+  "recycle",
+  "globe",
+  "cog",
+  "truck",
+  "building",
+  "building-2",
+  "fish",
+  "star",
+  "trees",
+  "warehouse",
+  "layers",
+  "factory",
+  "wrench",
+  "award",
+  "clock",
+  "sparkles",
+  "thumbs-up",
+  "handshake",
+  "rocket",
+  "users",
+  "boxes",
+  "layout-panel-left",
+  "spline",
+  "square-stack",
+  "package",
+  "calendar",
+  "map-pin",
+  "message-circle",
+  "mail",
+  "search",
+];
+
+export const titlePart = defineType({
+  name: "titlePart",
+  title: "Fragmento de título",
+  type: "object",
+  fields: [
+    defineField({ name: "text", title: "Texto", type: "string" }),
+    defineField({
+      name: "highlight",
+      title: "Resaltar en verde",
+      type: "boolean",
+      initialValue: false,
+    }),
+  ],
+  preview: {
+    select: { title: "text", highlight: "highlight" },
+    prepare({ title, highlight }) {
+      return { title: highlight ? `${title} (verde)` : title };
+    },
+  },
+});
+
+export const ctaButton = defineType({
+  name: "ctaButton",
+  title: "Botón",
+  type: "object",
+  fields: [
+    defineField({ name: "label", title: "Texto del botón", type: "string" }),
+    defineField({ name: "href", title: "Link (URL o ruta interna)", type: "string" }),
+  ],
+});
+
+export const badgeItem = defineType({
+  name: "badgeItem",
+  title: "Badge de confianza",
+  type: "object",
+  fields: [
+    defineField({
+      name: "icon",
+      title: "Ícono",
+      type: "string",
+      options: { list: ICON_OPTIONS },
+    }),
+    defineField({ name: "label", title: "Texto", type: "string" }),
+  ],
+  preview: { select: { title: "label", subtitle: "icon" } },
+});
+
+export const featureItem = defineType({
+  name: "featureItem",
+  title: "Ítem de característica",
+  type: "object",
+  fields: [
+    defineField({
+      name: "icon",
+      title: "Ícono",
+      type: "string",
+      options: { list: ICON_OPTIONS },
+    }),
+    defineField({ name: "title", title: "Título", type: "string" }),
+    defineField({ name: "description", title: "Descripción", type: "text", rows: 2 }),
+  ],
+  preview: { select: { title: "title", subtitle: "description" } },
+});
+
+export const statItem = defineType({
+  name: "statItem",
+  title: "Estadística",
+  type: "object",
+  fields: [
+    defineField({
+      name: "icon",
+      title: "Ícono",
+      type: "string",
+      options: { list: ICON_OPTIONS },
+    }),
+    defineField({ name: "value", title: "Valor (ej: +13 años)", type: "string" }),
+    defineField({ name: "label", title: "Etiqueta", type: "string" }),
+  ],
+  preview: { select: { title: "value", subtitle: "label" } },
+});
+
+export const workingWayItem = defineType({
+  name: "workingWayItem",
+  title: "Ítem de manera de trabajar",
+  type: "object",
+  fields: [
+    defineField({
+      name: "icon",
+      title: "Ícono",
+      type: "string",
+      options: { list: ICON_OPTIONS },
+    }),
+    defineField({ name: "title", title: "Título", type: "string" }),
+    defineField({ name: "description", title: "Descripción", type: "text", rows: 2 }),
+    defineField({ name: "image", title: "Imagen", type: "image", options: { hotspot: true } }),
+  ],
+  preview: { select: { title: "title", media: "image" } },
+});

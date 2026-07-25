@@ -1,0 +1,158 @@
+import Link from "next/link";
+import { MapPin, Phone, Mail } from "lucide-react";
+
+import { getContactInfo } from "@/sanity/lib/queries";
+
+function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z" />
+    </svg>
+  );
+}
+
+function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} aria-hidden="true" {...props}>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+const navigationLinks = [
+  { href: "/", label: "KD Pack" },
+  { href: "/konstruplast", label: "Konstruplast" },
+  { href: "/productos", label: "Productos" },
+  { href: "/industrias", label: "Industrias" },
+  { href: "/nosotros", label: "Nosotros" },
+  { href: "/proyectos", label: "Proyectos" },
+  { href: "/contacto", label: "Contacto" },
+];
+
+const productLinks = [
+  { href: "/productos?categoria=agricola", label: "Agrícola" },
+  { href: "/productos?categoria=cajas-cosecheras", label: "Cajas cosecheras" },
+  { href: "/productos?categoria=forestal", label: "Forestal" },
+  { href: "/productos?categoria=almacenaje", label: "Almacenaje" },
+  { href: "/productos?categoria=pallets", label: "Pallets" },
+  { href: "/productos?categoria=pesca", label: "Pesca" },
+];
+
+export async function Footer() {
+  const contact = await getContactInfo();
+
+  return (
+    <footer className="bg-kd-black text-white">
+      <div className="container py-14 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <span className="text-2xl font-bold tracking-tight">
+            KD<span className="text-kd-green">+</span>
+          </span>
+          <p className="mt-4 text-sm leading-relaxed text-white/60 max-w-xs">
+            Sistemas de packaging y soluciones plásticas para industrias que
+            no pueden detenerse.
+          </p>
+          <div className="mt-5 flex items-center gap-3">
+            <a
+              href={contact.linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn de KD Plus"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 hover:border-kd-green hover:text-kd-green transition-colors"
+            >
+              <LinkedinIcon className="h-4 w-4" />
+            </a>
+            <a
+              href={contact.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram de KD Plus"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 hover:border-kd-green hover:text-kd-green transition-colors"
+            >
+              <InstagramIcon className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-white/80">
+            Navegación
+          </h3>
+          <ul className="mt-4 space-y-2.5">
+            {navigationLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="text-sm text-white/60 hover:text-white transition-colors"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-white/80">
+            Productos
+          </h3>
+          <ul className="mt-4 space-y-2.5">
+            {productLinks.map((link) => (
+              <li key={link.label}>
+                <Link
+                  href={link.href}
+                  className="text-sm text-white/60 hover:text-white transition-colors"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-white/80">
+            Contacto
+          </h3>
+          <ul className="mt-4 space-y-3 text-sm text-white/60">
+            <li className="flex items-start gap-2.5">
+              <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-kd-green" />
+              <span>{contact.address}</span>
+            </li>
+            <li className="flex items-center gap-2.5">
+              <Phone className="h-4 w-4 shrink-0 text-kd-green" />
+              <a href={contact.phoneHref} className="hover:text-white transition-colors">
+                {contact.phone}
+              </a>
+            </li>
+            <li className="flex items-center gap-2.5">
+              <Mail className="h-4 w-4 shrink-0 text-kd-green" />
+              <a
+                href={`mailto:${contact.email}`}
+                className="hover:text-white transition-colors"
+              >
+                {contact.email}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="border-t border-white/10">
+        <div className="container py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/50">
+          <p>© {new Date().getFullYear()} KD Pack. Todos los derechos reservados.</p>
+          <div className="flex items-center gap-5">
+            <Link href="/politica-de-privacidad" className="hover:text-white">
+              Política de privacidad
+            </Link>
+            <Link href="/terminos-y-condiciones" className="hover:text-white">
+              Términos y condiciones
+            </Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
