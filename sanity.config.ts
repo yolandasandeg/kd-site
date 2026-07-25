@@ -1,6 +1,7 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
+import { esESLocale } from "@sanity/locale-es-es";
 
 import { apiVersion, dataset, projectId } from "./sanity/env";
 import { schemaTypes } from "./sanity/schemaTypes";
@@ -13,5 +14,9 @@ export default defineConfig({
   projectId,
   dataset,
   schema: { types: schemaTypes },
-  plugins: [structureTool({ structure }), visionTool({ defaultApiVersion: apiVersion })],
+  plugins: [
+    structureTool({ structure }),
+    visionTool({ defaultApiVersion: apiVersion }),
+    esESLocale(),
+  ],
 });
