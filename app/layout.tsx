@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { draftMode } from "next/headers";
+import { VisualEditing } from "next-sanity";
 import "./globals.css";
 
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
@@ -32,9 +34,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { isEnabled: isDraftMode } = draftMode();
+
   return (
     <html lang="es" className={`${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        {children}
+        {isDraftMode && <VisualEditing />}
+      </body>
     </html>
   );
 }
