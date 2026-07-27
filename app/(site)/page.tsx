@@ -130,51 +130,6 @@ export default async function Home() {
         variant="compact"
       />
 
-      <FeatureRow
-        eyebrow={doc?.whyEyebrow || "¿Por qué elegir KD Pack?"}
-        title={
-          doc?.whyTitle ||
-          "Un aliado que entiende tu operación y responde cuando más importa."
-        }
-        background="white"
-        items={
-          doc?.whyItems?.length
-            ? doc.whyItems
-            : [
-                {
-                  icon: "globe",
-                  title: "Fabricación nacional",
-                  description:
-                    "Planta propia en Paine, Chile, con tecnología de última generación.",
-                },
-                {
-                  icon: "wrench",
-                  title: "Desarrollos a medida",
-                  description:
-                    "Creamos soluciones personalizadas según los desafíos de tu operación.",
-                },
-                {
-                  icon: "shield",
-                  title: "Calidad certificada",
-                  description:
-                    "Bajo estrictos estándares de calidad e inocuidad para mercados exigentes.",
-                },
-                {
-                  icon: "recycle",
-                  title: "Sostenibilidad real",
-                  description:
-                    "Productos reciclables que contribuyen a una industria más responsable.",
-                },
-                {
-                  icon: "clock",
-                  title: "Respuesta ágil",
-                  description:
-                    "Flexibilidad y rapidez para asegurar continuidad en tu cadena.",
-                },
-              ]
-        }
-      />
-
       <section className="py-16 lg:py-20 bg-kd-surface-alt">
         <div className="container">
           <div className="flex items-end justify-between gap-4 flex-wrap">
@@ -203,6 +158,64 @@ export default async function Home() {
         </div>
       </section>
 
+      <FeatureRow
+        eyebrow={doc?.whyEyebrow || "¿Por qué elegir KD Pack?"}
+        title={
+          doc?.whyTitle ||
+          "Un aliado que entiende tu operación y responde cuando más importa."
+        }
+        background="white"
+        items={
+          doc?.whyItems?.length
+            ? doc.whyItems
+            : [
+                {
+                  icon: "leaf",
+                  title: "100% energía renovable",
+                  description:
+                    "Nuestra planta opera con energía 100% renovable, reduciendo el impacto ambiental de cada producto.",
+                },
+                {
+                  icon: "shield",
+                  title: "ISO 9001 en toda la cadena productiva",
+                  description:
+                    "Certificación ISO 9001 que respalda la calidad y consistencia de todo nuestro proceso productivo.",
+                },
+                {
+                  icon: "shield-plus",
+                  title: "Grado alimentario",
+                  description:
+                    "Productos certificados para contacto directo con alimentos, cumpliendo los estándares más exigentes.",
+                },
+                {
+                  icon: "clock",
+                  title: "Cotización en menos de 24 horas",
+                  description:
+                    "Recibe una propuesta clara y a tiempo, sin esperas que frenen tu operación.",
+                },
+                {
+                  icon: "truck",
+                  title: "Despacho express",
+                  description:
+                    "Entregas rápidas para asegurar continuidad en tu cadena de suministro.",
+                },
+              ]
+        }
+      />
+
+      <LogoStrip
+        title={
+          doc?.logosTitle ||
+          "Empresas de múltiples industrias confían en nuestras soluciones"
+        }
+        clients={kdPackClients.slice(0, 6)}
+      />
+
+      <CtaBanner
+        eyebrow={doc?.ctaEyebrow}
+        title={doc?.ctaTitle}
+      />
+
       <section className="py-16 lg:py-20 bg-kd-black">
         <div className="container">
           <div className="border-l-2 border-kd-green pl-4 max-w-xl">
@@ -225,18 +238,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-
-      <CtaBanner
-        eyebrow={doc?.ctaEyebrow}
-        title={doc?.ctaTitle}
-      />
-      <LogoStrip
-        title={
-          doc?.logosTitle ||
-          "Empresas de múltiples industrias confían en nuestras soluciones"
-        }
-        clients={kdPackClients.slice(0, 6)}
-      />
     </>
   );
 }
