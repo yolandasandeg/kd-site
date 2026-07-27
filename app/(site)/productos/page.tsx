@@ -6,6 +6,7 @@ import { FeatureRow, type FeatureItem } from "@/components/sections/FeatureRow";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { getPageDoc, getProducts } from "@/sanity/lib/queries";
 import type { HeroTitlePart } from "@/components/sections/Hero";
+import type { SanityImageRef } from "@/sanity/lib/image";
 
 export const metadata: Metadata = {
   title: "Productos | Catálogo de packaging y soluciones plásticas",
@@ -25,6 +26,8 @@ interface ProductosPageDoc {
   heroTitleParts?: HeroTitlePart[];
   heroSubtitle?: string;
   searchPlaceholder?: string;
+  heroImage?: SanityImageRef;
+  heroOverlayOpacity?: number;
   bottomItems?: FeatureItem[];
   ctaEyebrow?: string;
   ctaTitle?: string;
@@ -45,6 +48,8 @@ export default async function ProductosPage() {
           heroTitleParts={doc?.heroTitleParts?.length ? doc.heroTitleParts : undefined}
           heroSubtitle={doc?.heroSubtitle}
           searchPlaceholder={doc?.searchPlaceholder}
+          heroImage={doc?.heroImage}
+          heroOverlayOpacity={doc?.heroOverlayOpacity}
         />
       </Suspense>
 

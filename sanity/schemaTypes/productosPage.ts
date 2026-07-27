@@ -20,6 +20,22 @@ export const productosPage = defineType({
     }),
     defineField({ name: "heroSubtitle", title: "Subtítulo", type: "text", rows: 2, group: "hero" }),
     defineField({ name: "searchPlaceholder", title: "Placeholder del buscador", type: "string", group: "hero" }),
+    defineField({
+      name: "heroImage",
+      title: "Imagen de fondo",
+      description: "Opcional. Si no subes una, el fondo queda negro sólido como está ahora.",
+      type: "image",
+      group: "hero",
+    }),
+    defineField({
+      name: "heroOverlayOpacity",
+      title: "Oscurecer imagen de fondo (%)",
+      description: "0 = imagen sin oscurecer, 100 = como está más oscura. Recomendado: 40-60.",
+      type: "number",
+      validation: (r) => r.min(0).max(100),
+      initialValue: 55,
+      group: "hero",
+    }),
 
     defineField({
       name: "bottomItems",

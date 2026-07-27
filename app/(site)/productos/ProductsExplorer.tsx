@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { Search, SlidersHorizontal, LayoutGrid, List, X } from "lucide-react";
 
@@ -18,7 +19,7 @@ import {
   type Product,
 } from "@/lib/data/products";
 import type { HeroTitlePart } from "@/components/sections/Hero";
-import type { SanityImageRef } from "@/sanity/lib/image";
+import { resolveImageSrc, type SanityImageRef } from "@/sanity/lib/image";
 
 const PAGE_SIZE = 12;
 
@@ -28,6 +29,8 @@ interface ProductsExplorerProps {
   heroTitleParts?: HeroTitlePart[];
   heroSubtitle?: string;
   searchPlaceholder?: string;
+  heroImage?: SanityImageRef;
+  heroOverlayOpacity?: number;
 }
 
 function toggle(set: Set<string>, value: string) {
@@ -84,6 +87,8 @@ export function ProductsExplorer({
   ],
   heroSubtitle = "Más de 150 productos diseñados para optimizar procesos, proteger tus productos y asegurar la eficiencia de tu operación.",
   searchPlaceholder = "Buscar producto, código o categoría...",
+  heroImage,
+  heroOverlayOpacity = 55,
 }: ProductsExplorerProps) {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get("categoria");
@@ -201,6 +206,24 @@ export function ProductsExplorer({
   return (
     <>
       <section className="relative overflow-hidden bg-kd-black">
+        {heroImage?.asset?._ref && (
+          <div className="absolute inset-0">
+            <Image
+              src={resolveImageSrc(heroImage, "141414", "1600x500")}
+              alt=""
+              fill
+              priority
+              className="object-cover"
+              sizes="100vw"
+            />
+            <div
+              className="absolute inset-0 bg-kd-black"
+              style={{
+                opacity: (Math.min(100, Math.max(0, heroOverlayOpacity)) / 100) * 0.7,
+              }}
+            />
+          </div>
+        )}
         <div className="relative container py-16 lg:py-20">
           <p className="eyebrow font-semibold">{heroEyebrow}</p>
           <h1 className="mt-4 text-h1-mobile lg:text-h1-desktop max-w-xl text-white">
