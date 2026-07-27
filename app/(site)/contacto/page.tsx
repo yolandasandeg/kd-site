@@ -26,6 +26,7 @@ interface ContactoPageDoc {
   heroTitleParts?: HeroTitlePart[];
   heroSubtitle?: string;
   heroImage?: SanityImageRef;
+  heroOverlayOpacity?: number;
   locationEyebrow?: string;
   locationTitle?: string;
   locationText?: string;
@@ -76,6 +77,7 @@ export default async function ContactoPage() {
         imageAlt="Bin plástico KD Pack en bodega industrial"
         imageBg="141414"
         image={doc?.heroImage}
+        overlayOpacity={doc?.heroOverlayOpacity}
       />
 
       <section className="py-14 lg:py-16">

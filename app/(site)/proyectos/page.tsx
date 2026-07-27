@@ -33,6 +33,7 @@ interface ProyectosPageDoc {
   heroSubtitle?: string;
   heroBadges?: HeroBadge[];
   heroImage?: SanityImageRef;
+  heroOverlayOpacity?: number;
   featuredEyebrow?: string;
   featuredTitle?: string;
   logosEyebrow?: string;
@@ -103,6 +104,7 @@ export default async function ProyectosPage() {
         imageAlt="Bins plásticos en bodega industrial KD Pack"
         imageBg="141414"
         image={doc?.heroImage}
+        overlayOpacity={doc?.heroOverlayOpacity}
       />
 
       <section className="py-16 lg:py-20">

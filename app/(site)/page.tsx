@@ -39,6 +39,7 @@ interface HomePageDoc {
   heroSecondaryCta?: { label?: string; href?: string };
   heroBadges?: HeroBadge[];
   heroImage?: SanityImageRef;
+  heroOverlayOpacity?: number;
   categoryGridEyebrow?: string;
   categoryGridTitle?: string;
   whyEyebrow?: string;
@@ -117,6 +118,7 @@ export default async function Home() {
         imageAlt="Bins y pallets plásticos KD Pack en planta industrial"
         imageBg="141414"
         image={doc?.heroImage}
+        overlayOpacity={doc?.heroOverlayOpacity}
       />
 
       <CategoryGrid

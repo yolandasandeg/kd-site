@@ -36,6 +36,8 @@ interface HeroProps {
   imageAlt: string;
   imageBg?: string;
   image?: SanityImageRef;
+  /** 0-100: how dark the overlay over the background photo is (only used when layout="full"). */
+  overlayOpacity?: number;
   children?: React.ReactNode;
 }
 
@@ -51,6 +53,7 @@ export function Hero({
   imageAlt,
   imageBg = "1C7A43",
   image,
+  overlayOpacity = 55,
   children,
 }: HeroProps) {
   const isDark = variant === "dark";
@@ -135,10 +138,13 @@ export function Hero({
             alt=""
             fill
             priority
-            className="object-cover opacity-70"
+            className="object-cover"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-kd-black via-kd-black/85 to-kd-black/40" />
+          <div
+            className="absolute inset-0 bg-gradient-to-r from-kd-black via-kd-black/70 to-kd-black/20"
+            style={{ opacity: Math.min(100, Math.max(0, overlayOpacity)) / 100 }}
+          />
         </div>
         <div className="relative container py-20 lg:py-24">
           <p className="eyebrow font-semibold">{eyebrow}</p>
