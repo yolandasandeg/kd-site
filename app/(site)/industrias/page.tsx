@@ -26,6 +26,7 @@ interface IndustriasPageDoc {
   heroTitleParts?: HeroTitlePart[];
   heroSubtitle?: string;
   heroImage?: SanityImageRef;
+  heroOverlayOpacity?: number;
   gridEyebrow?: string;
   gridTitle?: string;
   gridSubtitle?: string;
@@ -62,6 +63,7 @@ export default async function IndustriasPage() {
     <>
       <Hero
         variant="dark"
+        layout="full"
         eyebrow={doc?.heroEyebrow || "Industrias"}
         titleParts={
           doc?.heroTitleParts?.length
@@ -85,6 +87,7 @@ export default async function IndustriasPage() {
         imageAlt="Forklift moviendo bins plásticos en planta industrial KD Pack"
         imageBg="1f2937"
         image={doc?.heroImage}
+        overlayOpacity={doc?.heroOverlayOpacity}
       />
 
       <CategoryGrid
