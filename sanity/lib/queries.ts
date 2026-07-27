@@ -23,11 +23,11 @@ import { DEFAULT_NAV_LINKS } from "@/lib/constants";
 
 const PRODUCT_PROJECTION = `{
   "slug": slug.current,
-  name, code, size, material, category, brand, description, productType, features, image
+  name, code, size, material, category, brand, description, productType, features, image, gallery
 }`;
 
 export async function getProducts(): Promise<
-  (Product & { image?: SanityImageRef })[]
+  (Product & { image?: SanityImageRef; gallery?: SanityImageRef[] })[]
 > {
   return sanityFetch(
     `*[_type == "product"] | order(order asc) ${PRODUCT_PROJECTION}`,

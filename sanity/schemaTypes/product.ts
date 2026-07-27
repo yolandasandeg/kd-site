@@ -40,7 +40,14 @@ export const product = defineType({
         list: ["Apilable", "Plegable", "Con tapa", "Reforzado", "Ventilado", "Uso alimentario"],
       },
     }),
-    defineField({ name: "image", title: "Imagen", type: "image", options: { hotspot: true } }),
+    defineField({ name: "image", title: "Imagen principal", type: "image", options: { hotspot: true } }),
+    defineField({
+      name: "gallery",
+      title: "Fotos adicionales",
+      description: "Sube más fotos del producto. Se muestran junto a la imagen principal en la ficha del producto.",
+      type: "array",
+      of: [{ type: "image", options: { hotspot: true } }],
+    }),
     defineField({ name: "order", title: "Orden", type: "number" }),
   ],
   orderings: [

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, ChevronRight, Ruler, Layers3, Tag, Boxes } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/sections/ProductCard";
+import { ProductGallery } from "@/components/sections/ProductGallery";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { AddToQuoteButton } from "@/components/cart/AddToQuoteButton";
 import { products as staticProducts, productCategories } from "@/lib/data/products";
@@ -56,6 +56,10 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     .filter((p) => p.slug !== product.slug && p.category === product.category)
     .slice(0, 4);
   const imageSrc = resolveImageSrc(product.image, product.imageColor, "900x900");
+  const galleryImages = [
+    imageSrc,
+    ...(product.gallery ?? []).map((img) => resolveImageSrc(img, product.imageColor, "900x900")),
+  ];
 
   return (
     <>
@@ -77,16 +81,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
       <section className="py-10 lg:py-14">
         <div className="container grid lg:grid-cols-2 gap-10 lg:gap-14">
-          <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-kd-surface-alt">
-            <Image
-              src={imageSrc}
-              alt={product.name}
-              fill
-              priority
-              className="object-cover"
-              sizes="(min-width: 1024px) 50vw, 100vw"
-            />
-          </div>
+          <ProductGallery images={galleryImages} alt={product.name} />
 
           <div>
             <p className="eyebrow font-semibold">{categoryLabel}</p>
