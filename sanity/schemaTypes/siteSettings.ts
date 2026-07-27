@@ -8,7 +8,13 @@ export const siteSettings = defineType({
     defineField({
       name: "logo",
       title: "Logo",
-      description: "Logo principal (PNG con fondo transparente). Se usa en el header y footer del sitio.",
+      description: "Logo principal (PNG con fondo transparente). Se usa en el footer del sitio.",
+      type: "image",
+    }),
+    defineField({
+      name: "headerLogo",
+      title: "Logo del header",
+      description: "Ícono que se muestra en el menú de navegación (arriba del sitio). Si lo dejas vacío, se usa el Logo principal.",
       type: "image",
     }),
     defineField({
