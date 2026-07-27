@@ -12,6 +12,16 @@ export const CONTACT = {
     "https://www.google.com/maps?q=Camino+Padre+Hurtado+16301,+Paine,+Chile&output=embed",
 };
 
+export const DEFAULT_NAV_LINKS = [
+  { label: "KD Pack", href: "/" },
+  { label: "Konstruplast", href: "/konstruplast" },
+  { label: "Productos", href: "/productos" },
+  { label: "Industrias", href: "/industrias" },
+  { label: "Nosotros", href: "/nosotros" },
+  { label: "Proyectos", href: "/proyectos" },
+  { label: "Contacto", href: "/contacto" },
+];
+
 export const WHATSAPP_NUMBER = "56228249870";
 export const WHATSAPP_MESSAGE = "Hola, quiero cotizar un proyecto con KD Pack.";
 export const WHATSAPP_HREF = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(

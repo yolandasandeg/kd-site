@@ -19,6 +19,7 @@ import {
   konstruplastApplications as staticApplications,
   type KonstruplastApplication,
 } from "@/lib/data/konstruplast";
+import { DEFAULT_NAV_LINKS } from "@/lib/constants";
 
 const PRODUCT_PROJECTION = `{
   "slug": slug.current,
@@ -95,6 +96,7 @@ interface SiteSettingsDoc {
   favicon?: SanityImageRef;
   kdpackLogo?: SanityImageRef;
   konstruplastLogo?: SanityImageRef;
+  navLinks?: { label: string; href: string }[];
   address?: string;
   phone?: string;
   phoneHref?: string;
@@ -155,6 +157,7 @@ export interface SiteBranding {
   favicon?: SanityImageRef;
   kdpackLogo?: SanityImageRef;
   konstruplastLogo?: SanityImageRef;
+  navLinks: { label: string; href: string }[];
 }
 
 export async function getSiteBranding(): Promise<SiteBranding> {
@@ -164,6 +167,10 @@ export async function getSiteBranding(): Promise<SiteBranding> {
     favicon: settings?.favicon,
     kdpackLogo: settings?.kdpackLogo,
     konstruplastLogo: settings?.konstruplastLogo,
+    navLinks:
+      settings?.navLinks && settings.navLinks.length > 0
+        ? settings.navLinks
+        : DEFAULT_NAV_LINKS,
   };
 }
 

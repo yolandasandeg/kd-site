@@ -8,11 +8,16 @@ export default async function SiteLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { logo, kdpackLogo, konstruplastLogo } = await getSiteBranding();
+  const { logo, kdpackLogo, konstruplastLogo, navLinks } = await getSiteBranding();
 
   return (
     <>
-      <Navbar logoImage={logo} kdpackLogo={kdpackLogo} konstruplastLogo={konstruplastLogo} />
+      <Navbar
+        logoImage={logo}
+        kdpackLogo={kdpackLogo}
+        konstruplastLogo={konstruplastLogo}
+        navLinks={navLinks}
+      />
       <main className="flex-1">{children}</main>
       <Footer logoImage={logo} />
       <WhatsAppButton />

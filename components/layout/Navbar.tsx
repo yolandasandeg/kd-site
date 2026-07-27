@@ -18,29 +18,35 @@ import {
 } from "@/components/ui/sheet";
 import { Logo } from "@/components/layout/Logo";
 import { urlFor, type SanityImageRef } from "@/sanity/lib/image";
+import { DEFAULT_NAV_LINKS } from "@/lib/constants";
 
-const navLinks = [
-  { href: "/", label: "KD Pack", logoKey: "kdpack" as const },
-  { href: "/konstruplast", label: "Konstruplast", logoKey: "konstruplast" as const },
-  { href: "/productos", label: "Productos" },
-  { href: "/industrias", label: "Industrias" },
-  { href: "/nosotros", label: "Nosotros" },
-  { href: "/proyectos", label: "Proyectos" },
-  { href: "/contacto", label: "Contacto" },
-];
+type NavLink = { href: string; label: string };
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
   return pathname.startsWith(href);
 }
 
+// Hrefs of the two sub-brands that show a logo image instead of their text label.
+function brandLogoKeyFor(href: string): "kdpack" | "konstruplast" | undefined {
+  if (href === "/") return "kdpack";
+  if (href === "/konstruplast") return "konstruplast";
+  return undefined;
+}
+
 interface NavbarProps {
   logoImage?: SanityImageRef;
   kdpackLogo?: SanityImageRef;
   konstruplastLogo?: SanityImageRef;
+  navLinks?: NavLink[];
 }
 
-export function Navbar({ logoImage, kdpackLogo, konstruplastLogo }: NavbarProps) {
+export function Navbar({
+  logoImage,
+  kdpackLogo,
+  konstruplastLogo,
+  navLinks = DEFAULT_NAV_LINKS,
+}: NavbarProps) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -57,8 +63,9 @@ export function Navbar({ logoImage, kdpackLogo, konstruplastLogo }: NavbarProps)
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  function NavLinkLabel({ link }: { link: (typeof navLinks)[number] }) {
-    const brandLogo = link.logoKey ? brandLogos[link.logoKey] : undefined;
+  function NavLinkLabel({ link }: { link: NavLink }) {
+    const logoKey = brandLogoKeyFor(link.href);
+    const brandLogo = logoKey ? brandLogos[logoKey] : undefined;
     if (brandLogo?.asset?._ref) {
       return (
         <span className="relative h-5 w-[88px] block">
