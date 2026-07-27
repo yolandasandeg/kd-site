@@ -3,8 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowRight, ChevronDown, Menu } from "lucide-react";
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import { ArrowRight, Menu } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -16,13 +15,12 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Logo } from "@/components/layout/Logo";
-import { productCategories } from "@/lib/data/products";
 
 const navLinks = [
   { href: "/", label: "KD Pack" },
   { href: "/konstruplast", label: "Konstruplast" },
-  { href: "/productos", label: "Productos", hasMenu: true },
-  { href: "/industrias", label: "Industrias", hasMenu: true },
+  { href: "/productos", label: "Productos" },
+  { href: "/industrias", label: "Industrias" },
   { href: "/nosotros", label: "Nosotros" },
   { href: "/proyectos", label: "Proyectos" },
   { href: "/contacto", label: "Contacto" },
@@ -56,77 +54,19 @@ export function Navbar() {
         <Logo />
 
         <nav className="hidden lg:flex items-center gap-7" aria-label="Navegación principal">
-          {navLinks.map((link) =>
-            link.hasMenu ? (
-              <DropdownMenu.Root key={link.href}>
-                <DropdownMenu.Trigger asChild>
-                  <button
-                    className={cn(
-                      "flex items-center gap-1 text-sm font-medium text-kd-text-primary hover:text-kd-green transition-colors outline-none",
-                      isActive(pathname, link.href) &&
-                        "text-kd-green underline underline-offset-8 decoration-2"
-                    )}
-                  >
-                    {link.label}
-                    <ChevronDown className="h-3.5 w-3.5" />
-                  </button>
-                </DropdownMenu.Trigger>
-                <DropdownMenu.Portal>
-                  <DropdownMenu.Content
-                    align="start"
-                    sideOffset={16}
-                    className="z-50 min-w-[220px] rounded-lg border border-kd-border bg-white p-2 shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
-                  >
-                    {link.href === "/productos" ? (
-                      <>
-                        <DropdownMenu.Item asChild>
-                          <Link
-                            href="/productos"
-                            className="block rounded-md px-3 py-2 text-sm font-semibold text-kd-text-primary hover:bg-kd-green-light hover:text-kd-green-dark outline-none"
-                          >
-                            Todos los productos
-                          </Link>
-                        </DropdownMenu.Item>
-                        {productCategories.map((c) => (
-                          <DropdownMenu.Item asChild key={c.slug}>
-                            <Link
-                              href={`/productos?categoria=${c.slug}`}
-                              className="block rounded-md px-3 py-2 text-sm text-kd-text-secondary hover:bg-kd-green-light hover:text-kd-green-dark outline-none"
-                            >
-                              {c.label}
-                            </Link>
-                          </DropdownMenu.Item>
-                        ))}
-                      </>
-                    ) : (
-                      <>
-                        <DropdownMenu.Item asChild>
-                          <Link
-                            href="/industrias"
-                            className="block rounded-md px-3 py-2 text-sm font-semibold text-kd-text-primary hover:bg-kd-green-light hover:text-kd-green-dark outline-none"
-                          >
-                            Todas las industrias
-                          </Link>
-                        </DropdownMenu.Item>
-                      </>
-                    )}
-                  </DropdownMenu.Content>
-                </DropdownMenu.Portal>
-              </DropdownMenu.Root>
-            ) : (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "text-sm font-medium text-kd-text-primary hover:text-kd-green transition-colors",
-                  isActive(pathname, link.href) &&
-                    "text-kd-green underline underline-offset-8 decoration-2"
-                )}
-              >
-                {link.label}
-              </Link>
-            )
-          )}
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={cn(
+                "text-sm font-medium text-kd-text-primary hover:text-kd-green transition-colors",
+                isActive(pathname, link.href) &&
+                  "text-kd-green underline underline-offset-8 decoration-2"
+              )}
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
         <div className="hidden lg:block">

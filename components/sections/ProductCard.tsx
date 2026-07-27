@@ -19,7 +19,7 @@ export function ProductCard({
   product: Product & { image?: SanityImageRef };
 }) {
   return (
-    <div className="group flex flex-col rounded-xl border border-kd-border bg-white overflow-hidden hover:shadow-md transition-shadow">
+    <div className="group flex flex-col rounded-xl border border-kd-border bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
       <div className="relative aspect-[4/3] overflow-hidden bg-kd-surface-alt">
         <Image
           src={resolveImageSrc(product.image, product.imageColor, "480x360")}

@@ -64,7 +64,7 @@ export async function getCategories(): Promise<
   (SolutionCategory & { image?: SanityImageRef })[]
 > {
   return sanityFetch(
-    `*[_type == "category"] | order(order asc) { name, "slug": slug.current, href, icon, image }`,
+    `*[_type == "category"] | order(order asc) { name, "slug": slug.current, href, icon, image, imageColor }`,
     {},
     solutionCategories
   );
@@ -74,7 +74,7 @@ export async function getIndustries(): Promise<
   (Industry & { image?: SanityImageRef })[]
 > {
   return sanityFetch(
-    `*[_type == "industry"] | order(order asc) { name, "slug": slug.current, description, href, icon, image }`,
+    `*[_type == "industry"] | order(order asc) { name, "slug": slug.current, description, href, icon, image, imageColor }`,
     {},
     staticIndustries
   );

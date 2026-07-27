@@ -146,7 +146,7 @@ export function Hero({
             style={{ opacity: Math.min(100, Math.max(0, overlayOpacity)) / 100 }}
           />
         </div>
-        <div className="relative container py-20 lg:py-24">
+        <div className="relative container py-20 lg:py-24 animate-fade-in-up">
           <p className="eyebrow font-semibold">{eyebrow}</p>
           <div className="mt-4">{title}</div>
           <p className="mt-5 max-w-xl text-sm sm:text-base text-white/75">
@@ -163,7 +163,7 @@ export function Hero({
   return (
     <section className={cn(isDark ? "bg-kd-black" : "bg-white")}>
       <div className="container grid lg:grid-cols-2 gap-10 lg:gap-8 items-center py-14 lg:py-20">
-        <div>
+        <div className="animate-fade-in-up">
           <p className="eyebrow font-semibold">{eyebrow}</p>
           <div className="mt-4">{title}</div>
           <p

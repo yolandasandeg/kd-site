@@ -11,6 +11,12 @@ export const category = defineType({
     defineField({ name: "href", title: "Link", type: "string" }),
     defineField({ name: "icon", title: "Ícono", type: "string", options: { list: ICON_OPTIONS } }),
     defineField({ name: "image", title: "Imagen", type: "image", options: { hotspot: true } }),
+    defineField({
+      name: "imageColor",
+      title: "Color de respaldo (hexadecimal, sin #)",
+      description: "Se usa solo si no hay una imagen subida. Ejemplo: 2d5a3f",
+      type: "string",
+    }),
     defineField({ name: "order", title: "Orden", type: "number" }),
   ],
   orderings: [

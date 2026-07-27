@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Icon } from "@/components/icon-map";
+import { Reveal } from "@/components/Reveal";
 
 export interface FeatureItem {
   icon: string;
@@ -44,7 +45,7 @@ export function FeatureRow({
     >
       <div className="container">
         {(eyebrow || title) && (
-          <div className="max-w-2xl border-l-2 border-kd-green pl-4 mb-10">
+          <Reveal className="max-w-2xl border-l-2 border-kd-green pl-4 mb-10">
             {eyebrow && (
               <p className="eyebrow font-semibold">{eyebrow}</p>
             )}
@@ -68,7 +69,7 @@ export function FeatureRow({
                 {subtitle}
               </p>
             )}
-          </div>
+          </Reveal>
         )}
 
         <div
@@ -77,15 +78,15 @@ export function FeatureRow({
             LG_COLS_CLASS[Math.min(items.length, 5) as 1 | 2 | 3 | 4 | 5]
           )}
         >
-          {items.map((item) =>
+          {items.map((item, index) =>
             layout === "card" ? (
+              <Reveal key={item.title} delay={index * 60}>
               <div
-                key={item.title}
                 className={cn(
-                  "rounded-xl border p-5",
+                  "h-full rounded-xl border p-5 transition-all duration-300 hover:-translate-y-1",
                   isDark
-                    ? "border-white/15 bg-white/5"
-                    : "border-kd-border bg-white"
+                    ? "border-white/15 bg-white/5 hover:bg-white/10"
+                    : "border-kd-border bg-white hover:shadow-lg"
                 )}
               >
                 <div className="flex h-11 w-11 items-center justify-center rounded-full bg-kd-green-light">
@@ -110,8 +111,10 @@ export function FeatureRow({
                   </p>
                 )}
               </div>
+              </Reveal>
             ) : (
-              <div key={item.title} className="flex flex-col items-start">
+              <Reveal key={item.title} delay={index * 60}>
+              <div className="flex flex-col items-start">
                 <div
                   className={cn(
                     "flex h-11 w-11 items-center justify-center rounded-full border",
@@ -141,6 +144,7 @@ export function FeatureRow({
                   </p>
                 )}
               </div>
+              </Reveal>
             )
           )}
         </div>

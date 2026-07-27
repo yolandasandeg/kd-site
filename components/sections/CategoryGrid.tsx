@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Icon } from "@/components/icon-map";
+import { Reveal } from "@/components/Reveal";
 import { resolveImageSrc, type SanityImageRef } from "@/sanity/lib/image";
 
 export interface CategoryGridItem {
@@ -37,7 +38,7 @@ export function CategoryGrid({
   return (
     <section className="py-16 lg:py-20">
       <div className="container">
-        <div className="flex items-end justify-between gap-4 flex-wrap">
+        <Reveal className="flex items-end justify-between gap-4 flex-wrap">
           <div className="border-l-2 border-kd-green pl-4 max-w-2xl">
             <p className="eyebrow font-semibold">{eyebrow}</p>
             <h2 className="mt-1.5 text-h2-mobile lg:text-h2-desktop text-kd-text-primary max-w-xl">
@@ -58,7 +59,7 @@ export function CategoryGrid({
               <ArrowRight className="h-4 w-4" />
             </Link>
           )}
-        </div>
+        </Reveal>
 
         <div
           className={
@@ -67,12 +68,12 @@ export function CategoryGrid({
               : "mt-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           }
         >
-          {items.map((item) =>
+          {items.map((item, index) =>
             variant === "compact" ? (
+              <Reveal key={item.slug} delay={index * 60}>
               <Link
-                key={item.slug}
                 href={item.href}
-                className="group relative aspect-[3/4] overflow-hidden rounded-xl"
+                className="group relative flex aspect-[3/4] overflow-hidden rounded-xl transition-transform duration-300 hover:-translate-y-1"
               >
                 <Image
                   src={resolveImageSrc(item.image, item.imageColor, "400x520")}
@@ -92,11 +93,12 @@ export function CategoryGrid({
                   <ArrowRight className="h-4 w-4 text-white shrink-0" />
                 </div>
               </Link>
+              </Reveal>
             ) : (
+              <Reveal key={item.slug} delay={index * 60}>
               <Link
-                key={item.slug}
                 href={item.href}
-                className="group rounded-xl border border-kd-border bg-white overflow-hidden hover:shadow-md transition-shadow"
+                className="group flex flex-col rounded-xl border border-kd-border bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Image
@@ -125,6 +127,7 @@ export function CategoryGrid({
                   </span>
                 </div>
               </Link>
+              </Reveal>
             )
           )}
         </div>
