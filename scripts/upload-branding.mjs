@@ -21,16 +21,16 @@ async function uploadImage(filename) {
 }
 
 async function main() {
-  const logo = await uploadImage("kd-plus-logo.png");
-  const favicon = await uploadImage("kd-plus-favicon.png");
+  const kdpackLogo = await uploadImage("kdpack-logo.png");
+  const konstruplastLogo = await uploadImage("konstruplast-logo.png");
 
   await client
     .patch("siteSettings")
     .setIfMissing({ _type: "siteSettings" })
-    .set({ logo, favicon })
+    .set({ kdpackLogo, konstruplastLogo })
     .commit({ autoGenerateArrayKeys: true });
 
-  console.log("Listo: logo y favicon subidos y conectados en siteSettings.");
+  console.log("Listo: logos de KD Pack y Konstruplast subidos y conectados en siteSettings.");
 }
 
 main().catch((err) => {

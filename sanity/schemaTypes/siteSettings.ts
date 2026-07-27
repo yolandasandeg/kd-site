@@ -17,6 +17,18 @@ export const siteSettings = defineType({
       description: "Ícono que aparece en la pestaña del navegador. Sube una imagen cuadrada (idealmente 512x512).",
       type: "image",
     }),
+    defineField({
+      name: "kdpackLogo",
+      title: "Logo KD Pack (menú)",
+      description: "Logo de KD Pack (PNG con fondo transparente) que se muestra en el menú de navegación.",
+      type: "image",
+    }),
+    defineField({
+      name: "konstruplastLogo",
+      title: "Logo Konstruplast (menú)",
+      description: "Logo de Konstruplast (PNG con fondo transparente) que se muestra en el menú de navegación.",
+      type: "image",
+    }),
     defineField({ name: "address", title: "Dirección", type: "string" }),
     defineField({ name: "phone", title: "Teléfono (texto mostrado)", type: "string" }),
     defineField({ name: "phoneHref", title: "Teléfono (link tel:, solo números con +)", type: "string" }),

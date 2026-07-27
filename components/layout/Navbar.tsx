@@ -2,8 +2,10 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ArrowRight, Menu } from "lucide-react";
+import type { Image as SanityImage } from "sanity";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -15,11 +17,11 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Logo } from "@/components/layout/Logo";
-import type { SanityImageRef } from "@/sanity/lib/image";
+import { urlFor, type SanityImageRef } from "@/sanity/lib/image";
 
 const navLinks = [
-  { href: "/", label: "KD Pack" },
-  { href: "/konstruplast", label: "Konstruplast" },
+  { href: "/", label: "KD Pack", logoKey: "kdpack" as const },
+  { href: "/konstruplast", label: "Konstruplast", logoKey: "konstruplast" as const },
   { href: "/productos", label: "Productos" },
   { href: "/industrias", label: "Industrias" },
   { href: "/nosotros", label: "Nosotros" },
@@ -34,12 +36,19 @@ function isActive(pathname: string, href: string) {
 
 interface NavbarProps {
   logoImage?: SanityImageRef;
+  kdpackLogo?: SanityImageRef;
+  konstruplastLogo?: SanityImageRef;
 }
 
-export function Navbar({ logoImage }: NavbarProps) {
+export function Navbar({ logoImage, kdpackLogo, konstruplastLogo }: NavbarProps) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const brandLogos: Record<string, SanityImageRef> = {
+    kdpack: kdpackLogo,
+    konstruplast: konstruplastLogo,
+  };
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -47,6 +56,24 @@ export function Navbar({ logoImage }: NavbarProps) {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  function NavLinkLabel({ link }: { link: (typeof navLinks)[number] }) {
+    const brandLogo = link.logoKey ? brandLogos[link.logoKey] : undefined;
+    if (brandLogo?.asset?._ref) {
+      return (
+        <span className="relative h-5 w-[88px] block">
+          <Image
+            src={urlFor(brandLogo as SanityImage).height(60).fit("max").auto("format").url()}
+            alt={link.label}
+            fill
+            className="object-contain object-left"
+            sizes="88px"
+          />
+        </span>
+      );
+    }
+    return <>{link.label}</>;
+  }
 
   return (
     <header
@@ -64,12 +91,11 @@ export function Navbar({ logoImage }: NavbarProps) {
               key={link.href}
               href={link.href}
               className={cn(
-                "text-sm font-medium text-kd-text-primary hover:text-kd-green transition-colors",
-                isActive(pathname, link.href) &&
-                  "text-kd-green underline underline-offset-8 decoration-2"
+                "text-sm font-medium text-kd-text-primary hover:text-kd-green transition-colors pb-1 border-b-2 border-transparent",
+                isActive(pathname, link.href) && "text-kd-green border-kd-green"
               )}
             >
-              {link.label}
+              <NavLinkLabel link={link} />
             </Link>
           ))}
         </nav>
@@ -109,7 +135,7 @@ export function Navbar({ logoImage }: NavbarProps) {
                     isActive(pathname, link.href) && "text-kd-green bg-kd-green-light"
                   )}
                 >
-                  {link.label}
+                  <NavLinkLabel link={link} />
                 </Link>
               ))}
             </nav>

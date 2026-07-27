@@ -25,8 +25,8 @@ export function resolveImageSrc(
   const color = fallbackColor && /^[0-9a-fA-F]{3,8}$/.test(fallbackColor)
     ? fallbackColor
     : "1C7A43";
-  // Use the same color for foreground as background so placehold.co's
-  // dimension label ("560 x 420") renders invisibly -- a clean solid
-  // block instead of a placeholder that reads as "unfinished".
-  return `https://placehold.co/${size}/${color}/${color}.png`;
+  // Show placehold.co's dimension label (e.g. "560 x 420") in white so it's
+  // obvious which spots still need a real image uploaded in Sanity.
+  // Note: placehold.co 404s if only a bg color is given without an fg color.
+  return `https://placehold.co/${size}/${color}/FFFFFF.png`;
 }
