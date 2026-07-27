@@ -38,6 +38,8 @@ interface HeroProps {
   image?: SanityImageRef;
   /** 0-100: how dark the overlay over the background photo is (only used when layout="full"). */
   overlayOpacity?: number;
+  /** CSS object-position for the split-layout image, e.g. "center" or "right center" (only used when layout="split"). */
+  imagePosition?: string;
   children?: React.ReactNode;
 }
 
@@ -54,6 +56,7 @@ export function Hero({
   imageBg = "1C7A43",
   image,
   overlayOpacity = 55,
+  imagePosition = "center",
   children,
 }: HeroProps) {
   const isDark = variant === "dark";
@@ -203,6 +206,7 @@ export function Hero({
             fill
             priority
             className="object-cover"
+            style={{ objectPosition: imagePosition }}
             sizes="(min-width: 1024px) 50vw, 100vw"
           />
         </div>

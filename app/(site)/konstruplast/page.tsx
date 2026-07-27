@@ -124,6 +124,7 @@ export default async function KonstruplastPage() {
         imageAlt="Elementos de encofrado plástico Konstruplast en obra de construcción"
         imageBg="3f3f3a"
         image={doc?.heroImage}
+        imagePosition="85% center"
       />
 
       <CategoryGrid
