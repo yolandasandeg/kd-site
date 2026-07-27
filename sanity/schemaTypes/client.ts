@@ -19,7 +19,12 @@ export const client = defineType({
       },
       initialValue: "kdpack",
     }),
-    defineField({ name: "logo", title: "Logo (opcional)", type: "image" }),
+    defineField({
+      name: "logo",
+      title: "Logo (opcional)",
+      description: "Sube un PNG con fondo transparente. Si no subes uno, se muestra el nombre en texto.",
+      type: "image",
+    }),
     defineField({ name: "order", title: "Orden", type: "number" }),
   ],
   orderings: [

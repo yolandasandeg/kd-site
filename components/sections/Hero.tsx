@@ -141,15 +141,21 @@ export function Hero({
             className="object-cover"
             sizes="100vw"
           />
+          {/* Fixed legibility gradient behind the text zone: never controlled
+              by the slider below, so text always stays readable. */}
+          <div className="absolute inset-0 bg-gradient-to-r from-kd-black from-10% via-kd-black/75 via-45% to-transparent to-75%" />
+          {/* Slider-controlled mood tint over the whole photo. */}
           <div
-            className="absolute inset-0 bg-gradient-to-r from-kd-black via-kd-black/70 to-kd-black/20"
-            style={{ opacity: Math.min(100, Math.max(0, overlayOpacity)) / 100 }}
+            className="absolute inset-0 bg-kd-black"
+            style={{
+              opacity: (Math.min(100, Math.max(0, overlayOpacity)) / 100) * 0.45,
+            }}
           />
         </div>
         <div className="relative container py-20 lg:py-24 animate-fade-in-up">
-          <p className="eyebrow font-semibold">{eyebrow}</p>
-          <div className="mt-4">{title}</div>
-          <p className="mt-5 max-w-xl text-sm sm:text-base text-white/75">
+          <p className="eyebrow font-semibold drop-shadow-sm">{eyebrow}</p>
+          <div className="mt-4 drop-shadow-sm">{title}</div>
+          <p className="mt-5 max-w-xl text-base sm:text-lg text-white/90 drop-shadow-sm">
             {subtitle}
           </p>
           {ctas}
