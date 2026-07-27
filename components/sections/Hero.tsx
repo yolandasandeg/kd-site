@@ -61,12 +61,24 @@ export function Hero({
   const title = (
     <h1
       className={cn(
-        "text-h1-mobile lg:text-h1-desktop max-w-xl",
+        layout === "full"
+          ? "text-[38px] leading-[1.15] font-semibold lg:text-h1-desktop"
+          : "text-h1-mobile lg:text-h1-desktop",
+        "max-w-xl",
         isDark ? "text-white" : "text-kd-text-primary"
       )}
     >
       {titleParts.map((part, i) => (
-        <span key={i} className={part.highlight ? "text-kd-green" : undefined}>
+        <span
+          key={i}
+          className={
+            part.highlight
+              ? layout === "full"
+                ? "text-white lg:text-kd-green"
+                : "text-kd-green"
+              : undefined
+          }
+        >
           {part.text}{" "}
         </span>
       ))}
@@ -152,7 +164,7 @@ export function Hero({
             }}
           />
         </div>
-        <div className="relative container py-20 lg:py-24 animate-fade-in-up">
+        <div className="relative container pt-10 pb-20 lg:py-24 animate-fade-in-up">
           <p className="eyebrow font-semibold drop-shadow-sm">{eyebrow}</p>
           <div className="mt-4 drop-shadow-sm">{title}</div>
           <p className="mt-5 max-w-xl text-base sm:text-lg text-white/90 drop-shadow-sm">
