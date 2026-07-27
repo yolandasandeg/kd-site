@@ -109,10 +109,10 @@ export default async function Home() {
           doc?.heroBadges?.length
             ? doc.heroBadges
             : [
-                { icon: "leaf", label: "100% energía renovable" },
-                { icon: "shield", label: "Materiales de alta durabilidad" },
-                { icon: "recycle", label: "Soluciones sostenibles" },
-                { icon: "globe", label: "Presencia en LATAM y el mundo" },
+                { icon: "award", label: "+15 años fabricando en Chile" },
+                { icon: "boxes", label: "+4,5M toneladas al año" },
+                { icon: "users", label: "+X clientes activos" },
+                { icon: "factory", label: "+30.000 mts2 de planta" },
               ]
         }
         imageAlt="Bins y pallets plásticos KD Pack en planta industrial"
