@@ -11,6 +11,7 @@ export const client = createClient({
   apiVersion,
   useCdn: true,
   perspective: "published",
+  stega: { enabled: false },
 });
 
 const token = process.env.SANITY_API_TOKEN;
@@ -19,7 +20,11 @@ const previewClient = token
   ? client.withConfig({
       token,
       useCdn: false,
-      perspective: "previewDrafts",
+      perspective: "drafts",
+      stega: {
+        enabled: true,
+        studioUrl: "/studio",
+      },
     })
   : null;
 
@@ -32,15 +37,9 @@ export async function sanityFetch<T>(
   try {
     const isPreview = previewClient && draftMode().isEnabled;
     const activeClient = isPreview ? previewClient : client;
-    const result = await activeClient.fetch<T>(
-      query,
-      params,
-      isPreview
-        ? { cache: "no-store" }
-        : {
-            next: { revalidate: 60 },
-          }
-    );
+    const result = await activeClient.fetch<T>(query, params, {
+      cache: "no-store",
+    });
     if (result === null || result === undefined) return fallback;
     if (Array.isArray(result) && result.length === 0) return fallback;
     return result;
