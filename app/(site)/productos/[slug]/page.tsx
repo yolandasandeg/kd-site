@@ -7,6 +7,7 @@ import { ArrowRight, ChevronRight, Ruler, Layers3, Tag, Boxes } from "lucide-rea
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/sections/ProductCard";
 import { CtaBanner } from "@/components/sections/CtaBanner";
+import { AddToQuoteButton } from "@/components/cart/AddToQuoteButton";
 import { products as staticProducts, productCategories } from "@/lib/data/products";
 import { getProducts } from "@/sanity/lib/queries";
 import { resolveImageSrc } from "@/sanity/lib/image";
@@ -54,6 +55,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const related = products
     .filter((p) => p.slug !== product.slug && p.category === product.category)
     .slice(0, 4);
+  const imageSrc = resolveImageSrc(product.image, product.imageColor, "900x900");
 
   return (
     <>
@@ -77,7 +79,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         <div className="container grid lg:grid-cols-2 gap-10 lg:gap-14">
           <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-kd-surface-alt">
             <Image
-              src={resolveImageSrc(product.image, product.imageColor, "900x900")}
+              src={imageSrc}
               alt={product.name}
               fill
               priority
@@ -163,6 +165,13 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
+              <AddToQuoteButton
+                slug={product.slug}
+                name={product.name}
+                code={product.code}
+                imageSrc={imageSrc}
+                size="lg"
+              />
               <Button asChild size="lg" variant="outline">
                 <Link href="/productos">Ver más productos</Link>
               </Button>

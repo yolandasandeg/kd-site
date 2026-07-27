@@ -19,6 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useCart } from "@/components/cart/CartContext";
 
 const industries = [
   "Agrícola",
@@ -61,6 +62,7 @@ const quoteSchema = z.object({
 type QuoteFormValues = z.infer<typeof quoteSchema>;
 
 export function QuoteForm() {
+  const { items: cartItems } = useCart();
   const [submitted, setSubmitted] = React.useState(false);
   const [file, setFile] = React.useState<File | null>(null);
   const [fileError, setFileError] = React.useState<string | null>(null);
@@ -87,6 +89,20 @@ export function QuoteForm() {
       consent: false,
     },
   });
+
+  const prefilledFromCart = React.useRef(false);
+  React.useEffect(() => {
+    if (prefilledFromCart.current || cartItems.length === 0) return;
+    if (watch("description")) return;
+    const lines = cartItems.map(
+      (i) => `- ${i.name} (${i.code}) x${i.quantity}`
+    );
+    setValue(
+      "description",
+      `Quiero cotizar los siguientes productos:\n\n${lines.join("\n")}\n\n`
+    );
+    prefilledFromCart.current = true;
+  }, [cartItems, setValue, watch]);
 
   function validateAndSetFile(candidate: File | undefined) {
     if (!candidate) return;

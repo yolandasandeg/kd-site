@@ -5,6 +5,7 @@ import { ArrowRight, Ruler, Layers3 } from "lucide-react";
 import type { Product } from "@/lib/data/products";
 import { productCategories } from "@/lib/data/products";
 import { resolveImageSrc, type SanityImageRef } from "@/sanity/lib/image";
+import { AddToQuoteButton } from "@/components/cart/AddToQuoteButton";
 
 function categoryLabel(category: string) {
   return (
@@ -18,11 +19,13 @@ export function ProductCard({
 }: {
   product: Product & { image?: SanityImageRef };
 }) {
+  const imageSrc = resolveImageSrc(product.image, product.imageColor, "480x360");
+
   return (
     <div className="group flex flex-col rounded-xl border border-kd-border bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
       <div className="relative aspect-[4/3] overflow-hidden bg-kd-surface-alt">
         <Image
-          src={resolveImageSrc(product.image, product.imageColor, "480x360")}
+          src={imageSrc}
           alt={product.name}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -47,13 +50,23 @@ export function ProductCard({
           </div>
         </div>
 
-        <Link
-          href={`/productos/${product.slug}`}
-          className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-kd-green hover:text-kd-green-dark"
-        >
-          Ver producto
-          <ArrowRight className="h-4 w-4" />
-        </Link>
+        <div className="mt-4 flex items-center justify-between gap-2">
+          <Link
+            href={`/productos/${product.slug}`}
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-kd-green hover:text-kd-green-dark"
+          >
+            Ver producto
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+          <AddToQuoteButton
+            slug={product.slug}
+            name={product.name}
+            code={product.code}
+            imageSrc={imageSrc}
+            iconOnly
+            className="h-8 w-8 shrink-0"
+          />
+        </div>
       </div>
     </div>
   );

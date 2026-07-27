@@ -122,6 +122,7 @@ export interface ContactInfo {
   hours: string;
   coverage: string;
   mapEmbedSrc: string;
+  whatsappNumber: string;
   whatsappHref: string;
   linkedinUrl: string;
   instagramUrl: string;
@@ -144,6 +145,7 @@ export async function getContactInfo(): Promise<ContactInfo> {
     hours: settings?.hours || CONTACT.hours,
     coverage: settings?.coverage || CONTACT.coverage,
     mapEmbedSrc: settings?.mapEmbedSrc || CONTACT.mapEmbedSrc,
+    whatsappNumber,
     whatsappHref: `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
       whatsappMessage
     )}`,
