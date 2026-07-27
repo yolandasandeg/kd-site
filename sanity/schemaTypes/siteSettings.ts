@@ -5,6 +5,18 @@ export const siteSettings = defineType({
   title: "Configuración del sitio",
   type: "document",
   fields: [
+    defineField({
+      name: "logo",
+      title: "Logo",
+      description: "Logo principal (PNG con fondo transparente). Se usa en el header y footer del sitio.",
+      type: "image",
+    }),
+    defineField({
+      name: "favicon",
+      title: "Favicon",
+      description: "Ícono que aparece en la pestaña del navegador. Sube una imagen cuadrada (idealmente 512x512).",
+      type: "image",
+    }),
     defineField({ name: "address", title: "Dirección", type: "string" }),
     defineField({ name: "phone", title: "Teléfono (texto mostrado)", type: "string" }),
     defineField({ name: "phoneHref", title: "Teléfono (link tel:, solo números con +)", type: "string" }),

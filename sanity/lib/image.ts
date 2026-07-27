@@ -17,8 +17,7 @@ export type SanityImageRef = { asset?: { _ref?: string; _id?: string } } | null 
 export function resolveImageSrc(
   image: SanityImageRef,
   fallbackColor?: string,
-  size = "800x600",
-  fg = "ffffff"
+  size = "800x600"
 ) {
   if (image?.asset?._ref) {
     return urlFor(image as Image).width(1600).auto("format").url();
@@ -26,5 +25,8 @@ export function resolveImageSrc(
   const color = fallbackColor && /^[0-9a-fA-F]{3,8}$/.test(fallbackColor)
     ? fallbackColor
     : "1C7A43";
-  return `https://placehold.co/${size}/${color}/${fg}.png?text=+`;
+  // Use the same color for foreground as background so placehold.co's
+  // dimension label ("560 x 420") renders invisibly -- a clean solid
+  // block instead of a placeholder that reads as "unfinished".
+  return `https://placehold.co/${size}/${color}/${color}.png`;
 }

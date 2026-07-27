@@ -1,17 +1,20 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
+import { getSiteBranding } from "@/sanity/lib/queries";
 
-export default function SiteLayout({
+export default async function SiteLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { logo } = await getSiteBranding();
+
   return (
     <>
-      <Navbar />
+      <Navbar logoImage={logo} />
       <main className="flex-1">{children}</main>
-      <Footer />
+      <Footer logoImage={logo} />
       <WhatsAppButton />
     </>
   );

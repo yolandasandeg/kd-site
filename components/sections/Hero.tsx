@@ -134,7 +134,7 @@ export function Hero({
       >
         <div className="absolute inset-0">
           <Image
-            src={resolveImageSrc(image, imageBg, "1600x700", "141414")}
+            src={resolveImageSrc(image, imageBg, "1600x700")}
             alt=""
             fill
             priority

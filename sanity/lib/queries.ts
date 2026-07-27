@@ -91,6 +91,8 @@ export async function getKonstruplastApplications(): Promise<
 }
 
 interface SiteSettingsDoc {
+  logo?: SanityImageRef;
+  favicon?: SanityImageRef;
   address?: string;
   phone?: string;
   phoneHref?: string;
@@ -144,6 +146,16 @@ export async function getContactInfo(): Promise<ContactInfo> {
     linkedinUrl: settings?.linkedinUrl || "https://linkedin.com",
     instagramUrl: settings?.instagramUrl || "https://instagram.com",
   };
+}
+
+export interface SiteBranding {
+  logo?: SanityImageRef;
+  favicon?: SanityImageRef;
+}
+
+export async function getSiteBranding(): Promise<SiteBranding> {
+  const settings = await getSiteSettings();
+  return { logo: settings?.logo, favicon: settings?.favicon };
 }
 
 export async function getPageDoc<T = Record<string, unknown>>(

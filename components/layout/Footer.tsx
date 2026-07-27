@@ -2,6 +2,8 @@ import Link from "next/link";
 import { MapPin, Phone, Mail } from "lucide-react";
 
 import { getContactInfo } from "@/sanity/lib/queries";
+import { Logo } from "@/components/layout/Logo";
+import type { SanityImageRef } from "@/sanity/lib/image";
 
 function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -40,16 +42,18 @@ const productLinks = [
   { href: "/productos?categoria=pesca", label: "Pesca" },
 ];
 
-export async function Footer() {
+interface FooterProps {
+  logoImage?: SanityImageRef;
+}
+
+export async function Footer({ logoImage }: FooterProps) {
   const contact = await getContactInfo();
 
   return (
     <footer className="bg-kd-black text-white">
       <div className="container py-14 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <span className="text-2xl font-bold tracking-tight">
-            KD<span className="text-kd-green">+</span>
-          </span>
+          <Logo variant="light" logoImage={logoImage} />
           <p className="mt-4 text-sm leading-relaxed text-white/60 max-w-xs">
             Sistemas de packaging y soluciones plásticas para industrias que
             no pueden detenerse.

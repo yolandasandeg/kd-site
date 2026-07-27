@@ -15,6 +15,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Logo } from "@/components/layout/Logo";
+import type { SanityImageRef } from "@/sanity/lib/image";
 
 const navLinks = [
   { href: "/", label: "KD Pack" },
@@ -31,7 +32,11 @@ function isActive(pathname: string, href: string) {
   return pathname.startsWith(href);
 }
 
-export function Navbar() {
+interface NavbarProps {
+  logoImage?: SanityImageRef;
+}
+
+export function Navbar({ logoImage }: NavbarProps) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -51,7 +56,7 @@ export function Navbar() {
       )}
     >
       <div className="container flex h-[68px] items-center justify-between gap-4">
-        <Logo />
+        <Logo logoImage={logoImage} />
 
         <nav className="hidden lg:flex items-center gap-7" aria-label="Navegación principal">
           {navLinks.map((link) => (
@@ -90,7 +95,7 @@ export function Navbar() {
           <SheetContent side="right" className="w-[85%] sm:max-w-sm flex flex-col">
             <SheetHeader>
               <SheetTitle>
-                <Logo />
+                <Logo logoImage={logoImage} />
               </SheetTitle>
             </SheetHeader>
             <nav className="mt-6 flex flex-col gap-1" aria-label="Navegación móvil">
