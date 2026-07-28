@@ -70,7 +70,7 @@ export default async function KonstruplastPage() {
     slug: app.slug,
     name: app.name,
     description: app.description,
-    href: `/productos?categoria=${app.slug}`,
+    href: `/productos?marca=konstruplast&categoria=${app.slug}`,
     icon: app.icon,
     imageColor: "141414",
   }));
@@ -105,7 +105,7 @@ export default async function KonstruplastPage() {
         }
         primaryCta={{
           label: doc?.heroPrimaryCta?.label || "Ver productos",
-          href: doc?.heroPrimaryCta?.href || "/productos?categoria=encofrados",
+          href: doc?.heroPrimaryCta?.href || "/productos?marca=konstruplast",
         }}
         secondaryCta={{
           label: doc?.heroSecondaryCta?.label || "Cotizar proyecto",
@@ -130,7 +130,7 @@ export default async function KonstruplastPage() {
       <CategoryGrid
         eyebrow={doc?.applicationsEyebrow || "Soluciones para cada etapa"}
         title={doc?.applicationsTitle || "Aplicaciones que impulsan cada construcción."}
-        viewAllHref="/productos"
+        viewAllHref="/productos?marca=konstruplast"
         viewAllLabel="Ver todas las soluciones"
         items={applicationItems}
         variant="detailed"
@@ -148,7 +148,7 @@ export default async function KonstruplastPage() {
               </h2>
             </div>
             <a
-              href="/productos?categoria=encofrados"
+              href="/productos?marca=konstruplast"
               className="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold text-kd-green hover:text-kd-green-dark"
             >
               Ver todos los productos

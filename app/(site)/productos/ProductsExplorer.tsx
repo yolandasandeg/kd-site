@@ -16,7 +16,9 @@ import {
   productTypes,
   productCharacteristics,
   productMaterials,
+  categoryBrand,
   type Product,
+  type Brand,
 } from "@/lib/data/products";
 import type { HeroTitlePart } from "@/components/sections/Hero";
 import { resolveImageSrc, type SanityImageRef } from "@/sanity/lib/image";
@@ -92,6 +94,42 @@ export function ProductsExplorer({
 }: ProductsExplorerProps) {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get("categoria");
+  const marcaParam = searchParams.get("marca");
+
+  const resolvedBrand: Brand =
+    marcaParam === "kdpack" || marcaParam === "konstruplast"
+      ? marcaParam
+      : (initialCategory && categoryBrand[initialCategory]) || "kdpack";
+
+  const brandProducts = React.useMemo(
+    () => products.filter((p) => p.brand === resolvedBrand),
+    [products, resolvedBrand]
+  );
+
+  const availableCategories = React.useMemo(
+    () =>
+      productCategories.filter((c) =>
+        brandProducts.some((p) => p.category === c.slug)
+      ),
+    [brandProducts]
+  );
+
+  const availableTypes = React.useMemo(() => {
+    const present = new Set(brandProducts.map((p) => p.productType));
+    const ordered = productTypes.filter((t) => present.has(t));
+    const extra = Array.from(present).filter((t) => !productTypes.includes(t));
+    return [...ordered, ...extra];
+  }, [brandProducts]);
+
+  const availableCharacteristics = React.useMemo(() => {
+    const present = new Set(brandProducts.flatMap((p) => p.features));
+    return productCharacteristics.filter((c) => present.has(c));
+  }, [brandProducts]);
+
+  const availableMaterials = React.useMemo(() => {
+    const present = brandProducts.map((p) => p.material);
+    return productMaterials.filter((m) => present.some((p) => p.includes(m)));
+  }, [brandProducts]);
 
   const [search, setSearch] = React.useState("");
   const [categories, setCategories] = React.useState<Set<string>>(
@@ -111,7 +149,7 @@ export function ProductsExplorer({
   }, [search, categories, types, characteristics, materials]);
 
   const filtered = React.useMemo(() => {
-    return products.filter((p) => {
+    return brandProducts.filter((p) => {
       if (
         search &&
         !`${p.name} ${p.code}`.toLowerCase().includes(search.toLowerCase())
@@ -131,7 +169,7 @@ export function ProductsExplorer({
         return false;
       return true;
     });
-  }, [products, search, categories, types, characteristics, materials]);
+  }, [brandProducts, search, categories, types, characteristics, materials]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
@@ -161,36 +199,36 @@ export function ProductsExplorer({
       </div>
       <FilterGroup
         title="Categoría"
-        options={productCategories.map((c) => c.label)}
+        options={availableCategories.map((c) => c.label)}
         selected={
           new Set(
             Array.from(categories).map(
               (slug) =>
-                productCategories.find((c) => c.slug === slug)?.label ?? slug
+                availableCategories.find((c) => c.slug === slug)?.label ?? slug
             )
           )
         }
         onToggle={(label) => {
           const slug =
-            productCategories.find((c) => c.label === label)?.slug ?? label;
+            availableCategories.find((c) => c.label === label)?.slug ?? label;
           setCategories((prev) => toggle(prev, slug));
         }}
       />
       <FilterGroup
         title="Tipo de producto"
-        options={productTypes}
+        options={availableTypes}
         selected={types}
         onToggle={(v) => setTypes((prev) => toggle(prev, v))}
       />
       <FilterGroup
         title="Características"
-        options={productCharacteristics}
+        options={availableCharacteristics}
         selected={characteristics}
         onToggle={(v) => setCharacteristics((prev) => toggle(prev, v))}
       />
       <FilterGroup
         title="Material"
-        options={productMaterials}
+        options={availableMaterials}
         selected={materials}
         onToggle={(v) => setMaterials((prev) => toggle(prev, v))}
       />
@@ -262,7 +300,7 @@ export function ProductsExplorer({
           >
             Todos los productos
           </button>
-          {productCategories.map((c) => (
+          {availableCategories.map((c) => (
             <button
               key={c.slug}
               onClick={() => setCategories(new Set([c.slug]))}

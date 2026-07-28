@@ -15,7 +15,6 @@ export const CONTACT = {
 export const DEFAULT_NAV_LINKS = [
   { label: "KD Pack", href: "/" },
   { label: "Konstruplast", href: "/konstruplast" },
-  { label: "Productos", href: "/productos" },
   { label: "Industrias", href: "/industrias" },
   { label: "Nosotros", href: "/nosotros" },
   { label: "Proyectos", href: "/proyectos" },

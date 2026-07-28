@@ -99,7 +99,7 @@ export default async function Home() {
         }
         primaryCta={{
           label: doc?.heroPrimaryCta?.label || "Ver productos",
-          href: doc?.heroPrimaryCta?.href || "/productos",
+          href: doc?.heroPrimaryCta?.href || "/productos?marca=kdpack",
         }}
         secondaryCta={{
           label: doc?.heroSecondaryCta?.label || "Cotizar proyecto",
@@ -124,7 +124,7 @@ export default async function Home() {
       <CategoryGrid
         eyebrow={doc?.categoryGridEyebrow || "¿Qué solución necesitas?"}
         title={doc?.categoryGridTitle || "Encuentra el producto ideal para tu operación."}
-        viewAllHref="/productos"
+        viewAllHref="/productos?marca=kdpack"
         viewAllLabel="Ver todos los productos"
         items={categories}
         variant="compact"
@@ -142,7 +142,7 @@ export default async function Home() {
               </h2>
             </div>
             <Link
-              href="/productos"
+              href="/productos?marca=kdpack"
               className="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold text-kd-green hover:text-kd-green-dark"
             >
               Ver todos los productos

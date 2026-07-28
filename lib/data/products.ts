@@ -21,7 +21,30 @@ export const productCategories: { slug: string; label: string }[] = [
   { slug: "almacenaje", label: "Almacenaje" },
   { slug: "pallets", label: "Pallets" },
   { slug: "pesca", label: "Pesca" },
+  { slug: "encofrados", label: "Encofrados" },
+  { slug: "separadores", label: "Separadores" },
+  { slug: "tapas", label: "Tapas" },
+  { slug: "terminaciones", label: "Terminaciones" },
+  { slug: "alivianantes", label: "Alivianantes" },
 ];
+
+// Which brand each product category belongs to, so a bare "?categoria=" link
+// (e.g. from the footer) can resolve the right brand-scoped catalog without
+// also needing an explicit "?marca=" param.
+export const categoryBrand: Record<string, Brand> = {
+  agricola: "kdpack",
+  "cajas-cosecheras": "kdpack",
+  forestal: "kdpack",
+  almacenaje: "kdpack",
+  pallets: "kdpack",
+  pesca: "kdpack",
+  encofrados: "konstruplast",
+  separadores: "konstruplast",
+  tapas: "konstruplast",
+  terminaciones: "konstruplast",
+  alivianantes: "konstruplast",
+  pasos: "konstruplast",
+};
 
 export const productTypes = [
   "Bins y contenedores",
