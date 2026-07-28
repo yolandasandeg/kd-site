@@ -16,7 +16,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Logo } from "@/components/layout/Logo";
 import { urlFor, type SanityImageRef } from "@/sanity/lib/image";
 import { DEFAULT_NAV_LINKS } from "@/lib/constants";
 
@@ -35,14 +34,12 @@ function brandLogoKeyFor(href: string): "kdpack" | "konstruplast" | undefined {
 }
 
 interface NavbarProps {
-  logoImage?: SanityImageRef;
   kdpackLogo?: SanityImageRef;
   konstruplastLogo?: SanityImageRef;
   navLinks?: NavLink[];
 }
 
 export function Navbar({
-  logoImage,
   kdpackLogo,
   konstruplastLogo,
   navLinks = DEFAULT_NAV_LINKS,
@@ -90,8 +87,6 @@ export function Navbar({
       )}
     >
       <div className="container flex h-[68px] items-center justify-between gap-4">
-        <Logo logoImage={logoImage} />
-
         <nav className="hidden lg:flex items-center gap-7" aria-label="Navegación principal">
           {navLinks.map((link) => (
             <Link
@@ -127,9 +122,7 @@ export function Navbar({
           </SheetTrigger>
           <SheetContent side="right" className="w-[85%] sm:max-w-sm flex flex-col">
             <SheetHeader>
-              <SheetTitle>
-                <Logo logoImage={logoImage} />
-              </SheetTitle>
+              <SheetTitle className="sr-only">Menú de navegación</SheetTitle>
             </SheetHeader>
             <nav className="mt-6 flex flex-col gap-1" aria-label="Navegación móvil">
               {navLinks.map((link) => (

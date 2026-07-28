@@ -10,13 +10,12 @@ export default async function SiteLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [{ logo, headerLogo, kdpackLogo, konstruplastLogo, navLinks }, { whatsappNumber }] =
+  const [{ logo, kdpackLogo, konstruplastLogo, navLinks }, { whatsappNumber }] =
     await Promise.all([getSiteBranding(), getContactInfo()]);
 
   return (
     <CartProvider>
       <Navbar
-        logoImage={headerLogo?.asset?._ref ? headerLogo : logo}
         kdpackLogo={kdpackLogo}
         konstruplastLogo={konstruplastLogo}
         navLinks={navLinks}
