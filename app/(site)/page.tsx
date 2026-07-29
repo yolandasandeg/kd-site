@@ -66,10 +66,18 @@ export default async function Home() {
 
   // Curated by likely search demand: arándanos and erizos are Chile's flagship
   // export categories, plus generic high-volume terms (bins, cajas expo).
+  // Falls back to the first 5 KD Pack products if any curated slug is missing
+  // (e.g. if Sanity is briefly unreachable and static fallback data is used
+  // instead) so this section never silently renders empty.
   const featuredProductSlugs = ["bins-001", "ag-001", "ag-025k3", "ag-062", "esp-011"];
-  const featuredProducts = featuredProductSlugs
-    .map((slug) => products.find((p) => p.brand === "kdpack" && p.slug === slug))
+  const kdpackProducts = products.filter((p) => p.brand === "kdpack");
+  const curatedFeaturedProducts = featuredProductSlugs
+    .map((slug) => kdpackProducts.find((p) => p.slug === slug))
     .filter((p): p is (typeof products)[number] => Boolean(p));
+  const featuredProducts =
+    curatedFeaturedProducts.length === featuredProductSlugs.length
+      ? curatedFeaturedProducts
+      : kdpackProducts.slice(0, 5);
 
   const featuredProjects = projects.filter((p) =>
     ["garces-fruit-berries", "frusan-logistica", "almagro-encofrados"].includes(
