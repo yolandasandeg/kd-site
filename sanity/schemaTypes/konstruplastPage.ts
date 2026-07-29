@@ -33,6 +33,15 @@ export const konstruplastPage = defineType({
       group: "hero",
     }),
     defineField({ name: "heroImage", title: "Imagen del hero", type: "image", group: "hero" }),
+    defineField({
+      name: "heroOverlayOpacity",
+      title: "Oscurecer imagen de fondo (%)",
+      description: "0 = imagen sin oscurecer, 100 = como está más oscura. Recomendado: 40-60.",
+      type: "number",
+      validation: (r) => r.min(0).max(100),
+      initialValue: 55,
+      group: "hero",
+    }),
 
     defineField({ name: "applicationsEyebrow", title: "Eyebrow", type: "string", group: "applications" }),
     defineField({ name: "applicationsTitle", title: "Título", type: "string", group: "applications" }),

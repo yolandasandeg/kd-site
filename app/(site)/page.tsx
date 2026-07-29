@@ -64,9 +64,12 @@ export default async function Home() {
     getClients(),
   ]);
 
-  const featuredProducts = products
-    .filter((p) => p.brand === "kdpack")
-    .slice(0, 5);
+  // Curated by likely search demand: arándanos and erizos are Chile's flagship
+  // export categories, plus generic high-volume terms (bins, cajas expo).
+  const featuredProductSlugs = ["bins-001", "ag-001", "ag-025k3", "ag-062", "esp-011"];
+  const featuredProducts = featuredProductSlugs
+    .map((slug) => products.find((p) => p.brand === "kdpack" && p.slug === slug))
+    .filter((p): p is (typeof products)[number] => Boolean(p));
 
   const featuredProjects = projects.filter((p) =>
     ["garces-fruit-berries", "frusan-logistica", "almagro-encofrados"].includes(
@@ -130,34 +133,6 @@ export default async function Home() {
         variant="compact"
       />
 
-      <section className="py-16 lg:py-20 bg-kd-surface-alt">
-        <div className="container">
-          <div className="flex items-end justify-between gap-4 flex-wrap">
-            <div className="border-l-2 border-kd-green pl-4">
-              <p className="eyebrow font-semibold">
-                {doc?.productsEyebrow || "Productos destacados"}
-              </p>
-              <h2 className="mt-1.5 text-h2-mobile lg:text-h2-desktop text-kd-text-primary">
-                {doc?.productsTitle || "Los más utilizados por nuestros clientes."}
-              </h2>
-            </div>
-            <Link
-              href="/productos?marca=kdpack"
-              className="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold text-kd-green hover:text-kd-green-dark"
-            >
-              Ver todos los productos
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-
-          <div className="mt-9 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.slug} product={product} />
-            ))}
-          </div>
-        </div>
-      </section>
-
       <FeatureRow
         eyebrow={doc?.whyEyebrow || "¿Por qué elegir KD Pack?"}
         title={
@@ -202,6 +177,34 @@ export default async function Home() {
               ]
         }
       />
+
+      <section className="py-16 lg:py-20 bg-kd-surface-alt">
+        <div className="container">
+          <div className="flex items-end justify-between gap-4 flex-wrap">
+            <div className="border-l-2 border-kd-green pl-4">
+              <p className="eyebrow font-semibold">
+                {doc?.productsEyebrow || "Productos destacados"}
+              </p>
+              <h2 className="mt-1.5 text-h2-mobile lg:text-h2-desktop text-kd-text-primary">
+                {doc?.productsTitle || "Los más utilizados por nuestros clientes."}
+              </h2>
+            </div>
+            <Link
+              href="/productos?marca=kdpack"
+              className="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold text-kd-green hover:text-kd-green-dark"
+            >
+              Ver todos los productos
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="mt-9 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
+            {featuredProducts.map((product) => (
+              <ProductCard key={product.slug} product={product} />
+            ))}
+          </div>
+        </div>
+      </section>
 
       <LogoStrip
         title={

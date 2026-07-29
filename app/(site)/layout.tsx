@@ -10,7 +10,7 @@ export default async function SiteLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [{ logo, kdpackLogo, konstruplastLogo, navLinks }, { whatsappNumber }] =
+  const [{ kdpackLogo, konstruplastLogo, navLinks }, { whatsappNumber }] =
     await Promise.all([getSiteBranding(), getContactInfo()]);
 
   return (
@@ -21,7 +21,7 @@ export default async function SiteLayout({
         navLinks={navLinks}
       />
       <main className="flex-1">{children}</main>
-      <Footer logoImage={logo} />
+      <Footer logoImage={kdpackLogo} />
       <WhatsAppButton />
       <CartWidget whatsappNumber={whatsappNumber} />
     </CartProvider>

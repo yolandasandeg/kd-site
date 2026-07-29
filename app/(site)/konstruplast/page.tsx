@@ -37,6 +37,7 @@ interface KonstruplastPageDoc {
   heroSecondaryCta?: { label?: string; href?: string };
   heroBadges?: HeroBadge[];
   heroImage?: SanityImageRef;
+  heroOverlayOpacity?: number;
   applicationsEyebrow?: string;
   applicationsTitle?: string;
   productsEyebrow?: string;
@@ -75,7 +76,9 @@ export default async function KonstruplastPage() {
     imageColor: "141414",
   }));
 
-  const featuredProducts = products.filter((p) => p.brand === "konstruplast");
+  const featuredProducts = products
+    .filter((p) => p.brand === "konstruplast")
+    .slice(0, 6);
 
   const featuredProjects = projects.filter((p) =>
     konstruplastProjectSlugs.includes(p.slug)
@@ -88,7 +91,8 @@ export default async function KonstruplastPage() {
   return (
     <>
       <Hero
-        variant="light"
+        variant="dark"
+        layout="full"
         eyebrow={doc?.heroEyebrow || "Konstruplast"}
         titleParts={
           doc?.heroTitleParts?.length
@@ -124,7 +128,7 @@ export default async function KonstruplastPage() {
         imageAlt="Elementos de encofrado plástico Konstruplast en obra de construcción"
         imageBg="3f3f3a"
         image={doc?.heroImage}
-        imagePosition="85% center"
+        overlayOpacity={doc?.heroOverlayOpacity}
       />
 
       <CategoryGrid

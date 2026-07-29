@@ -36,7 +36,7 @@ export function ProjectCard({ project, variant = "light" }: ProjectCardProps) {
             className="object-cover transition-transform duration-300 group-hover:scale-105"
             sizes="(min-width: 1024px) 30vw, 100vw"
           />
-          <div className="absolute top-3 left-3 eyebrow bg-black/40 backdrop-blur px-2.5 py-1 rounded-full text-white">
+          <div className="absolute top-3 left-3 eyebrow bg-black/40 backdrop-blur px-2.5 py-1 rounded-full !text-white">
             {project.industry}
           </div>
         </div>
