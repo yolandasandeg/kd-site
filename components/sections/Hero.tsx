@@ -116,7 +116,7 @@ export function Hero({
   );
 
   const badgeRow = badges && badges.length > 0 && (
-    <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5 max-w-2xl">
+    <div className="mt-10 lg:mt-7 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5 max-w-2xl">
       {badges.map((badge) => (
         <div key={badge.label} className="flex items-center gap-2.5">
           <Icon
@@ -167,7 +167,7 @@ export function Hero({
             }}
           />
         </div>
-        <div className="relative container pt-10 pb-20 lg:py-24 animate-fade-in-up">
+        <div className="relative container pt-10 pb-20 lg:pt-16 lg:pb-24 animate-fade-in-up">
           <p className="eyebrow font-semibold drop-shadow-sm">{eyebrow}</p>
           <div className="mt-4 drop-shadow-sm">{title}</div>
           <p className="mt-5 max-w-xl text-base sm:text-lg text-white/90 drop-shadow-sm">
