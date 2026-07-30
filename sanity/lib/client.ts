@@ -9,7 +9,10 @@ export const client = createClient({
   projectId: projectId || "placeholder",
   dataset: dataset || "production",
   apiVersion,
-  useCdn: true,
+  // Read straight from Sanity's primary API, not the CDN edge cache.
+  // The CDN occasionally serves stale/empty responses from certain edge
+  // nodes, which showed up as products silently vanishing for some users.
+  useCdn: false,
   perspective: "published",
   stega: { enabled: false },
 });
