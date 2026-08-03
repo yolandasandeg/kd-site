@@ -21,11 +21,14 @@ export const productCategories: { slug: string; label: string }[] = [
   { slug: "almacenaje", label: "Almacenaje" },
   { slug: "pallets", label: "Pallets" },
   { slug: "pesca", label: "Pesca" },
+  { slug: "acuicola", label: "Acuícola" },
+  { slug: "especificos", label: "Específicos" },
   { slug: "encofrados", label: "Encofrados" },
   { slug: "separadores", label: "Separadores" },
   { slug: "tapas", label: "Tapas" },
   { slug: "terminaciones", label: "Terminaciones" },
   { slug: "alivianantes", label: "Alivianantes" },
+  { slug: "drenaje", label: "Drenaje" },
 ];
 
 // Which brand each product category belongs to, so a bare "?categoria=" link
@@ -38,11 +41,14 @@ export const categoryBrand: Record<string, Brand> = {
   almacenaje: "kdpack",
   pallets: "kdpack",
   pesca: "kdpack",
+  acuicola: "kdpack",
+  especificos: "kdpack",
   encofrados: "konstruplast",
   separadores: "konstruplast",
   tapas: "konstruplast",
   terminaciones: "konstruplast",
   alivianantes: "konstruplast",
+  drenaje: "konstruplast",
   pasos: "konstruplast",
 };
 

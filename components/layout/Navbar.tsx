@@ -87,6 +87,25 @@ export function Navbar({
       )}
     >
       <div className="container flex h-[68px] items-center justify-between gap-4">
+        <Link
+          href="/"
+          className="relative h-8 w-[110px] shrink-0 block"
+          aria-label="KD Pack — ir al inicio"
+        >
+          {kdpackLogo?.asset?._ref ? (
+            <Image
+              src={urlFor(kdpackLogo as SanityImage).height(64).fit("max").auto("format").url()}
+              alt="KD Pack"
+              fill
+              className="object-contain object-left"
+              sizes="110px"
+              priority
+            />
+          ) : (
+            <span className="text-lg font-bold text-kd-text-primary leading-8">KD Pack</span>
+          )}
+        </Link>
+
         <nav className="hidden lg:flex items-center gap-7" aria-label="Navegación principal">
           {navLinks.map((link) => (
             <Link

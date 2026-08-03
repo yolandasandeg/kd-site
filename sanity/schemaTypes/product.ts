@@ -30,6 +30,10 @@ export const product = defineType({
     defineField({ name: "productType", title: "Tipo de producto", type: "string" }),
     defineField({ name: "size", title: "Dimensiones", type: "string" }),
     defineField({ name: "material", title: "Material", type: "string" }),
+    defineField({ name: "volumeLiters", title: "Volumen (litros)", type: "string" }),
+    defineField({ name: "unitsPerPallet", title: "Unidades por pallet", type: "string" }),
+    defineField({ name: "recyclable", title: "100% Reciclable", type: "boolean" }),
+    defineField({ name: "reusable", title: "100% Reutilizable", type: "boolean" }),
     defineField({ name: "description", title: "Descripción", type: "text", rows: 3 }),
     defineField({
       name: "features",
