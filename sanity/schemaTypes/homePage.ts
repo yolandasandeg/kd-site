@@ -6,12 +6,12 @@ export const homePage = defineType({
   type: "document",
   groups: [
     { name: "hero", title: "Hero" },
-    { name: "categoryGrid", title: "Qué solución necesitas" },
-    { name: "why", title: "Por qué elegirnos" },
+    { name: "logos", title: "Logos de clientes" },
     { name: "products", title: "Productos destacados" },
+    { name: "industries", title: "Industrias" },
+    { name: "why", title: "Por qué elegirnos" },
     { name: "projects", title: "Proyectos" },
     { name: "cta", title: "CTA final" },
-    { name: "logos", title: "Logos de clientes" },
   ],
   fields: [
     defineField({ name: "heroEyebrow", title: "Eyebrow", type: "string", group: "hero" }),
@@ -43,21 +43,42 @@ export const homePage = defineType({
       group: "hero",
     }),
 
-    defineField({ name: "categoryGridEyebrow", title: "Eyebrow", type: "string", group: "categoryGrid" }),
-    defineField({ name: "categoryGridTitle", title: "Título", type: "string", group: "categoryGrid" }),
-
     defineField({ name: "whyEyebrow", title: "Eyebrow", type: "string", group: "why" }),
     defineField({ name: "whyTitle", title: "Título", type: "string", group: "why" }),
     defineField({
       name: "whyItems",
-      title: "Ítems",
+      title: "Tarjetas",
       type: "array",
       of: [{ type: "featureItem" }],
+      group: "why",
+    }),
+    defineField({
+      name: "whySealsTitle",
+      title: "Texto sobre los sellos (opcional)",
+      type: "string",
+      group: "why",
+    }),
+    defineField({
+      name: "whySeals",
+      title: "Sellos y certificaciones",
+      description: "Franja de sellos/certificaciones que va debajo de las tarjetas (ISO 9001, SERVIU, DICTUC, etc).",
+      type: "array",
+      of: [{ type: "badgeItem" }],
       group: "why",
     }),
 
     defineField({ name: "productsEyebrow", title: "Eyebrow", type: "string", group: "products" }),
     defineField({ name: "productsTitle", title: "Título", type: "string", group: "products" }),
+
+    defineField({ name: "industriesEyebrow", title: "Eyebrow", type: "string", group: "industries" }),
+    defineField({ name: "industriesTitle", title: "Título", type: "string", group: "industries" }),
+    defineField({
+      name: "industriesItems",
+      title: "Industrias",
+      type: "array",
+      of: [{ type: "badgeItem" }],
+      group: "industries",
+    }),
 
     defineField({ name: "projectsEyebrow", title: "Eyebrow", type: "string", group: "projects" }),
     defineField({ name: "projectsTitle", title: "Título", type: "string", group: "projects" }),

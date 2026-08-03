@@ -14,6 +14,8 @@ import { nosotrosPage } from "./nosotrosPage";
 import { proyectosPage } from "./proyectosPage";
 import { contactoPage } from "./contactoPage";
 import { cotizaPage } from "./cotizaPage";
+import { sustentabilidadPage } from "./sustentabilidadPage";
+import { ubicacionPage } from "./ubicacionPage";
 
 export const schemaTypes = [
   // Objetos reutilizables
@@ -41,6 +43,8 @@ export const schemaTypes = [
   proyectosPage,
   contactoPage,
   cotizaPage,
+  sustentabilidadPage,
+  ubicacionPage,
 ];
 
 export const singletonTypes = new Set([
@@ -53,4 +57,6 @@ export const singletonTypes = new Set([
   "proyectosPage",
   "contactoPage",
   "cotizaPage",
+  "sustentabilidadPage",
+  "ubicacionPage",
 ]);

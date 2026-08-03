@@ -32,6 +32,10 @@ interface HeroProps {
   subtitle: string;
   primaryCta: HeroCta;
   secondaryCta?: HeroCta;
+  /** Override the primary button's visual style. Defaults to solid green. */
+  primaryVariant?: "default" | "outline" | "outlineLight" | "white";
+  /** Override the secondary button's visual style. Defaults to an outline matching the hero variant. */
+  secondaryVariant?: "default" | "outline" | "outlineLight" | "white";
   badges?: HeroBadge[];
   imageAlt: string;
   imageBg?: string;
@@ -51,6 +55,8 @@ export function Hero({
   subtitle,
   primaryCta,
   secondaryCta,
+  primaryVariant,
+  secondaryVariant,
   badges,
   imageAlt,
   imageBg = "1C7A43",
@@ -90,7 +96,7 @@ export function Hero({
 
   const ctas = (
     <div className="mt-8 flex flex-col sm:flex-row gap-3">
-      <Button asChild size="lg">
+      <Button asChild size="lg" variant={primaryVariant ?? "default"}>
         <Link href={primaryCta.href}>
           {primaryCta.icon && <Icon name={primaryCta.icon} className="h-4 w-4" />}
           {primaryCta.label}
@@ -101,7 +107,7 @@ export function Hero({
         <Button
           asChild
           size="lg"
-          variant={isDark ? "outlineLight" : "outline"}
+          variant={secondaryVariant ?? (isDark ? "outlineLight" : "outline")}
         >
           <Link href={secondaryCta.href}>
             {secondaryCta.icon && (
@@ -128,7 +134,7 @@ export function Hero({
           />
           <span
             className={cn(
-              "text-sm leading-snug",
+              "text-sm leading-snug whitespace-pre-line",
               isDark ? "text-white/80" : "text-kd-text-secondary"
             )}
           >

@@ -184,3 +184,14 @@ export async function getPageDoc<T = Record<string, unknown>>(
 ): Promise<T | null> {
   return sanityFetch(`*[_type == "${type}"][0]`, {}, null);
 }
+
+export async function getSustentabilidadPage<T = Record<string, unknown>>(): Promise<T | null> {
+  return sanityFetch(
+    `*[_type == "sustentabilidadPage"][0]{
+      ...,
+      certificateFile{ asset->{url, originalFilename} }
+    }`,
+    {},
+    null
+  );
+}

@@ -29,6 +29,8 @@ const navigationLinks = [
   { href: "/productos", label: "Productos" },
   { href: "/industrias", label: "Industrias" },
   { href: "/nosotros", label: "Nosotros" },
+  { href: "/sustentabilidad", label: "Sustentabilidad" },
+  { href: "/ubicacion", label: "Ubicación" },
   { href: "/proyectos", label: "Proyectos" },
   { href: "/contacto", label: "Contacto" },
 ];

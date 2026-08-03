@@ -3,14 +3,13 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Hero, type HeroBadge, type HeroTitlePart } from "@/components/sections/Hero";
-import { CategoryGrid } from "@/components/sections/CategoryGrid";
 import { FeatureRow, type FeatureItem } from "@/components/sections/FeatureRow";
+import { SealsStrip, type SealItem } from "@/components/sections/SealsStrip";
 import { ProductCard } from "@/components/sections/ProductCard";
 import { ProjectCard } from "@/components/sections/ProjectCard";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { LogoStrip } from "@/components/sections/LogoStrip";
 import {
-  getCategories,
   getClients,
   getPageDoc,
   getProducts,
@@ -40,13 +39,16 @@ interface HomePageDoc {
   heroBadges?: HeroBadge[];
   heroImage?: SanityImageRef;
   heroOverlayOpacity?: number;
-  categoryGridEyebrow?: string;
-  categoryGridTitle?: string;
   whyEyebrow?: string;
   whyTitle?: string;
   whyItems?: FeatureItem[];
+  whySealsTitle?: string;
+  whySeals?: SealItem[];
   productsEyebrow?: string;
   productsTitle?: string;
+  industriesEyebrow?: string;
+  industriesTitle?: string;
+  industriesItems?: SealItem[];
   projectsEyebrow?: string;
   projectsTitle?: string;
   projectsSubtitle?: string;
@@ -56,11 +58,10 @@ interface HomePageDoc {
 }
 
 export default async function Home() {
-  const [doc, products, projects, categories, clients] = await Promise.all([
+  const [doc, products, projects, clients] = await Promise.all([
     getPageDoc<HomePageDoc>("homePage"),
     getProducts(),
     getProjects(),
-    getCategories(),
     getClients(),
   ]);
 
@@ -99,14 +100,14 @@ export default async function Home() {
           doc?.heroTitleParts?.length
             ? doc.heroTitleParts
             : [
-                { text: "Packaging plástico" },
+                { text: "Soluciones plásticas" },
                 { text: "para industrias que" },
                 { text: "no pueden detenerse.", highlight: true },
               ]
         }
         subtitle={
           doc?.heroSubtitle ||
-          "Contenedores, bins, pallets y soluciones plásticas para agricultura, logística, industria y construcción."
+          "Fabricamos en Chile para agricultura, acuicultura, forestal, construcción, logística y más."
         }
         primaryCta={{
           label: doc?.heroPrimaryCta?.label || "Ver productos",
@@ -116,14 +117,16 @@ export default async function Home() {
           label: doc?.heroSecondaryCta?.label || "Cotizar proyecto",
           href: doc?.heroSecondaryCta?.href || "/cotiza-tu-proyecto",
         }}
+        primaryVariant="outlineLight"
+        secondaryVariant="default"
         badges={
           doc?.heroBadges?.length
             ? doc.heroBadges
             : [
-                { icon: "award", label: "+15 años fabricando en Chile" },
-                { icon: "boxes", label: "+4,5M toneladas al año" },
+                { icon: "award", label: "+15 años\nfabricando en Chile" },
+                { icon: "boxes", label: "+4.500 toneladas al año" },
                 { icon: "users", label: "+X clientes activos" },
-                { icon: "factory", label: "+30.000 mts2 de planta" },
+                { icon: "leaf", label: "100% energía renovable" },
               ]
         }
         imageAlt="Bins y pallets plásticos KD Pack en planta industrial"
@@ -132,61 +135,15 @@ export default async function Home() {
         overlayOpacity={doc?.heroOverlayOpacity}
       />
 
-      <CategoryGrid
-        eyebrow={doc?.categoryGridEyebrow || "¿Qué solución necesitas?"}
-        title={doc?.categoryGridTitle || "Encuentra el producto ideal para tu operación."}
-        viewAllHref="/productos?marca=kdpack"
-        viewAllLabel="Ver todos los productos"
-        items={categories}
-        variant="compact"
-      />
-
-      <FeatureRow
-        eyebrow={doc?.whyEyebrow || "¿Por qué elegir KD Pack?"}
+      <LogoStrip
         title={
-          doc?.whyTitle ||
-          "Un aliado que entiende tu operación y responde cuando más importa."
+          doc?.logosTitle ||
+          "Empresas de múltiples industrias confían en nuestras soluciones"
         }
-        background="white"
-        items={
-          doc?.whyItems?.length
-            ? doc.whyItems
-            : [
-                {
-                  icon: "leaf",
-                  title: "100% energía renovable",
-                  description:
-                    "Nuestra planta opera con energía 100% renovable, reduciendo el impacto ambiental de cada producto.",
-                },
-                {
-                  icon: "shield",
-                  title: "ISO 9001 en toda la cadena productiva",
-                  description:
-                    "Certificación ISO 9001 que respalda la calidad y consistencia de todo nuestro proceso productivo.",
-                },
-                {
-                  icon: "shield-plus",
-                  title: "Grado alimentario",
-                  description:
-                    "Productos certificados para contacto directo con alimentos, cumpliendo los estándares más exigentes.",
-                },
-                {
-                  icon: "clock",
-                  title: "Cotización en menos de 24 horas",
-                  description:
-                    "Recibe una propuesta clara y a tiempo, sin esperas que frenen tu operación.",
-                },
-                {
-                  icon: "truck",
-                  title: "Despacho express",
-                  description:
-                    "Entregas rápidas para asegurar continuidad en tu cadena de suministro.",
-                },
-              ]
-        }
+        clients={kdPackClients.slice(0, 6)}
       />
 
-      <section className="py-16 lg:py-20 bg-kd-surface-alt">
+      <section className="py-16 lg:py-20">
         <div className="container">
           <div className="flex items-end justify-between gap-4 flex-wrap">
             <div className="border-l-2 border-kd-green pl-4">
@@ -214,18 +171,83 @@ export default async function Home() {
         </div>
       </section>
 
-      <LogoStrip
+      <FeatureRow
+        eyebrow={doc?.industriesEyebrow || "Industrias"}
         title={
-          doc?.logosTitle ||
-          "Empresas de múltiples industrias confían en nuestras soluciones"
+          doc?.industriesTitle ||
+          "Soluciones especializadas para cada sector que impulsamos."
         }
-        clients={kdPackClients.slice(0, 6)}
+        background="alt"
+        items={
+          doc?.industriesItems?.length
+            ? doc.industriesItems.map((i) => ({ icon: i.icon, title: i.label }))
+            : [
+                { icon: "leaf", title: "Agricultura" },
+                { icon: "fish", title: "Acuicultura" },
+                { icon: "trees", title: "Forestal" },
+                { icon: "building-2", title: "Construcción" },
+                { icon: "truck", title: "Logística" },
+                { icon: "star", title: "Proyectos especiales" },
+              ]
+        }
       />
 
-      <CtaBanner
-        eyebrow={doc?.ctaEyebrow}
-        title={doc?.ctaTitle}
-      />
+      <section className="py-16 lg:py-20">
+        <FeatureRow
+          eyebrow={doc?.whyEyebrow || "¿Por qué elegir KD Pack?"}
+          title={
+            doc?.whyTitle ||
+            "Un aliado que entiende tu operación y responde cuando más importa."
+          }
+          background="white"
+          layout="card"
+          items={
+            doc?.whyItems?.length
+              ? doc.whyItems
+              : [
+                  {
+                    icon: "warehouse",
+                    title: "Continuidad de suministro",
+                    description:
+                      "Fabricamos en Paine con stock permanente: entrega y reposición rápida, sin depender de un contenedor en camino.",
+                  },
+                  {
+                    icon: "shield-plus",
+                    title: "Durabilidad comprobada en terreno",
+                    description:
+                      "Diseñados para el uso rudo real: sol, frío, golpes y ciclos intensivos de carga. Menos recambio y menor costo por año de uso.",
+                  },
+                  {
+                    icon: "sparkles",
+                    title: "Innovación en materiales y procesos",
+                    description:
+                      "Mejoramos continuamente diseños, materiales y procesos, validados por certificaciones técnicas independientes como DICTUC.",
+                  },
+                  {
+                    icon: "cog",
+                    title: "Desarrollo a medida",
+                    description:
+                      "Nuestro equipo de ingeniería trabaja con el tuyo para desarrollar la solución que tu operación necesita: desde el diseño hasta la producción en serie.",
+                  },
+                ]
+          }
+        />
+
+        <SealsStrip
+          title={doc?.whySealsTitle}
+          items={
+            doc?.whySeals?.length
+              ? doc.whySeals
+              : [
+                  { icon: "shield", label: "ISO 9001" },
+                  { icon: "building", label: "SERVIU" },
+                  { icon: "award", label: "DICTUC" },
+                  { icon: "leaf", label: "Energía renovable" },
+                  { icon: "recycle", label: "Materia prima reciclada" },
+                ]
+          }
+        />
+      </section>
 
       <section className="py-16 lg:py-20 bg-kd-black">
         <div className="container">
@@ -249,6 +271,11 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      <CtaBanner
+        eyebrow={doc?.ctaEyebrow}
+        title={doc?.ctaTitle}
+      />
     </>
   );
 }

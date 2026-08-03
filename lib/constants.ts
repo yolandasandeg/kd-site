@@ -13,12 +13,12 @@ export const CONTACT = {
 };
 
 export const DEFAULT_NAV_LINKS = [
-  { label: "KD Pack", href: "/" },
-  { label: "Konstruplast", href: "/konstruplast" },
   { label: "Industrias", href: "/industrias" },
+  { label: "Productos", href: "/productos?marca=kdpack" },
   { label: "Nosotros", href: "/nosotros" },
-  { label: "Proyectos", href: "/proyectos" },
-  { label: "Contacto", href: "/contacto" },
+  { label: "Sustentabilidad", href: "/sustentabilidad" },
+  { label: "Ubicación", href: "/ubicacion" },
+  { label: "Cotizar", href: "/cotiza-tu-proyecto" },
 ];
 
 export const WHATSAPP_NUMBER = "56228249870";
