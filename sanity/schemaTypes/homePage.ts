@@ -69,6 +69,14 @@ export const homePage = defineType({
 
     defineField({ name: "productsEyebrow", title: "Eyebrow", type: "string", group: "products" }),
     defineField({ name: "productsTitle", title: "Título", type: "string", group: "products" }),
+    defineField({
+      name: "featuredProducts",
+      title: "Productos a mostrar",
+      description: "Elige los productos que aparecen en el carrusel de la home. Si lo dejas vacío, se muestra una selección automática.",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "product" }] }],
+      group: "products",
+    }),
 
     defineField({ name: "industriesEyebrow", title: "Eyebrow", type: "string", group: "industries" }),
     defineField({ name: "industriesTitle", title: "Título", type: "string", group: "industries" }),

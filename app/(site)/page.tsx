@@ -12,10 +12,11 @@ import { CtaBanner } from "@/components/sections/CtaBanner";
 import { LogoStrip } from "@/components/sections/LogoStrip";
 import {
   getClients,
-  getPageDoc,
+  getHomePage,
   getProducts,
   getProjects,
 } from "@/sanity/lib/queries";
+import type { Product } from "@/lib/data/products";
 import type { SanityImageRef } from "@/sanity/lib/image";
 
 export const metadata: Metadata = {
@@ -47,6 +48,7 @@ interface HomePageDoc {
   whySeals?: SealItem[];
   productsEyebrow?: string;
   productsTitle?: string;
+  featuredProducts?: (Product & { image?: SanityImageRef })[];
   industriesEyebrow?: string;
   industriesTitle?: string;
   industriesItems?: { name?: string; href?: string; icon?: string; image?: SanityImageRef }[];
@@ -69,7 +71,7 @@ const defaultIndustries = [
 
 export default async function Home() {
   const [doc, products, projects, clients] = await Promise.all([
-    getPageDoc<HomePageDoc>("homePage"),
+    getHomePage<HomePageDoc>(),
     getProducts(),
     getProjects(),
     getClients(),
@@ -80,7 +82,8 @@ export default async function Home() {
   // (bins, cajas expo). Falls back to the first 10 KD Pack products if any
   // curated slug is missing (e.g. if Sanity is briefly unreachable and
   // static fallback data is used instead) so this section never silently
-  // renders empty.
+  // renders empty. Editors can override this whole list from Sanity via
+  // homePage.featuredProducts.
   const featuredProductSlugs = [
     "bins-001",
     "ag-001",
@@ -97,8 +100,9 @@ export default async function Home() {
   const curatedFeaturedProducts = featuredProductSlugs
     .map((slug) => kdpackProducts.find((p) => p.slug === slug))
     .filter((p): p is (typeof products)[number] => Boolean(p));
-  const featuredProducts =
-    curatedFeaturedProducts.length === featuredProductSlugs.length
+  const featuredProducts = doc?.featuredProducts?.length
+    ? doc.featuredProducts
+    : curatedFeaturedProducts.length === featuredProductSlugs.length
       ? curatedFeaturedProducts
       : kdpackProducts.slice(0, 10);
 

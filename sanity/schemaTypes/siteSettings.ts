@@ -52,6 +52,12 @@ export const siteSettings = defineType({
         },
       ],
     }),
+    defineField({
+      name: "footerTagline",
+      title: "Frase del footer",
+      description: "Texto corto debajo del logo en el pie de página.",
+      type: "string",
+    }),
     defineField({ name: "address", title: "Dirección", type: "string" }),
     defineField({ name: "phone", title: "Teléfono (texto mostrado)", type: "string" }),
     defineField({ name: "phoneHref", title: "Teléfono (link tel:, solo números con +)", type: "string" }),

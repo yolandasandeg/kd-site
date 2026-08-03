@@ -93,6 +93,7 @@ interface SiteSettingsDoc {
   favicon?: SanityImageRef;
   kdpackLogo?: SanityImageRef;
   navLinks?: { label: string; href: string }[];
+  footerTagline?: string;
   address?: string;
   phone?: string;
   phoneHref?: string;
@@ -111,6 +112,7 @@ export async function getSiteSettings(): Promise<SiteSettingsDoc | null> {
 }
 
 export interface ContactInfo {
+  footerTagline: string;
   address: string;
   phone: string;
   phoneHref: string;
@@ -134,6 +136,7 @@ export async function getContactInfo(): Promise<ContactInfo> {
   const whatsappMessage = settings?.whatsappMessage || WHATSAPP_MESSAGE;
 
   return {
+    footerTagline: settings?.footerTagline || "Soluciones plásticas en movimiento.",
     address: settings?.address || CONTACT.address,
     phone: settings?.phone || CONTACT.phone,
     phoneHref: settings?.phoneHref || CONTACT.phoneHref,
@@ -176,6 +179,17 @@ export async function getPageDoc<T = Record<string, unknown>>(
   type: string
 ): Promise<T | null> {
   return sanityFetch(`*[_type == "${type}"][0]`, {}, null);
+}
+
+export async function getHomePage<T = Record<string, unknown>>(): Promise<T | null> {
+  return sanityFetch(
+    `*[_type == "homePage"][0]{
+      ...,
+      featuredProducts[]-> ${PRODUCT_PROJECTION}
+    }`,
+    {},
+    null
+  );
 }
 
 export async function getSustentabilidadPage<T = Record<string, unknown>>(): Promise<T | null> {

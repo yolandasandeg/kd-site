@@ -57,7 +57,7 @@ export async function Footer({ logoImage }: FooterProps) {
         <div>
           <Logo variant="light" logoImage={logoImage} />
           <p className="mt-4 text-sm leading-relaxed text-white/60 max-w-xs">
-            Soluciones plásticas en movimiento.
+            {contact.footerTagline}
           </p>
           <div className="mt-5 flex items-center gap-3">
             <a
