@@ -8,12 +8,13 @@ export interface FeatureItem {
   description?: string;
 }
 
-const LG_COLS_CLASS: Record<1 | 2 | 3 | 4 | 5, string> = {
+const LG_COLS_CLASS: Record<1 | 2 | 3 | 4 | 5 | 6, string> = {
   1: "sm:grid-cols-1 lg:grid-cols-1",
   2: "sm:grid-cols-2 lg:grid-cols-2",
   3: "sm:grid-cols-3 lg:grid-cols-3",
   4: "sm:grid-cols-2 lg:grid-cols-4",
   5: "sm:grid-cols-3 lg:grid-cols-5",
+  6: "sm:grid-cols-3 lg:grid-cols-3",
 };
 
 interface FeatureRowProps {
@@ -75,7 +76,7 @@ export function FeatureRow({
         <div
           className={cn(
             "grid grid-cols-2 gap-6",
-            LG_COLS_CLASS[Math.min(items.length, 5) as 1 | 2 | 3 | 4 | 5]
+            LG_COLS_CLASS[Math.min(items.length, 6) as 1 | 2 | 3 | 4 | 5 | 6]
           )}
         >
           {items.map((item, index) =>
