@@ -57,8 +57,7 @@ export async function Footer({ logoImage }: FooterProps) {
         <div>
           <Logo variant="light" logoImage={logoImage} />
           <p className="mt-4 text-sm leading-relaxed text-white/60 max-w-xs">
-            Sistemas de packaging y soluciones plásticas para industrias que
-            no pueden detenerse.
+            Soluciones plásticas en movimiento.
           </p>
           <div className="mt-5 flex items-center gap-3">
             <a
@@ -102,7 +101,7 @@ export async function Footer({ logoImage }: FooterProps) {
 
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-wide text-white/80">
-            Productos
+            Industrias
           </h3>
           <ul className="mt-4 space-y-2.5">
             {productLinks.map((link) => (

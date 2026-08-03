@@ -71,7 +71,7 @@ export async function getIndustries(): Promise<
   (Industry & { image?: SanityImageRef })[]
 > {
   return sanityFetch(
-    `*[_type == "industry"] | order(order asc) { name, "slug": slug.current, description, href, icon, image, imageColor }`,
+    `*[_type == "industry"] | order(name asc) { name, "slug": slug.current, description, href, icon, image, imageColor }`,
     {},
     staticIndustries
   );

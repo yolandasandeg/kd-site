@@ -223,7 +223,7 @@ export default async function ConstruccionPage() {
       />
       <LogoStrip
         title={doc?.logosTitle || "Empresas que confían en nuestras soluciones"}
-        clients={clients.slice(0, 6)}
+        clients={clients}
       />
     </>
   );

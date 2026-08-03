@@ -124,17 +124,17 @@ export function Hero({
   const badgeRow = badges && badges.length > 0 && (
     <div className="mt-10 lg:mt-7 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5 max-w-2xl">
       {badges.map((badge) => (
-        <div key={badge.label} className="flex items-center gap-2.5">
+        <div key={badge.label} className="flex items-center gap-3">
           <Icon
             name={badge.icon}
             className={cn(
-              "h-5 w-5 shrink-0",
+              "h-7 w-7 shrink-0",
               isDark ? "text-kd-green" : "text-kd-green"
             )}
           />
           <span
             className={cn(
-              "text-sm leading-snug whitespace-pre-line",
+              "text-base leading-snug whitespace-pre-line",
               isDark ? "text-white/80" : "text-kd-text-secondary"
             )}
           >

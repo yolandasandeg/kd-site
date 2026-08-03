@@ -18,13 +18,13 @@ export const industries: Industry[] = [
     imageColor: "2d5a3f",
   },
   {
-    slug: "logistica",
-    name: "Logística y Distribución",
+    slug: "almacenaje",
+    name: "Almacenaje Industrial",
     description:
-      "Optimización de procesos logísticos con contenedores y pallets reutilizables que mejoran la eficiencia y reducen costos.",
-    href: "/productos?categoria=pallets",
-    icon: "truck",
-    imageColor: "1f2937",
+      "Contenedores y bins de alta resistencia para el almacenamiento seguro y organizado en la industria.",
+    href: "/productos?categoria=almacenaje",
+    icon: "warehouse",
+    imageColor: "141414",
   },
   {
     slug: "forestal",
@@ -36,13 +36,13 @@ export const industries: Industry[] = [
     imageColor: "3d5c3a",
   },
   {
-    slug: "almacenaje",
-    name: "Almacenaje Industrial",
+    slug: "logistica",
+    name: "Logística y Distribución",
     description:
-      "Contenedores y bins de alta resistencia para el almacenamiento seguro y organizado en la industria.",
-    href: "/productos?categoria=almacenaje",
-    icon: "warehouse",
-    imageColor: "141414",
+      "Optimización de procesos logísticos con contenedores y pallets reutilizables que mejoran la eficiencia y reducen costos.",
+    href: "/productos?categoria=pallets",
+    icon: "truck",
+    imageColor: "1f2937",
   },
   {
     slug: "pallets",

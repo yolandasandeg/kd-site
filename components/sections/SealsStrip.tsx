@@ -20,14 +20,14 @@ export function SealsStrip({ title, items }: SealsStripProps) {
           {title}
         </p>
       )}
-      <div className={`flex flex-wrap items-center justify-center gap-3 ${title ? "mt-5" : ""}`}>
+      <div className={`flex flex-wrap items-center justify-center gap-4 ${title ? "mt-5" : ""}`}>
         {items.map((item) => (
           <div
             key={item.label}
-            className="flex items-center gap-2 rounded-full border border-kd-border bg-white px-4 py-2"
+            className="flex items-center gap-3 rounded-full border border-kd-border bg-white px-6 py-3.5 shadow-sm"
           >
-            <Icon name={item.icon} className="h-4 w-4 text-kd-green shrink-0" />
-            <span className="text-sm font-medium text-kd-text-primary">
+            <Icon name={item.icon} className="h-7 w-7 text-kd-green shrink-0" />
+            <span className="text-base font-semibold text-kd-text-primary">
               {item.label}
             </span>
           </div>

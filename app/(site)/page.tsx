@@ -6,7 +6,7 @@ import { Hero, type HeroBadge, type HeroTitlePart } from "@/components/sections/
 import { CategoryGrid } from "@/components/sections/CategoryGrid";
 import { FeatureRow, type FeatureItem } from "@/components/sections/FeatureRow";
 import { SealsStrip, type SealItem } from "@/components/sections/SealsStrip";
-import { ProductCard } from "@/components/sections/ProductCard";
+import { ProductCarousel } from "@/components/sections/ProductCarousel";
 import { ProjectCard } from "@/components/sections/ProjectCard";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { LogoStrip } from "@/components/sections/LogoStrip";
@@ -59,10 +59,10 @@ interface HomePageDoc {
 }
 
 const defaultIndustries = [
-  { slug: "agricultura", name: "Agricultura", href: "/productos?categoria=agricola", icon: "leaf", imageColor: "2d5a3f" },
   { slug: "acuicultura", name: "Acuicultura", href: "/productos?categoria=acuicola", icon: "fish", imageColor: "1c3f5c" },
-  { slug: "forestal", name: "Forestal", href: "/productos?categoria=forestal", icon: "trees", imageColor: "1e4620" },
+  { slug: "agricultura", name: "Agricultura", href: "/productos?categoria=agricola", icon: "leaf", imageColor: "2d5a3f" },
   { slug: "construccion", name: "Construcción", href: "/industrias/construccion", icon: "building-2", imageColor: "3f3f3a" },
+  { slug: "forestal", name: "Forestal", href: "/productos?categoria=forestal", icon: "trees", imageColor: "1e4620" },
   { slug: "logistica", name: "Logística", href: "/productos?categoria=almacenaje", icon: "truck", imageColor: "1f2937" },
   { slug: "proyectos-especiales", name: "Proyectos especiales", href: "/cotiza-tu-proyecto", icon: "star", imageColor: "141414" },
 ];
@@ -75,12 +75,24 @@ export default async function Home() {
     getClients(),
   ]);
 
-  // Curated by likely search demand: arándanos and erizos are Chile's flagship
-  // export categories, plus generic high-volume terms (bins, cajas expo).
-  // Falls back to the first 5 KD Pack products if any curated slug is missing
-  // (e.g. if Sanity is briefly unreachable and static fallback data is used
-  // instead) so this section never silently renders empty.
-  const featuredProductSlugs = ["bins-001", "ag-001", "ag-025k3", "ag-062", "esp-011"];
+  // Curated by likely search demand: arándanos, cerezas and erizos are
+  // Chile's flagship export categories, plus generic high-volume terms
+  // (bins, cajas expo). Falls back to the first 10 KD Pack products if any
+  // curated slug is missing (e.g. if Sanity is briefly unreachable and
+  // static fallback data is used instead) so this section never silently
+  // renders empty.
+  const featuredProductSlugs = [
+    "bins-001",
+    "ag-001",
+    "ag-025k3",
+    "ag-062",
+    "esp-011",
+    "ag-004k2",
+    "ag-035",
+    "ag-026",
+    "bins-002",
+    "ag-021",
+  ];
   const kdpackProducts = products.filter((p) => p.brand === "kdpack");
   const curatedFeaturedProducts = featuredProductSlugs
     .map((slug) => kdpackProducts.find((p) => p.slug === slug))
@@ -88,7 +100,7 @@ export default async function Home() {
   const featuredProducts =
     curatedFeaturedProducts.length === featuredProductSlugs.length
       ? curatedFeaturedProducts
-      : kdpackProducts.slice(0, 5);
+      : kdpackProducts.slice(0, 10);
 
   const featuredProjects = projects.filter((p) =>
     ["garces-fruit-berries", "frusan-logistica", "almagro-encofrados"].includes(
@@ -115,10 +127,7 @@ export default async function Home() {
                 { text: "no pueden detenerse.", highlight: true },
               ]
         }
-        subtitle={
-          doc?.heroSubtitle ||
-          "Fabricamos en Chile para agricultura, acuicultura, forestal, construcción, logística y más."
-        }
+        subtitle={doc?.heroSubtitle || "Fabricamos en Chile para Chile."}
         primaryCta={{
           label: doc?.heroPrimaryCta?.label || "Ver productos",
           href: doc?.heroPrimaryCta?.href || "/productos?marca=kdpack",
@@ -150,7 +159,7 @@ export default async function Home() {
           doc?.logosTitle ||
           "Empresas de múltiples industrias confían en nuestras soluciones"
         }
-        clients={kdPackClients.slice(0, 6)}
+        clients={kdPackClients}
       />
 
       <section className="py-16 lg:py-20">
@@ -160,9 +169,6 @@ export default async function Home() {
               <p className="eyebrow font-semibold">
                 {doc?.productsEyebrow || "Productos destacados"}
               </p>
-              <h2 className="mt-1.5 text-h2-mobile lg:text-h2-desktop text-kd-text-primary">
-                {doc?.productsTitle || "Los más utilizados por nuestros clientes."}
-              </h2>
             </div>
             <Link
               href="/productos?marca=kdpack"
@@ -173,10 +179,8 @@ export default async function Home() {
             </Link>
           </div>
 
-          <div className="mt-9 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.slug} product={product} />
-            ))}
+          <div className="mt-9">
+            <ProductCarousel products={featuredProducts} />
           </div>
         </div>
       </section>

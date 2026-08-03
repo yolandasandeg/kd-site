@@ -129,7 +129,7 @@ export default async function ContactoPage() {
             </p>
             <Button asChild variant="outline" className="mt-5">
               <a
-                href="https://www.google.com/maps/search/?api=1&query=Camino+Padre+Hurtado+16301+Paine+Chile"
+                href="https://www.google.com/maps/search/?api=1&query=8+Poniente+229+Paine+Chile"
                 target="_blank"
                 rel="noopener noreferrer"
               >

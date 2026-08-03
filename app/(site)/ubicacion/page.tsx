@@ -107,7 +107,7 @@ export default async function UbicacionPage() {
             </ul>
             <Button asChild variant="outline" className="mt-6">
               <a
-                href="https://www.google.com/maps/search/?api=1&query=Camino+Padre+Hurtado+16301+Paine+Chile"
+                href="https://www.google.com/maps/search/?api=1&query=8+Poniente+229+Paine+Chile"
                 target="_blank"
                 rel="noopener noreferrer"
               >
