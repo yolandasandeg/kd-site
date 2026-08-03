@@ -76,7 +76,7 @@ export const homePage = defineType({
       name: "industriesItems",
       title: "Industrias",
       type: "array",
-      of: [{ type: "badgeItem" }],
+      of: [{ type: "industryTile" }],
       group: "industries",
     }),
 

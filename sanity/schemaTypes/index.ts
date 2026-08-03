@@ -1,4 +1,4 @@
-import { titlePart, ctaButton, badgeItem, featureItem, statItem, workingWayItem } from "./objects";
+import { titlePart, ctaButton, badgeItem, featureItem, statItem, workingWayItem, industryTile } from "./objects";
 import { product } from "./product";
 import { project } from "./project";
 import { client } from "./client";
@@ -25,6 +25,7 @@ export const schemaTypes = [
   featureItem,
   statItem,
   workingWayItem,
+  industryTile,
   // Colecciones
   product,
   project,

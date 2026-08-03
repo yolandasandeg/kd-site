@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Hero, type HeroBadge, type HeroTitlePart } from "@/components/sections/Hero";
+import { CategoryGrid } from "@/components/sections/CategoryGrid";
 import { FeatureRow, type FeatureItem } from "@/components/sections/FeatureRow";
 import { SealsStrip, type SealItem } from "@/components/sections/SealsStrip";
 import { ProductCard } from "@/components/sections/ProductCard";
@@ -48,7 +49,7 @@ interface HomePageDoc {
   productsTitle?: string;
   industriesEyebrow?: string;
   industriesTitle?: string;
-  industriesItems?: SealItem[];
+  industriesItems?: { name?: string; href?: string; icon?: string; image?: SanityImageRef }[];
   projectsEyebrow?: string;
   projectsTitle?: string;
   projectsSubtitle?: string;
@@ -56,6 +57,15 @@ interface HomePageDoc {
   ctaTitle?: string;
   logosTitle?: string;
 }
+
+const defaultIndustries = [
+  { slug: "agricultura", name: "Agricultura", href: "/productos?categoria=agricola", icon: "leaf", imageColor: "2d5a3f" },
+  { slug: "acuicultura", name: "Acuicultura", href: "/productos?categoria=acuicola", icon: "fish", imageColor: "1c3f5c" },
+  { slug: "forestal", name: "Forestal", href: "/productos?categoria=forestal", icon: "trees", imageColor: "1e4620" },
+  { slug: "construccion", name: "Construcción", href: "/industrias/construccion", icon: "building-2", imageColor: "3f3f3a" },
+  { slug: "logistica", name: "Logística", href: "/productos?categoria=almacenaje", icon: "truck", imageColor: "1f2937" },
+  { slug: "proyectos-especiales", name: "Proyectos especiales", href: "/cotiza-tu-proyecto", icon: "star", imageColor: "141414" },
+];
 
 export default async function Home() {
   const [doc, products, projects, clients] = await Promise.all([
@@ -171,24 +181,24 @@ export default async function Home() {
         </div>
       </section>
 
-      <FeatureRow
+      <CategoryGrid
         eyebrow={doc?.industriesEyebrow || "Industrias"}
         title={
           doc?.industriesTitle ||
           "Soluciones especializadas para cada sector que impulsamos."
         }
-        background="alt"
+        variant="compact"
         items={
           doc?.industriesItems?.length
-            ? doc.industriesItems.map((i) => ({ icon: i.icon, title: i.label }))
-            : [
-                { icon: "leaf", title: "Agricultura" },
-                { icon: "fish", title: "Acuicultura" },
-                { icon: "trees", title: "Forestal" },
-                { icon: "building-2", title: "Construcción" },
-                { icon: "truck", title: "Logística" },
-                { icon: "star", title: "Proyectos especiales" },
-              ]
+            ? doc.industriesItems.map((i, idx) => ({
+                slug: `industria-${idx}`,
+                name: i.name || "",
+                href: i.href || "/productos",
+                icon: i.icon || "star",
+                imageColor: defaultIndustries[idx % defaultIndustries.length].imageColor,
+                image: i.image,
+              }))
+            : defaultIndustries
         }
       />
 

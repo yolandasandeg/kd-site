@@ -84,6 +84,34 @@ export const badgeItem = defineType({
   preview: { select: { title: "label", subtitle: "icon" } },
 });
 
+export const industryTile = defineType({
+  name: "industryTile",
+  title: "Industria (con foto)",
+  type: "object",
+  fields: [
+    defineField({ name: "name", title: "Nombre", type: "string" }),
+    defineField({
+      name: "href",
+      title: "Enlace",
+      type: "string",
+      description: "Ej: /productos?categoria=agricola, /industrias/construccion, /cotiza-tu-proyecto",
+    }),
+    defineField({
+      name: "icon",
+      title: "Ícono",
+      type: "string",
+      options: { list: ICON_OPTIONS },
+    }),
+    defineField({
+      name: "image",
+      title: "Foto",
+      type: "image",
+      options: { hotspot: true },
+    }),
+  ],
+  preview: { select: { title: "name", subtitle: "href", media: "image" } },
+});
+
 export const featureItem = defineType({
   name: "featureItem",
   title: "Ítem de característica",
