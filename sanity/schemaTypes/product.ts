@@ -18,7 +18,7 @@ export const product = defineType({
       name: "brand",
       title: "Marca",
       type: "string",
-      options: { list: [{ title: "KD Pack", value: "kdpack" }, { title: "Konstruplast", value: "konstruplast" }] },
+      options: { list: [{ title: "KD Pack", value: "kdpack" }] },
       initialValue: "kdpack",
     }),
     defineField({

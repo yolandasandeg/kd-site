@@ -30,12 +30,6 @@ export const siteSettings = defineType({
       type: "image",
     }),
     defineField({
-      name: "konstruplastLogo",
-      title: "Logo Konstruplast (menú)",
-      description: "Logo de Konstruplast (PNG con fondo transparente) que se muestra en el menú de navegación.",
-      type: "image",
-    }),
-    defineField({
       name: "navLinks",
       title: "Enlaces del menú",
       description: "Arrastra los elementos para reordenarlos. Elimina uno para quitarlo del menú.",
@@ -51,7 +45,7 @@ export const siteSettings = defineType({
               title: "Enlace",
               type: "string",
               validation: (r) => r.required(),
-              description: "Ej: / , /productos, /industrias, /nosotros, /proyectos, /contacto, /konstruplast",
+              description: "Ej: /industrias, /productos, /nosotros, /sustentabilidad, /ubicacion, /cotiza-tu-proyecto",
             }),
           ],
           preview: { select: { title: "label", subtitle: "href" } },

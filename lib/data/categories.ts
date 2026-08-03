@@ -31,7 +31,7 @@ export const solutionCategories: SolutionCategory[] = [
   {
     slug: "construccion",
     name: "Construcción",
-    href: "/konstruplast",
+    href: "/industrias/construccion",
     icon: "building",
     imageColor: "3f3f3a",
   },

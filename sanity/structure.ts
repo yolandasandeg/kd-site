@@ -17,7 +17,7 @@ export const structure: StructureResolver = (S) =>
             .title("Páginas")
             .items([
               singletonListItem(S, "homePage", "Home (KD Pack)"),
-              singletonListItem(S, "konstruplastPage", "Konstruplast"),
+              singletonListItem(S, "construccionPage", "Construcción"),
               singletonListItem(S, "productosPage", "Productos"),
               singletonListItem(S, "industriasPage", "Industrias"),
               singletonListItem(S, "nosotrosPage", "Nosotros"),
@@ -32,7 +32,7 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem("client").title("Clientes / Logos"),
       S.documentTypeListItem("category").title("Categorías (Home)"),
       S.documentTypeListItem("industry").title("Industrias"),
-      S.documentTypeListItem("konstruplastApplication").title("Aplicaciones Konstruplast"),
+      S.documentTypeListItem("konstruplastApplication").title("Aplicaciones de Construcción"),
       S.divider(),
       singletonListItem(S, "siteSettings", "Configuración del sitio"),
     ]);

@@ -24,10 +24,10 @@ function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
 }
 
 const navigationLinks = [
-  { href: "/", label: "KD Pack" },
-  { href: "/konstruplast", label: "Konstruplast" },
+  { href: "/", label: "Inicio" },
   { href: "/productos", label: "Productos" },
   { href: "/industrias", label: "Industrias" },
+  { href: "/industrias/construccion", label: "Construcción" },
   { href: "/nosotros", label: "Nosotros" },
   { href: "/sustentabilidad", label: "Sustentabilidad" },
   { href: "/ubicacion", label: "Ubicación" },

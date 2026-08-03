@@ -11,11 +11,7 @@ export const client = defineType({
       title: "Aparece en",
       type: "string",
       options: {
-        list: [
-          { title: "KD Pack", value: "kdpack" },
-          { title: "Konstruplast", value: "konstruplast" },
-          { title: "Ambas", value: "both" },
-        ],
+        list: [{ title: "KD Pack", value: "kdpack" }],
       },
       initialValue: "kdpack",
     }),

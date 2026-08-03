@@ -5,11 +5,7 @@ import {
   type Product,
 } from "@/lib/data/products";
 import { projects as staticProjects, type Project } from "@/lib/data/projects";
-import {
-  kdPackClients,
-  konstruplastClients,
-  type Client,
-} from "@/lib/data/clients";
+import { kdPackClients, type Client } from "@/lib/data/clients";
 import {
   solutionCategories,
   type SolutionCategory,
@@ -57,7 +53,7 @@ export async function getClients(): Promise<
   return sanityFetch(
     `*[_type == "client"] | order(order asc) { name, brand, logo }`,
     {},
-    [...kdPackClients, ...konstruplastClients]
+    kdPackClients
   );
 }
 
@@ -96,7 +92,6 @@ interface SiteSettingsDoc {
   headerLogo?: SanityImageRef;
   favicon?: SanityImageRef;
   kdpackLogo?: SanityImageRef;
-  konstruplastLogo?: SanityImageRef;
   navLinks?: { label: string; href: string }[];
   address?: string;
   phone?: string;
@@ -160,7 +155,6 @@ export interface SiteBranding {
   headerLogo?: SanityImageRef;
   favicon?: SanityImageRef;
   kdpackLogo?: SanityImageRef;
-  konstruplastLogo?: SanityImageRef;
   navLinks: { label: string; href: string }[];
 }
 
@@ -171,7 +165,6 @@ export async function getSiteBranding(): Promise<SiteBranding> {
     headerLogo: settings?.headerLogo,
     favicon: settings?.favicon,
     kdpackLogo: settings?.kdpackLogo,
-    konstruplastLogo: settings?.konstruplastLogo,
     navLinks:
       settings?.navLinks && settings.navLinks.length > 0
         ? settings.navLinks

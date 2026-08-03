@@ -2,7 +2,7 @@ import { defineLocations, type PresentationPluginOptions } from "sanity/presenta
 
 const singletonLocations: Record<string, { title: string; href: string }> = {
   homePage: { title: "Home (KD Pack)", href: "/" },
-  konstruplastPage: { title: "Konstruplast", href: "/konstruplast" },
+  construccionPage: { title: "Construcción", href: "/industrias/construccion" },
   productosPage: { title: "Productos", href: "/productos" },
   industriasPage: { title: "Industrias", href: "/industrias" },
   nosotrosPage: { title: "Nosotros", href: "/nosotros" },

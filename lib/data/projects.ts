@@ -33,7 +33,7 @@ export const projects: Project[] = [
   },
   {
     slug: "almagro-encofrados",
-    brand: "konstruplast",
+    brand: "kdpack",
     industry: "Construcción",
     client: "Constructora Almagro",
     title: "Encofrados plásticos para obras de gran escala",
@@ -63,7 +63,7 @@ export const projects: Project[] = [
   },
   {
     slug: "edificio-residencial-santiago",
-    brand: "konstruplast",
+    brand: "kdpack",
     industry: "Edificación",
     client: "Edificio Residencial Santiago, Chile",
     title: "Edificio Residencial Santiago, Chile",
@@ -73,7 +73,7 @@ export const projects: Project[] = [
   },
   {
     slug: "planta-industrial-antofagasta",
-    brand: "konstruplast",
+    brand: "kdpack",
     industry: "Obra industrial",
     client: "Planta Industrial Antofagasta, Chile",
     title: "Planta Industrial Antofagasta, Chile",
@@ -83,7 +83,7 @@ export const projects: Project[] = [
   },
   {
     slug: "mejoramiento-infraestructura-valparaiso",
-    brand: "konstruplast",
+    brand: "kdpack",
     industry: "Obra pública",
     client: "Mejoramiento Infraestructura Valparaíso, Chile",
     title: "Mejoramiento Infraestructura Valparaíso, Chile",

@@ -17,19 +17,19 @@ import {
 import type { SanityImageRef } from "@/sanity/lib/image";
 
 export const metadata: Metadata = {
-  title: "Konstruplast | Soluciones plásticas para construcción",
+  title: "Construcción | Soluciones plásticas KD Pack para obras",
   description:
-    "Encofrados, separadores, tapas de seguridad y alivianantes plásticos para obras más eficientes, robustas y sostenibles.",
-  alternates: { canonical: "/konstruplast" },
+    "Encofrados, separadores, tapas de seguridad, drenajes y alivianantes plásticos para obras más eficientes, robustas y sostenibles.",
+  alternates: { canonical: "/industrias/construccion" },
   openGraph: {
-    title: "Konstruplast | Soluciones plásticas para construcción",
+    title: "Construcción | Soluciones plásticas KD Pack para obras",
     description:
       "Elementos plásticos diseñados para optimizar procesos constructivos, mejorar la seguridad y aumentar la durabilidad de cada proyecto.",
-    url: "/konstruplast",
+    url: "/industrias/construccion",
   },
 };
 
-interface KonstruplastPageDoc {
+interface ConstruccionPageDoc {
   heroEyebrow?: string;
   heroTitleParts?: HeroTitlePart[];
   heroSubtitle?: string;
@@ -52,15 +52,25 @@ interface KonstruplastPageDoc {
   logosTitle?: string;
 }
 
-const konstruplastProjectSlugs = [
+const construccionProjectSlugs = [
+  "almagro-encofrados",
   "edificio-residencial-santiago",
   "planta-industrial-antofagasta",
   "mejoramiento-infraestructura-valparaiso",
 ];
 
-export default async function KonstruplastPage() {
+const construccionCategories = [
+  "encofrados",
+  "separadores",
+  "tapas",
+  "terminaciones",
+  "alivianantes",
+  "drenaje",
+];
+
+export default async function ConstruccionPage() {
   const [doc, applications, products, projects, clients] = await Promise.all([
-    getPageDoc<KonstruplastPageDoc>("konstruplastPage"),
+    getPageDoc<ConstruccionPageDoc>("construccionPage"),
     getKonstruplastApplications(),
     getProducts(),
     getProjects(),
@@ -71,21 +81,17 @@ export default async function KonstruplastPage() {
     slug: app.slug,
     name: app.name,
     description: app.description,
-    href: `/productos?marca=konstruplast&categoria=${app.slug}`,
+    href: `/productos?categoria=${app.slug}`,
     icon: app.icon,
     imageColor: "141414",
   }));
 
   const featuredProducts = products
-    .filter((p) => p.brand === "konstruplast")
+    .filter((p) => construccionCategories.includes(p.category))
     .slice(0, 6);
 
   const featuredProjects = projects.filter((p) =>
-    konstruplastProjectSlugs.includes(p.slug)
-  );
-
-  const konstruplastClients = clients.filter(
-    (c) => c.brand === "konstruplast" || c.brand === "both"
+    construccionProjectSlugs.includes(p.slug)
   );
 
   return (
@@ -93,7 +99,7 @@ export default async function KonstruplastPage() {
       <Hero
         variant="dark"
         layout="full"
-        eyebrow={doc?.heroEyebrow || "Konstruplast"}
+        eyebrow={doc?.heroEyebrow || "Construcción"}
         titleParts={
           doc?.heroTitleParts?.length
             ? doc.heroTitleParts
@@ -105,11 +111,11 @@ export default async function KonstruplastPage() {
         }
         subtitle={
           doc?.heroSubtitle ||
-          "Elementos plásticos diseñados para optimizar procesos constructivos, mejorar la seguridad y aumentar la durabilidad de cada proyecto."
+          "Elementos plásticos diseñados por KD Pack para optimizar procesos constructivos, mejorar la seguridad y aumentar la durabilidad de cada proyecto."
         }
         primaryCta={{
           label: doc?.heroPrimaryCta?.label || "Ver productos",
-          href: doc?.heroPrimaryCta?.href || "/productos?marca=konstruplast",
+          href: doc?.heroPrimaryCta?.href || "/productos?categoria=encofrados",
         }}
         secondaryCta={{
           label: doc?.heroSecondaryCta?.label || "Cotizar proyecto",
@@ -125,7 +131,7 @@ export default async function KonstruplastPage() {
                 { icon: "truck", label: "Despacho a todo Chile y LATAM" },
               ]
         }
-        imageAlt="Elementos de encofrado plástico Konstruplast en obra de construcción"
+        imageAlt="Elementos de encofrado plástico KD Pack en obra de construcción"
         imageBg="3f3f3a"
         image={doc?.heroImage}
         overlayOpacity={doc?.heroOverlayOpacity}
@@ -134,7 +140,7 @@ export default async function KonstruplastPage() {
       <CategoryGrid
         eyebrow={doc?.applicationsEyebrow || "Soluciones para cada etapa"}
         title={doc?.applicationsTitle || "Aplicaciones que impulsan cada construcción."}
-        viewAllHref="/productos?marca=konstruplast"
+        viewAllHref="/productos?categoria=encofrados"
         viewAllLabel="Ver todas las soluciones"
         items={applicationItems}
         variant="detailed"
@@ -152,7 +158,7 @@ export default async function KonstruplastPage() {
               </h2>
             </div>
             <a
-              href="/productos?marca=konstruplast"
+              href="/productos?categoria=encofrados"
               className="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold text-kd-green hover:text-kd-green-dark"
             >
               Ver todos los productos
@@ -168,7 +174,7 @@ export default async function KonstruplastPage() {
       </section>
 
       <FeatureRow
-        eyebrow={doc?.whyEyebrow || "¿Por qué Konstruplast?"}
+        eyebrow={doc?.whyEyebrow || "¿Por qué KD Pack para construcción?"}
         title={doc?.whyTitle || "Innovación que construye resultados concretos."}
         background="white"
         items={
@@ -217,7 +223,7 @@ export default async function KonstruplastPage() {
       />
       <LogoStrip
         title={doc?.logosTitle || "Empresas que confían en nuestras soluciones"}
-        clients={konstruplastClients}
+        clients={clients.slice(0, 6)}
       />
     </>
   );

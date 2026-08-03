@@ -26,32 +26,15 @@ function isActive(pathname: string, href: string) {
   return pathname.startsWith(href);
 }
 
-// Hrefs of the two sub-brands that show a logo image instead of their text label.
-function brandLogoKeyFor(href: string): "kdpack" | "konstruplast" | undefined {
-  if (href === "/") return "kdpack";
-  if (href === "/konstruplast") return "konstruplast";
-  return undefined;
-}
-
 interface NavbarProps {
   kdpackLogo?: SanityImageRef;
-  konstruplastLogo?: SanityImageRef;
   navLinks?: NavLink[];
 }
 
-export function Navbar({
-  kdpackLogo,
-  konstruplastLogo,
-  navLinks = DEFAULT_NAV_LINKS,
-}: NavbarProps) {
+export function Navbar({ kdpackLogo, navLinks = DEFAULT_NAV_LINKS }: NavbarProps) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
-  const brandLogos: Record<string, SanityImageRef> = {
-    kdpack: kdpackLogo,
-    konstruplast: konstruplastLogo,
-  };
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -59,25 +42,6 @@ export function Navbar({
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  function NavLinkLabel({ link }: { link: NavLink }) {
-    const logoKey = brandLogoKeyFor(link.href);
-    const brandLogo = logoKey ? brandLogos[logoKey] : undefined;
-    if (brandLogo?.asset?._ref) {
-      return (
-        <span className="relative h-5 w-[88px] block">
-          <Image
-            src={urlFor(brandLogo as SanityImage).height(60).fit("max").auto("format").url()}
-            alt={link.label}
-            fill
-            className="object-contain object-left"
-            sizes="88px"
-          />
-        </span>
-      );
-    }
-    return <>{link.label}</>;
-  }
 
   return (
     <header
@@ -116,7 +80,7 @@ export function Navbar({
                 isActive(pathname, link.href) && "text-kd-green border-kd-green"
               )}
             >
-              <NavLinkLabel link={link} />
+              {link.label}
             </Link>
           ))}
         </nav>
@@ -154,7 +118,7 @@ export function Navbar({
                     isActive(pathname, link.href) && "text-kd-green bg-kd-green-light"
                   )}
                 >
-                  <NavLinkLabel link={link} />
+                  {link.label}
                 </Link>
               ))}
             </nav>

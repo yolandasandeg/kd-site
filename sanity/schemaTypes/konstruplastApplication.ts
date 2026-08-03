@@ -3,7 +3,7 @@ import { ICON_OPTIONS } from "./objects";
 
 export const konstruplastApplication = defineType({
   name: "konstruplastApplication",
-  title: "Aplicación Konstruplast",
+  title: "Aplicación de Construcción",
   type: "document",
   fields: [
     defineField({ name: "name", title: "Nombre", type: "string", validation: (r) => r.required() }),

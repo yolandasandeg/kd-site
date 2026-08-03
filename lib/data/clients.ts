@@ -16,19 +16,11 @@ export const kdPackClients: Client[] = [
   { name: "Hortifrut", brand: "kdpack" },
   { name: "Salfa", brand: "kdpack" },
   { name: "Sigro", brand: "kdpack" },
+  { name: "EBCO", brand: "kdpack" },
+  { name: "Pilotes Terratest", brand: "kdpack" },
+  { name: "Constructora Almagro", brand: "kdpack" },
+  { name: "Vial y Vives", brand: "kdpack" },
+  { name: "Moller", brand: "kdpack" },
 ];
 
-export const konstruplastClients: Client[] = [
-  { name: "EBCO", brand: "konstruplast" },
-  { name: "Pilotes Terratest", brand: "konstruplast" },
-  { name: "Constructora Almagro", brand: "konstruplast" },
-  { name: "Vial y Vives", brand: "konstruplast" },
-  { name: "Sigro", brand: "konstruplast" },
-  { name: "Moller", brand: "konstruplast" },
-];
-
-export const allClients: Client[] = [
-  ...kdPackClients,
-  { name: "EBCO", brand: "konstruplast" },
-  { name: "Pilotes Terratest", brand: "konstruplast" },
-];
+export const allClients: Client[] = [...kdPackClients];

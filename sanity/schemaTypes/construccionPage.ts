@@ -1,14 +1,14 @@
 import { defineField, defineType } from "sanity";
 
-export const konstruplastPage = defineType({
-  name: "konstruplastPage",
-  title: "Página: Konstruplast",
+export const construccionPage = defineType({
+  name: "construccionPage",
+  title: "Página: Construcción (KD Pack)",
   type: "document",
   groups: [
     { name: "hero", title: "Hero" },
     { name: "applications", title: "Aplicaciones" },
     { name: "products", title: "Productos destacados" },
-    { name: "why", title: "Por qué Konstruplast" },
+    { name: "why", title: "Por qué elegirnos" },
     { name: "projects", title: "Proyectos" },
     { name: "cta", title: "CTA final" },
     { name: "logos", title: "Logos de clientes" },
@@ -36,7 +36,6 @@ export const konstruplastPage = defineType({
     defineField({
       name: "heroOverlayOpacity",
       title: "Oscurecer imagen de fondo (%)",
-      description: "0 = imagen sin oscurecer, 100 = como está más oscura. Recomendado: 40-60.",
       type: "number",
       validation: (r) => r.min(0).max(100),
       initialValue: 55,
@@ -69,7 +68,7 @@ export const konstruplastPage = defineType({
   ],
   preview: {
     prepare() {
-      return { title: "Página: Konstruplast" };
+      return { title: "Página: Construcción (KD Pack)" };
     },
   },
 });

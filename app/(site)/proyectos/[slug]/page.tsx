@@ -52,9 +52,6 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
     .filter((p) => p.slug !== project.slug && p.brand === project.brand)
     .slice(0, 3);
 
-  const brandLabel = project.brand === "kdpack" ? "KD Pack" : "Konstruplast";
-  const brandHref = project.brand === "kdpack" ? "/" : "/konstruplast";
-
   return (
     <>
       <section className="border-b border-kd-border bg-white">
@@ -89,13 +86,6 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           <div>
             <div className="flex items-center gap-2">
               <span className="eyebrow font-semibold">{project.industry}</span>
-              <span className="text-kd-text-secondary">·</span>
-              <Link
-                href={brandHref}
-                className="text-xs font-semibold uppercase tracking-wide text-kd-text-secondary hover:text-kd-green"
-              >
-                {brandLabel}
-              </Link>
             </div>
             <h1 className="mt-2 text-h1-mobile lg:text-h2-desktop text-kd-text-primary">
               {project.title}
