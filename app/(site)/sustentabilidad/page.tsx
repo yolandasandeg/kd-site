@@ -115,11 +115,31 @@ export default async function SustentabilidadPage() {
             doc?.seals?.length
               ? doc.seals
               : [
-                  { icon: "leaf", label: "RENOVA - Energía renovable" },
-                  { icon: "shield", label: "ISO 9001" },
-                  { icon: "building", label: "SERVIU" },
-                  { icon: "award", label: "DICTUC" },
-                  { icon: "recycle", label: "Materia prima reciclada" },
+                  {
+                    icon: "leaf",
+                    label: "RENOVA - Energía renovable",
+                    description: "Certificado del Coordinador Eléctrico Nacional que acredita que nuestra planta consume energía eléctrica 100% renovable.",
+                  },
+                  {
+                    icon: "shield",
+                    label: "ISO 9001",
+                    description: "Norma internacional de gestión de calidad que certifica procesos consistentes y orientados a la mejora continua.",
+                  },
+                  {
+                    icon: "building",
+                    label: "SERVIU",
+                    description: "Servicio de Vivienda y Urbanización de Chile: supervisa el cumplimiento de estándares técnicos en obras de construcción.",
+                  },
+                  {
+                    icon: "award",
+                    label: "DICTUC",
+                    description: "Organismo de certificación técnica ligado a la Universidad Católica que valida el cumplimiento de normas de calidad e ingeniería.",
+                  },
+                  {
+                    icon: "recycle",
+                    label: "Materia prima reciclada",
+                    description: "Incorporamos materiales reciclables y reciclados en nuestros procesos, reduciendo el impacto ambiental de cada producto.",
+                  },
                 ]
           }
         />

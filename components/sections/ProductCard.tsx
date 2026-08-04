@@ -22,7 +22,13 @@ export function ProductCard({
   const imageSrc = resolveImageSrc(product.image, product.imageColor, "480x360");
 
   return (
-    <div className="group flex flex-col rounded-xl border border-kd-border bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+    <div className="group relative flex flex-col rounded-xl border border-kd-border bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <Link
+        href={`/productos/${product.slug}`}
+        className="absolute inset-0 z-0"
+        aria-hidden="true"
+        tabIndex={-1}
+      />
       <div className="relative aspect-[4/3] overflow-hidden bg-kd-surface-alt">
         <Image
           src={imageSrc}
@@ -50,7 +56,7 @@ export function ProductCard({
           </div>
         </div>
 
-        <div className="mt-4 flex items-center justify-between gap-2">
+        <div className="relative z-10 mt-4 flex items-center justify-between gap-2">
           <Link
             href={`/productos/${product.slug}`}
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-kd-green hover:text-kd-green-dark"

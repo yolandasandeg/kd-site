@@ -80,6 +80,12 @@ export const badgeItem = defineType({
       options: { list: ICON_OPTIONS },
     }),
     defineField({ name: "label", title: "Texto", type: "string" }),
+    defineField({
+      name: "description",
+      title: "Explicación (tooltip al pasar el mouse)",
+      type: "text",
+      rows: 2,
+    }),
   ],
   preview: { select: { title: "label", subtitle: "icon" } },
 });

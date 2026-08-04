@@ -257,11 +257,31 @@ export default async function Home() {
             doc?.whySeals?.length
               ? doc.whySeals
               : [
-                  { icon: "shield", label: "ISO 9001" },
-                  { icon: "building", label: "SERVIU" },
-                  { icon: "award", label: "DICTUC" },
-                  { icon: "leaf", label: "Energía renovable" },
-                  { icon: "recycle", label: "Materia prima reciclada" },
+                  {
+                    icon: "shield",
+                    label: "ISO 9001",
+                    description: "Norma internacional de gestión de calidad que certifica procesos consistentes y orientados a la mejora continua.",
+                  },
+                  {
+                    icon: "building",
+                    label: "SERVIU",
+                    description: "Servicio de Vivienda y Urbanización de Chile: supervisa el cumplimiento de estándares técnicos en obras de construcción.",
+                  },
+                  {
+                    icon: "award",
+                    label: "DICTUC",
+                    description: "Organismo de certificación técnica ligado a la Universidad Católica que valida el cumplimiento de normas de calidad e ingeniería.",
+                  },
+                  {
+                    icon: "leaf",
+                    label: "Energía renovable",
+                    description: "Certificado RENOVA que acredita que nuestra planta opera con energía eléctrica 100% renovable.",
+                  },
+                  {
+                    icon: "recycle",
+                    label: "Materia prima reciclada",
+                    description: "Incorporamos materiales reciclables y reciclados en nuestros procesos, reduciendo el impacto ambiental de cada producto.",
+                  },
                 ]
           }
         />
