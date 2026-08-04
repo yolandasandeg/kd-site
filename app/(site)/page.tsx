@@ -166,6 +166,27 @@ export default async function Home() {
         clients={kdPackClients}
       />
 
+      <CategoryGrid
+        eyebrow={doc?.industriesEyebrow || "Industrias"}
+        title={
+          doc?.industriesTitle ||
+          "Soluciones especializadas para cada sector que impulsamos."
+        }
+        variant="compact"
+        items={
+          doc?.industriesItems?.length
+            ? doc.industriesItems.map((i, idx) => ({
+                slug: `industria-${idx}`,
+                name: i.name || "",
+                href: i.href || "/productos",
+                icon: i.icon || "star",
+                imageColor: defaultIndustries[idx % defaultIndustries.length].imageColor,
+                image: i.image,
+              }))
+            : defaultIndustries
+        }
+      />
+
       <section className="py-16 lg:py-20">
         <div className="container">
           <div className="flex items-end justify-between gap-4 flex-wrap">
@@ -188,27 +209,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-
-      <CategoryGrid
-        eyebrow={doc?.industriesEyebrow || "Industrias"}
-        title={
-          doc?.industriesTitle ||
-          "Soluciones especializadas para cada sector que impulsamos."
-        }
-        variant="compact"
-        items={
-          doc?.industriesItems?.length
-            ? doc.industriesItems.map((i, idx) => ({
-                slug: `industria-${idx}`,
-                name: i.name || "",
-                href: i.href || "/productos",
-                icon: i.icon || "star",
-                imageColor: defaultIndustries[idx % defaultIndustries.length].imageColor,
-                image: i.image,
-              }))
-            : defaultIndustries
-        }
-      />
 
       <section className="py-16 lg:py-20">
         <FeatureRow
