@@ -61,11 +61,11 @@ interface HomePageDoc {
 }
 
 const defaultIndustries = [
-  { slug: "acuicultura", name: "Acuicultura", href: "/productos?categoria=acuicola", icon: "fish", imageColor: "1c3f5c" },
   { slug: "agricultura", name: "Agricultura", href: "/productos?categoria=agricola", icon: "leaf", imageColor: "2d5a3f" },
   { slug: "construccion", name: "Construcción", href: "/industrias/construccion", icon: "building-2", imageColor: "3f3f3a" },
-  { slug: "forestal", name: "Forestal", href: "/productos?categoria=forestal", icon: "trees", imageColor: "1e4620" },
   { slug: "logistica", name: "Logística", href: "/productos?categoria=almacenaje", icon: "truck", imageColor: "1f2937" },
+  { slug: "forestal", name: "Forestal", href: "/productos?categoria=forestal", icon: "trees", imageColor: "1e4620" },
+  { slug: "acuicultura", name: "Acuicultura", href: "/productos?categoria=acuicola", icon: "fish", imageColor: "1c3f5c" },
   { slug: "proyectos-especiales", name: "Proyectos especiales", href: "/cotiza-tu-proyecto", icon: "star", imageColor: "141414" },
 ];
 
@@ -108,8 +108,8 @@ export default async function Home() {
 
   // Construction first (most visually impressive projects), agrícola last.
   const featuredProjectSlugs = [
+    "metro-santiago",
     "almagro-encofrados",
-    "frusan-logistica",
     "garces-fruit-berries",
   ];
   const featuredProjects = featuredProjectSlugs
