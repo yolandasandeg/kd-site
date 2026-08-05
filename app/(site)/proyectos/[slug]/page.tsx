@@ -32,7 +32,7 @@ export async function generateMetadata({
     description: project.description,
     alternates: { canonical: `/proyectos/${project.slug}` },
     openGraph: {
-      title: `${project.title} | KD Plus`,
+      title: `${project.title} | KD Pack`,
       description: project.description,
       url: `/proyectos/${project.slug}`,
     },

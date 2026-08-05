@@ -22,11 +22,11 @@ export function Logo({ variant = "dark", logoImage }: LogoProps) {
       .url();
 
     return (
-      <Link href="/" className="flex items-center" aria-label="KD Plus - Inicio">
+      <Link href="/" className="flex items-center" aria-label="KD Pack - Inicio">
         <span className="relative h-9 w-[100px] sm:h-10 sm:w-[112px]">
           <Image
             src={src}
-            alt="KD Plus"
+            alt="KD Pack"
             fill
             priority
             className={cn(
@@ -41,7 +41,7 @@ export function Logo({ variant = "dark", logoImage }: LogoProps) {
   }
 
   return (
-    <Link href="/" className="flex items-center gap-2.5" aria-label="KD Plus - Inicio">
+    <Link href="/" className="flex items-center gap-2.5" aria-label="KD Pack - Inicio">
       <span className={`text-2xl font-bold tracking-tight ${textColor}`}>
         KD<span className="text-kd-green">+</span>
       </span>

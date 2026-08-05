@@ -8,7 +8,7 @@ const singletonListItem = (S: Parameters<StructureResolver>[0], typeName: string
 
 export const structure: StructureResolver = (S) =>
   S.list()
-    .title("Contenido de KD Plus")
+    .title("Contenido de KD Pack")
     .items([
       S.listItem()
         .title("Páginas")

@@ -50,7 +50,7 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // KD Plus brand tokens
+        // KD Pack brand tokens
         kd: {
           black: "#141414",
           green: "#1C7A43",

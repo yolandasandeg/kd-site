@@ -12,7 +12,7 @@ import type { SanityImageRef } from "@/sanity/lib/image";
 export const metadata: Metadata = {
   title: "Proyectos | Casos de éxito",
   description:
-    "Conoce los proyectos reales de KD Pack y Konstruplast: soluciones plásticas que impulsan industrias y construyen futuro en Chile y LATAM.",
+    "Conoce los proyectos reales de KD Pack: soluciones plásticas que impulsan industrias y construyen futuro en Chile y LATAM.",
   alternates: { canonical: "/proyectos" },
   openGraph: {
     title: "Proyectos | Casos de éxito",
@@ -150,7 +150,7 @@ export default async function ProyectosPage() {
             <Icon name="handshake" className="h-8 w-8 text-kd-green" />
             <p className="mt-4 text-sm text-kd-text-secondary leading-relaxed">
               {doc?.logosBoxText ||
-                "Más de 200 empresas en Chile y LATAM confían en KD Pack y Konstruplast para desarrollar soluciones plásticas que responden a los desafíos reales de cada operación."}
+                "Más de 200 empresas en Chile y LATAM confían en KD Pack para desarrollar soluciones plásticas que responden a los desafíos reales de cada operación."}
             </p>
             <Link
               href="/contacto"

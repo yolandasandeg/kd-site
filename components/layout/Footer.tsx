@@ -54,7 +54,7 @@ export async function Footer({ logoImage }: FooterProps) {
               href={contact.linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="LinkedIn de KD Plus"
+              aria-label="LinkedIn de KD Pack"
               className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 hover:border-kd-green hover:text-kd-green transition-colors"
             >
               <LinkedinIcon className="h-4 w-4" />

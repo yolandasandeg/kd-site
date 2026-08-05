@@ -141,7 +141,7 @@ export default async function ContactoPage() {
           <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl border border-kd-border">
             <iframe
               src={contact.mapEmbedSrc}
-              title="Mapa de ubicación de KD Plus en Paine, Chile"
+              title="Mapa de ubicación de KD Pack en Paine, Chile"
               className="h-full w-full border-0"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

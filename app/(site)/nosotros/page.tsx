@@ -13,12 +13,12 @@ import { resolveImageSrc, type SanityImageRef } from "@/sanity/lib/image";
 export const metadata: Metadata = {
   title: "Nosotros | Quiénes somos",
   description:
-    "KD Plus diseña y fabrica soluciones plásticas de alto rendimiento para sectores que exigen calidad, continuidad y confianza. Conoce nuestra historia, valores y certificaciones.",
+    "KD Pack diseña y fabrica soluciones plásticas de alto rendimiento para sectores que exigen calidad, continuidad y confianza. Conoce nuestra historia, valores y certificaciones.",
   alternates: { canonical: "/nosotros" },
   openGraph: {
     title: "Nosotros | Quiénes somos",
     description:
-      "En KD Plus desarrollamos y fabricamos soluciones plásticas de alto rendimiento para sectores que exigen calidad, continuidad y confianza.",
+      "En KD Pack desarrollamos y fabricamos soluciones plásticas de alto rendimiento para sectores que exigen calidad, continuidad y confianza.",
     url: "/nosotros",
   },
 };
@@ -91,7 +91,7 @@ const defaultCertifications = ["ISO 9001:2015", "HACCP", "BRCGS", "SMETA", "100%
 const defaultParagraphs = [
   "KD Pack nació en 2011 con el propósito de entregar soluciones de packaging plástico que realmente respondieran a las necesidades de la industria agrícola.",
   "Con el tiempo, y escuchando nuevos desafíos, dimos vida a Konstruplast en 2019, ampliando nuestro alcance al sector de la construcción.",
-  "Hoy, como KD Plus, somos un grupo sólido, con tecnología, experiencia y un equipo comprometido con diseñar y fabricar productos que hacen más eficientes y sostenibles las operaciones de nuestros clientes.",
+  "Hoy, como KD Pack, somos un grupo sólido, con tecnología, experiencia y un equipo comprometido con diseñar y fabricar productos que hacen más eficientes y sostenibles las operaciones de nuestros clientes.",
 ];
 
 export default async function NosotrosPage() {
@@ -128,10 +128,10 @@ export default async function NosotrosPage() {
         }
         subtitle={
           doc?.heroSubtitle ||
-          "En KD Plus desarrollamos y fabricamos soluciones plásticas de alto rendimiento para sectores que exigen calidad, continuidad y confianza."
+          "En KD Pack desarrollamos y fabricamos soluciones plásticas de alto rendimiento para sectores que exigen calidad, continuidad y confianza."
         }
         primaryCta={{ label: doc?.heroCtaLabel || "Conoce nuestra historia", href: "#historia" }}
-        imageAlt="Planta de producción KD Plus con máquinas de última generación"
+        imageAlt="Planta de producción KD Pack con máquinas de última generación"
         imageBg="141414"
         image={doc?.heroImage}
       />
@@ -171,7 +171,7 @@ export default async function NosotrosPage() {
           <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl">
             <Image
               src={resolveImageSrc(doc?.historiaImage, "141414", "900x680")}
-              alt="Fachada de la planta KD Plus en Paine, Chile"
+              alt="Fachada de la planta KD Pack en Paine, Chile"
               fill
               className="object-cover"
               sizes="(min-width: 1024px) 50vw, 100vw"
@@ -266,7 +266,7 @@ export default async function NosotrosPage() {
       <section className="relative aspect-[16/7] w-full overflow-hidden">
         <Image
           src={resolveImageSrc(doc?.teamImage, "141414", "1600x700")}
-          alt="Equipo de profesionales de KD Plus"
+          alt="Equipo de profesionales de KD Pack"
           fill
           className="object-cover"
           sizes="100vw"

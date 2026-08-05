@@ -33,7 +33,7 @@ export async function generateMetadata({
     description: product.description,
     alternates: { canonical: `/productos/${product.slug}` },
     openGraph: {
-      title: `${product.name} | KD Plus`,
+      title: `${product.name} | KD Pack`,
       description: product.description,
       url: `/productos/${product.slug}`,
     },

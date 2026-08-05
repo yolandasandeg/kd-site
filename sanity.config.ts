@@ -14,7 +14,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 export default defineConfig({
   basePath: "/studio",
   name: "kdplus",
-  title: "KD Plus — Editor de contenido",
+  title: "KD Pack — Editor de contenido",
   projectId,
   dataset,
   schema: { types: schemaTypes },

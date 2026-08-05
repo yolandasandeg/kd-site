@@ -29,7 +29,6 @@ interface ProductsExplorerProps {
   products: (Product & { image?: SanityImageRef })[];
   heroEyebrow?: string;
   heroTitleParts?: HeroTitlePart[];
-  heroSubtitle?: string;
   searchPlaceholder?: string;
   heroImage?: SanityImageRef;
   heroOverlayOpacity?: number;
@@ -87,7 +86,6 @@ export function ProductsExplorer({
     { text: "Soluciones plásticas" },
     { text: "para cada necesidad.", highlight: true },
   ],
-  heroSubtitle = "Más de 150 productos diseñados para optimizar procesos, proteger tus productos y asegurar la eficiencia de tu operación.",
   searchPlaceholder = "Buscar producto, código o categoría...",
   heroImage,
   heroOverlayOpacity = 55,
@@ -262,27 +260,28 @@ export function ProductsExplorer({
             />
           </div>
         )}
-        <div className="relative container py-16 lg:py-20">
-          <p className="eyebrow font-semibold">{heroEyebrow}</p>
-          <h1 className="mt-4 text-h1-mobile lg:text-h1-desktop max-w-xl text-white">
-            {heroTitleParts.map((part, i) => (
-              <span key={i} className={part.highlight ? "text-kd-green" : undefined}>
-                {part.text}{" "}
-              </span>
-            ))}
-          </h1>
-          <p className="mt-5 max-w-xl text-sm sm:text-base text-white/70">
-            {heroSubtitle}
-          </p>
-          <div className="relative mt-8 max-w-xl">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4.5 w-4.5 text-kd-text-secondary" />
-            <Input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder={searchPlaceholder}
-              aria-label="Buscar producto, código o categoría"
-              className="h-12 pl-11 bg-white"
-            />
+        <div className="relative container py-6 lg:py-8">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+            <div>
+              <p className="eyebrow font-semibold">{heroEyebrow}</p>
+              <h1 className="mt-1 text-xl sm:text-2xl lg:text-3xl font-semibold text-white">
+                {heroTitleParts.map((part, i) => (
+                  <span key={i} className={part.highlight ? "text-kd-green" : undefined}>
+                    {part.text}{" "}
+                  </span>
+                ))}
+              </h1>
+            </div>
+            <div className="relative w-full lg:w-80 shrink-0">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4.5 w-4.5 text-kd-text-secondary" />
+              <Input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder={searchPlaceholder}
+                aria-label="Buscar producto, código o categoría"
+                className="h-11 pl-11 bg-white"
+              />
+            </div>
           </div>
         </div>
       </section>

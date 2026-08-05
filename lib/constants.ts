@@ -1,4 +1,4 @@
-export const SITE_NAME = "KD Plus";
+export const SITE_NAME = "KD Pack";
 export const SITE_URL = "https://kdpack.cl";
 
 export const CONTACT = {

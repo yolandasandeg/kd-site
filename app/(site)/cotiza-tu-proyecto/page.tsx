@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { MapPin, Phone, Mail, Clock, Globe2 } from "lucide-react";
 
-import { Hero, type HeroTitlePart } from "@/components/sections/Hero";
+import type { HeroTitlePart } from "@/components/sections/Hero";
 import { FeatureRow, type FeatureItem } from "@/components/sections/FeatureRow";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { QuoteForm } from "@/components/forms/QuoteForm";
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "Completa el formulario con los detalles de tu proyecto y nuestro equipo se pondrá en contacto contigo a la brevedad para asesorarte.",
   alternates: { canonical: "/cotiza-tu-proyecto" },
   openGraph: {
-    title: "Cotiza tu proyecto | KD Plus",
+    title: "Cotiza tu proyecto | KD Pack",
     description:
       "Cuéntanos tu proyecto, te ayudamos a encontrar la mejor solución.",
     url: "/cotiza-tu-proyecto",
@@ -49,40 +49,33 @@ export default async function CotizaTuProyectoPage() {
     { icon: Globe2, label: "Cobertura", value: contact.coverage },
   ];
 
+  const titleParts =
+    doc?.heroTitleParts?.length
+      ? doc.heroTitleParts
+      : [
+          { text: "Cuéntanos tu proyecto," },
+          { text: "te ayudamos a" },
+          { text: "encontrar la mejor solución.", highlight: true },
+        ];
+
   return (
     <>
-      <Hero
-        variant="dark"
-        eyebrow={doc?.heroEyebrow || "Cotiza tu proyecto"}
-        titleParts={
-          doc?.heroTitleParts?.length
-            ? doc.heroTitleParts
-            : [
-                { text: "Cuéntanos tu proyecto," },
-                { text: "te ayudamos a" },
-                { text: "encontrar la mejor solución.", highlight: true },
-              ]
-        }
-        subtitle={
-          doc?.heroSubtitle ||
-          "Completa el formulario y nuestro equipo se pondrá en contacto contigo a la brevedad para asesorarte."
-        }
-        primaryCta={{
-          label: "Escríbenos por WhatsApp",
-          href: contact.whatsappHref,
-          icon: "message-circle",
-        }}
-        secondaryCta={{
-          label: "Envíanos un correo",
-          href: `mailto:${contact.email}`,
-          icon: "mail",
-        }}
-        imageAlt="Bin plástico KD Pack listo para despacho"
-        imageBg="141414"
-        image={doc?.heroImage}
-      />
+      <section className="bg-kd-black py-8 lg:py-10">
+        <div className="container">
+          <p className="eyebrow font-semibold">
+            {doc?.heroEyebrow || "Cotiza tu proyecto"}
+          </p>
+          <h1 className="mt-1.5 text-xl sm:text-2xl lg:text-3xl font-semibold text-white max-w-xl">
+            {titleParts.map((part, i) => (
+              <span key={i} className={part.highlight ? "text-kd-green" : undefined}>
+                {part.text}{" "}
+              </span>
+            ))}
+          </h1>
+        </div>
+      </section>
 
-      <section className="py-14 lg:py-16">
+      <section className="py-10 lg:py-12">
         <div className="container grid lg:grid-cols-[320px_1fr] gap-10">
           <div>
             <h2 className="text-lg font-semibold text-kd-text-primary">

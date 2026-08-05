@@ -20,18 +20,18 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(SITE_URL),
     title: {
-      default: `${SITE_NAME} | KD Pack & Konstruplast`,
+      default: `${SITE_NAME} | Packaging plástico industrial`,
       template: `%s | ${SITE_NAME}`,
     },
     description:
-      "KD Plus es el holding que agrupa a KD Pack y Konstruplast: packaging plástico industrial y soluciones plásticas para construcción, fabricadas en Chile con presencia en LATAM.",
+      "KD Pack fabrica packaging plástico industrial y soluciones plásticas para agricultura, acuicultura, forestal, construcción y logística, en Chile con presencia en LATAM.",
     openGraph: {
       type: "website",
       locale: "es_CL",
       siteName: SITE_NAME,
-      title: `${SITE_NAME} | KD Pack & Konstruplast`,
+      title: `${SITE_NAME} | Packaging plástico industrial`,
       description:
-        "Packaging plástico industrial y soluciones plásticas para construcción, fabricadas en Chile con presencia en LATAM.",
+        "Packaging plástico industrial y soluciones plásticas para agricultura, acuicultura, forestal, construcción y logística, fabricadas en Chile con presencia en LATAM.",
     },
     icons: favicon?.asset?._ref
       ? { icon: urlFor(favicon as SanityImage).width(64).height(64).url() }

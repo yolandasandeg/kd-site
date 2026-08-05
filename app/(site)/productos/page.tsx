@@ -46,7 +46,6 @@ export default async function ProductosPage() {
           products={products}
           heroEyebrow={doc?.heroEyebrow}
           heroTitleParts={doc?.heroTitleParts?.length ? doc.heroTitleParts : undefined}
-          heroSubtitle={doc?.heroSubtitle}
           searchPlaceholder={doc?.searchPlaceholder}
           heroImage={doc?.heroImage}
           heroOverlayOpacity={doc?.heroOverlayOpacity}
