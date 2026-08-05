@@ -13,16 +13,6 @@ function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} aria-hidden="true" {...props}>
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
 const navigationLinks = [
   { href: "/", label: "Inicio" },
   { href: "/productos", label: "Productos" },
@@ -68,15 +58,6 @@ export async function Footer({ logoImage }: FooterProps) {
               className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 hover:border-kd-green hover:text-kd-green transition-colors"
             >
               <LinkedinIcon className="h-4 w-4" />
-            </a>
-            <a
-              href={contact.instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram de KD Plus"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 hover:border-kd-green hover:text-kd-green transition-colors"
-            >
-              <InstagramIcon className="h-4 w-4" />
             </a>
           </div>
         </div>

@@ -36,7 +36,7 @@ export function CategoryGrid({
   variant = "compact",
 }: CategoryGridProps) {
   return (
-    <section className="py-16 lg:py-20">
+    <section className="py-10 lg:py-14">
       <div className="container">
         <Reveal className="flex items-end justify-between gap-4 flex-wrap">
           <div className="border-l-2 border-kd-green pl-4 max-w-2xl">

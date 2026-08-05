@@ -106,11 +106,15 @@ export default async function Home() {
       ? curatedFeaturedProducts
       : kdpackProducts.slice(0, 10);
 
-  const featuredProjects = projects.filter((p) =>
-    ["garces-fruit-berries", "frusan-logistica", "almagro-encofrados"].includes(
-      p.slug
-    )
-  );
+  // Construction first (most visually impressive projects), agrícola last.
+  const featuredProjectSlugs = [
+    "almagro-encofrados",
+    "frusan-logistica",
+    "garces-fruit-berries",
+  ];
+  const featuredProjects = featuredProjectSlugs
+    .map((slug) => projects.find((p) => p.slug === slug))
+    .filter((p): p is (typeof projects)[number] => Boolean(p));
 
   const kdPackClients = clients.filter(
     (c) => c.brand === "kdpack" || c.brand === "both"
@@ -187,7 +191,7 @@ export default async function Home() {
         }
       />
 
-      <section className="py-16 lg:py-20">
+      <section className="py-10 lg:py-14">
         <div className="container">
           <div className="flex items-end justify-between gap-4 flex-wrap">
             <div className="border-l-2 border-kd-green pl-4">
@@ -210,7 +214,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="py-16 lg:py-20">
+      <section className="py-10 lg:py-14">
         <FeatureRow
           eyebrow={doc?.whyEyebrow || "¿Por qué elegir KD Pack?"}
           title={

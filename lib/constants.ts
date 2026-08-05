@@ -18,7 +18,6 @@ export const DEFAULT_NAV_LINKS = [
   { label: "Nosotros", href: "/nosotros" },
   { label: "Sustentabilidad", href: "/sustentabilidad" },
   { label: "Ubicación", href: "/ubicacion" },
-  { label: "Cotizar", href: "/cotiza-tu-proyecto" },
 ];
 
 export const WHATSAPP_NUMBER = "56228249870";
