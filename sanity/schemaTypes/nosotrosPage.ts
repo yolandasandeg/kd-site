@@ -9,8 +9,12 @@ export const nosotrosPage = defineType({
     { name: "stats", title: "Estadísticas" },
     { name: "historia", title: "Nuestra historia" },
     { name: "valores", title: "Valores" },
+    { name: "engel", title: "Máquina Engel" },
     { name: "workingWays", title: "Manera de trabajar" },
+    { name: "testimonials", title: "Testimonios" },
+    { name: "team", title: "Equipo directivo" },
     { name: "certifications", title: "Certificaciones" },
+    { name: "logos", title: "Logos de clientes" },
     { name: "cta", title: "CTA final" },
   ],
   fields: [
@@ -44,6 +48,13 @@ export const nosotrosPage = defineType({
       group: "historia",
     }),
     defineField({ name: "historiaImage", title: "Imagen", type: "image", group: "historia" }),
+    defineField({
+      name: "timelineItems",
+      title: "Línea de tiempo (hitos)",
+      type: "array",
+      of: [{ type: "timelineItem" }],
+      group: "historia",
+    }),
 
     defineField({ name: "valoresEyebrow", title: "Eyebrow", type: "string", group: "valores" }),
     defineField({ name: "valoresTitle", title: "Título", type: "string", group: "valores" }),
@@ -55,6 +66,17 @@ export const nosotrosPage = defineType({
       group: "valores",
     }),
 
+    defineField({ name: "engelTitle", title: "Título", type: "string", group: "engel" }),
+    defineField({ name: "engelIntro", title: "Texto introductorio", type: "text", rows: 3, group: "engel" }),
+    defineField({ name: "engelImage", title: "Foto de la máquina", type: "image", group: "engel" }),
+    defineField({
+      name: "engelSpecs",
+      title: "Especificaciones técnicas",
+      type: "array",
+      of: [{ type: "specItem" }],
+      group: "engel",
+    }),
+
     defineField({ name: "workingWaysEyebrow", title: "Eyebrow", type: "string", group: "workingWays" }),
     defineField({ name: "workingWaysTitle", title: "Título", type: "string", group: "workingWays" }),
     defineField({
@@ -64,6 +86,28 @@ export const nosotrosPage = defineType({
       of: [{ type: "workingWayItem" }],
       group: "workingWays",
     }),
+
+    defineField({ name: "testimonialsEyebrow", title: "Eyebrow", type: "string", group: "testimonials" }),
+    defineField({ name: "testimonialsTitle", title: "Título", type: "string", group: "testimonials" }),
+    defineField({
+      name: "testimonials",
+      title: "Testimonios",
+      type: "array",
+      of: [{ type: "testimonialItem" }],
+      group: "testimonials",
+    }),
+
+    defineField({ name: "teamEyebrow", title: "Eyebrow", type: "string", group: "team" }),
+    defineField({ name: "teamTitle", title: "Título", type: "string", group: "team" }),
+    defineField({
+      name: "teamMembers",
+      title: "Miembros",
+      type: "array",
+      of: [{ type: "teamMemberItem" }],
+      group: "team",
+    }),
+
+    defineField({ name: "logosTitle", title: "Texto sobre los logos", type: "string", group: "logos" }),
 
     defineField({ name: "certificationsEyebrow", title: "Eyebrow", type: "string", group: "certifications" }),
     defineField({ name: "certificationsTitle", title: "Título", type: "string", group: "certifications" }),

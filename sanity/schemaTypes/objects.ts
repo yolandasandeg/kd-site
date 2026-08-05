@@ -152,6 +152,55 @@ export const statItem = defineType({
   preview: { select: { title: "value", subtitle: "label" } },
 });
 
+export const specItem = defineType({
+  name: "specItem",
+  title: "Especificación técnica",
+  type: "object",
+  fields: [
+    defineField({ name: "label", title: "Nombre de la especificación", type: "string" }),
+    defineField({ name: "value", title: "Valor", type: "string" }),
+  ],
+  preview: { select: { title: "label", subtitle: "value" } },
+});
+
+export const timelineItem = defineType({
+  name: "timelineItem",
+  title: "Hito de historia",
+  type: "object",
+  fields: [
+    defineField({ name: "year", title: "Año", type: "string" }),
+    defineField({ name: "title", title: "Título", type: "string" }),
+    defineField({ name: "description", title: "Descripción", type: "text", rows: 2 }),
+  ],
+  preview: { select: { title: "year", subtitle: "title" } },
+});
+
+export const testimonialItem = defineType({
+  name: "testimonialItem",
+  title: "Testimonio",
+  type: "object",
+  fields: [
+    defineField({ name: "quote", title: "Cita", type: "text", rows: 3 }),
+    defineField({ name: "author", title: "Nombre", type: "string" }),
+    defineField({ name: "role", title: "Cargo", type: "string" }),
+    defineField({ name: "company", title: "Empresa", type: "string" }),
+    defineField({ name: "photo", title: "Foto (opcional)", type: "image" }),
+  ],
+  preview: { select: { title: "author", subtitle: "company" } },
+});
+
+export const teamMemberItem = defineType({
+  name: "teamMemberItem",
+  title: "Miembro del equipo",
+  type: "object",
+  fields: [
+    defineField({ name: "name", title: "Nombre", type: "string" }),
+    defineField({ name: "role", title: "Cargo", type: "string" }),
+    defineField({ name: "photo", title: "Foto", type: "image", options: { hotspot: true } }),
+  ],
+  preview: { select: { title: "name", subtitle: "role", media: "photo" } },
+});
+
 export const workingWayItem = defineType({
   name: "workingWayItem",
   title: "Ítem de manera de trabajar",

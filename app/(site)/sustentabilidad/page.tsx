@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { FileText } from "lucide-react";
 
 import { Hero, type HeroTitlePart } from "@/components/sections/Hero";
 import { FeatureRow, type FeatureItem } from "@/components/sections/FeatureRow";
 import { SealsStrip, type SealItem } from "@/components/sections/SealsStrip";
+import { Icon } from "@/components/icon-map";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { getSustentabilidadPage } from "@/sanity/lib/queries";
-import type { SanityImageRef } from "@/sanity/lib/image";
+import { resolveImageSrc, type SanityImageRef } from "@/sanity/lib/image";
 
 export const metadata: Metadata = {
   title: "Sustentabilidad | Compromiso ambiental de KD Pack",
@@ -21,6 +23,12 @@ export const metadata: Metadata = {
   },
 };
 
+interface StatItemDoc {
+  icon: string;
+  value: string;
+  label: string;
+}
+
 interface SustentabilidadPageDoc {
   heroEyebrow?: string;
   heroTitleParts?: HeroTitlePart[];
@@ -32,6 +40,14 @@ interface SustentabilidadPageDoc {
   pillarsItems?: FeatureItem[];
   sealsTitle?: string;
   seals?: SealItem[];
+  impactEyebrow?: string;
+  impactTitle?: string;
+  impactStats?: StatItemDoc[];
+  recyclingEyebrow?: string;
+  recyclingTitle?: string;
+  recyclingText?: string;
+  recyclingPartner?: string;
+  recyclingImages?: SanityImageRef[];
   certificateTitle?: string;
   certificateIssuer?: string;
   certificateFacts?: string[];
@@ -40,8 +56,14 @@ interface SustentabilidadPageDoc {
   ctaTitle?: string;
 }
 
+const defaultImpactStats: StatItemDoc[] = [
+  { icon: "recycle", value: "+X%", label: "de productos con material reciclado (dato pendiente)" },
+  { icon: "leaf", value: "+X%", label: "de productos 100% reciclables (dato pendiente)" },
+];
+
 export default async function SustentabilidadPage() {
   const doc = await getSustentabilidadPage<SustentabilidadPageDoc>();
+  const impactStats = doc?.impactStats?.length ? doc.impactStats : defaultImpactStats;
 
   return (
     <>
@@ -143,6 +165,66 @@ export default async function SustentabilidadPage() {
                 ]
           }
         />
+      </section>
+
+      <section className="py-16 lg:py-20 bg-kd-black">
+        <div className="container">
+          <div className="border-l-2 border-kd-green pl-4 max-w-2xl">
+            <p className="eyebrow font-semibold">
+              {doc?.impactEyebrow || "Impacto en números"}
+            </p>
+            <h2 className="mt-1.5 text-h2-mobile lg:text-h2-desktop text-white">
+              {doc?.impactTitle || "Sostenibilidad medible, no solo declarada."}
+            </h2>
+          </div>
+          <div className="mt-9 grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl">
+            {impactStats.map((stat) => (
+              <div
+                key={stat.label}
+                className="flex items-center gap-4 rounded-xl border border-white/15 bg-white/5 p-6"
+              >
+                <Icon name={stat.icon} className="h-8 w-8 text-kd-green shrink-0" />
+                <div>
+                  <p className="text-2xl font-semibold text-white">{stat.value}</p>
+                  <p className="text-sm text-white/60">{stat.label}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 lg:py-20">
+        <div className="container">
+          <div className="border-l-2 border-kd-green pl-4 max-w-2xl">
+            <p className="eyebrow font-semibold">
+              {doc?.recyclingEyebrow || "Materia prima reciclada"}
+            </p>
+            <h2 className="mt-1.5 text-h2-mobile lg:text-h2-desktop text-kd-text-primary">
+              {doc?.recyclingTitle || "De vuelta al ciclo productivo."}
+            </h2>
+            <p className="mt-3 text-sm sm:text-base text-kd-text-secondary leading-relaxed">
+              {doc?.recyclingText ||
+                `Trabajamos junto a ${doc?.recyclingPartner || "CE Maipo"} para dar una segunda vida a materiales plásticos, incorporándolos de vuelta a nuestros procesos productivos.`}
+            </p>
+          </div>
+          <div className="mt-9 grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {(doc?.recyclingImages?.length
+              ? doc.recyclingImages
+              : [undefined, undefined, undefined, undefined]
+            ).map((image, i) => (
+              <div key={i} className="relative aspect-square overflow-hidden rounded-xl">
+                <Image
+                  src={resolveImageSrc(image, "2d5a3f", "400x400")}
+                  alt="Uso de materia prima reciclada en KD Pack"
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 20vw, 45vw"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="py-16 lg:py-20 bg-kd-surface-alt">

@@ -7,6 +7,8 @@ export const sustentabilidadPage = defineType({
   groups: [
     { name: "hero", title: "Hero" },
     { name: "pillars", title: "Pilares" },
+    { name: "impact", title: "Datos de impacto" },
+    { name: "recycling", title: "Materia prima reciclada" },
     { name: "certificate", title: "Certificado energía renovable" },
     { name: "cta", title: "CTA final" },
   ],
@@ -52,6 +54,34 @@ export const sustentabilidadPage = defineType({
       type: "array",
       of: [{ type: "badgeItem" }],
       group: "pillars",
+    }),
+
+    defineField({ name: "impactEyebrow", title: "Eyebrow", type: "string", group: "impact" }),
+    defineField({ name: "impactTitle", title: "Título", type: "string", group: "impact" }),
+    defineField({
+      name: "impactStats",
+      title: "Datos duros",
+      description: "Ej: \"68%\" con etiqueta \"de productos con material reciclado\".",
+      type: "array",
+      of: [{ type: "statItem" }],
+      group: "impact",
+    }),
+
+    defineField({ name: "recyclingEyebrow", title: "Eyebrow", type: "string", group: "recycling" }),
+    defineField({ name: "recyclingTitle", title: "Título", type: "string", group: "recycling" }),
+    defineField({ name: "recyclingText", title: "Texto", type: "text", rows: 3, group: "recycling" }),
+    defineField({
+      name: "recyclingPartner",
+      title: "Socio de reciclaje (ej: CE Maipo)",
+      type: "string",
+      group: "recycling",
+    }),
+    defineField({
+      name: "recyclingImages",
+      title: "Fotos reales de uso de materia prima reciclada",
+      type: "array",
+      of: [{ type: "image", options: { hotspot: true } }],
+      group: "recycling",
     }),
 
     defineField({ name: "certificateTitle", title: "Título", type: "string", group: "certificate" }),
