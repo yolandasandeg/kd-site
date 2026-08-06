@@ -19,7 +19,7 @@ import type { Product } from "@/lib/data/products";
 import type { SanityImageRef } from "@/sanity/lib/image";
 
 export const metadata: Metadata = {
-  title: "KD Pack | Packaging plástico industrial",
+  title: "Packaging plástico industrial",
   description:
     "Contenedores, bins, pallets y soluciones plásticas para agricultura, logística, industria y construcción. Fabricación nacional con presencia en LATAM.",
   alternates: { canonical: "/" },

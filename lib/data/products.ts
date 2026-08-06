@@ -16,6 +16,7 @@ export interface Product {
 
 export const productCategories: { slug: string; label: string }[] = [
   { slug: "agricola", label: "Agrícola" },
+  { slug: "cajas-expo", label: "Cajas expo" },
   { slug: "cajas-cosecheras", label: "Cajas cosecheras" },
   { slug: "forestal", label: "Forestal" },
   { slug: "almacenaje", label: "Almacenaje" },
@@ -36,6 +37,7 @@ export const productCategories: { slug: string; label: string }[] = [
 // also needing an explicit "?marca=" param.
 export const categoryBrand: Record<string, Brand> = {
   agricola: "kdpack",
+  "cajas-expo": "kdpack",
   "cajas-cosecheras": "kdpack",
   forestal: "kdpack",
   almacenaje: "kdpack",
@@ -43,13 +45,13 @@ export const categoryBrand: Record<string, Brand> = {
   pesca: "kdpack",
   acuicola: "kdpack",
   especificos: "kdpack",
-  encofrados: "konstruplast",
-  separadores: "konstruplast",
-  tapas: "konstruplast",
-  terminaciones: "konstruplast",
-  alivianantes: "konstruplast",
-  drenaje: "konstruplast",
-  pasos: "konstruplast",
+  encofrados: "kdpack",
+  separadores: "kdpack",
+  tapas: "kdpack",
+  terminaciones: "kdpack",
+  alivianantes: "kdpack",
+  drenaje: "kdpack",
+  pasos: "kdpack",
 };
 
 export const productTypes = [

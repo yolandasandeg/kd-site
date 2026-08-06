@@ -18,12 +18,45 @@ import {
 } from "@/components/ui/sheet";
 import { urlFor, type SanityImageRef } from "@/sanity/lib/image";
 import { DEFAULT_NAV_LINKS } from "@/lib/constants";
+import { PRODUCTS_MENU } from "@/lib/data/productsMenu";
 
 type NavLink = { href: string; label: string };
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
   return pathname.startsWith(href);
+}
+
+function ProductsDropdown() {
+  return (
+    <div className="pointer-events-none absolute left-0 top-full w-72 pt-2 opacity-0 transition-all duration-150 group-hover:pointer-events-auto group-hover:opacity-100">
+      <div className="rounded-xl border border-kd-border bg-white p-2 shadow-lg">
+        {PRODUCTS_MENU.map((industry) => (
+          <div key={industry.label}>
+            <Link
+              href={industry.href}
+              className="block rounded-lg px-3 py-2 text-sm font-semibold text-kd-text-primary hover:bg-kd-surface-alt hover:text-kd-green"
+            >
+              {industry.label}
+            </Link>
+            {industry.subcategories && (
+              <div className="ml-3 border-l border-kd-border pl-3">
+                {industry.subcategories.map((sub) => (
+                  <Link
+                    key={sub.label}
+                    href={sub.href}
+                    className="block rounded-lg px-3 py-1.5 text-sm text-kd-text-secondary hover:bg-kd-surface-alt hover:text-kd-green"
+                  >
+                    {sub.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 interface NavbarProps {
@@ -71,18 +104,23 @@ export function Navbar({ kdpackLogo, navLinks = DEFAULT_NAV_LINKS }: NavbarProps
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7" aria-label="Navegación principal">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "text-sm font-medium text-kd-text-primary hover:text-kd-green transition-colors pb-1 border-b-2 border-transparent",
-                isActive(pathname, link.href) && "text-kd-green border-kd-green"
-              )}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isProductos = link.href.startsWith("/productos");
+            return (
+              <div key={link.href} className={cn(isProductos && "group relative")}>
+                <Link
+                  href={link.href}
+                  className={cn(
+                    "text-sm font-medium text-kd-text-primary hover:text-kd-green transition-colors pb-1 border-b-2 border-transparent",
+                    isActive(pathname, link.href) && "text-kd-green border-kd-green"
+                  )}
+                >
+                  {link.label}
+                </Link>
+                {isProductos && <ProductsDropdown />}
+              </div>
+            );
+          })}
         </nav>
 
         <div className="hidden lg:block">
@@ -107,20 +145,53 @@ export function Navbar({ kdpackLogo, navLinks = DEFAULT_NAV_LINKS }: NavbarProps
             <SheetHeader>
               <SheetTitle className="sr-only">Menú de navegación</SheetTitle>
             </SheetHeader>
-            <nav className="mt-6 flex flex-col gap-1" aria-label="Navegación móvil">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className={cn(
-                    "rounded-lg px-3 py-3 text-base font-medium text-kd-text-primary hover:bg-kd-surface-alt",
-                    isActive(pathname, link.href) && "text-kd-green bg-kd-green-light"
-                  )}
-                >
-                  {link.label}
-                </Link>
-              ))}
+            <nav className="mt-6 flex flex-col gap-1 overflow-y-auto" aria-label="Navegación móvil">
+              {navLinks.map((link) => {
+                const isProductos = link.href.startsWith("/productos");
+                return (
+                  <div key={link.href}>
+                    <Link
+                      href={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className={cn(
+                        "block rounded-lg px-3 py-3 text-base font-medium text-kd-text-primary hover:bg-kd-surface-alt",
+                        isActive(pathname, link.href) && "text-kd-green bg-kd-green-light"
+                      )}
+                    >
+                      {link.label}
+                    </Link>
+                    {isProductos && (
+                      <div className="ml-4 border-l border-kd-border pl-3">
+                        {PRODUCTS_MENU.map((industry) => (
+                          <div key={industry.label}>
+                            <Link
+                              href={industry.href}
+                              onClick={() => setMobileOpen(false)}
+                              className="block rounded-lg px-3 py-2 text-sm font-semibold text-kd-text-primary hover:bg-kd-surface-alt"
+                            >
+                              {industry.label}
+                            </Link>
+                            {industry.subcategories && (
+                              <div className="ml-3 border-l border-kd-border pl-3">
+                                {industry.subcategories.map((sub) => (
+                                  <Link
+                                    key={sub.label}
+                                    href={sub.href}
+                                    onClick={() => setMobileOpen(false)}
+                                    className="block rounded-lg px-3 py-1.5 text-sm text-kd-text-secondary hover:bg-kd-surface-alt"
+                                  >
+                                    {sub.label}
+                                  </Link>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </nav>
             <div className="mt-auto pt-6">
               <Button asChild className="w-full" onClick={() => setMobileOpen(false)}>
