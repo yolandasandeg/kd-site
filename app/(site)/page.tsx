@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Hero, type HeroBadge, type HeroTitlePart } from "@/components/sections/Hero";
-import { CategoryGrid } from "@/components/sections/CategoryGrid";
 import { FeatureRow, type FeatureItem } from "@/components/sections/FeatureRow";
 import { SealsStrip, type SealItem } from "@/components/sections/SealsStrip";
 import { ProductCarousel } from "@/components/sections/ProductCarousel";
@@ -61,12 +60,11 @@ interface HomePageDoc {
 }
 
 const defaultIndustries = [
-  { slug: "agricultura", name: "Agricultura", href: "/productos?categoria=agricola", icon: "leaf", imageColor: "2d5a3f" },
-  { slug: "construccion", name: "Construcción", href: "/industrias/construccion", icon: "building-2", imageColor: "3f3f3a" },
-  { slug: "logistica", name: "Logística", href: "/productos?categoria=almacenaje", icon: "truck", imageColor: "1f2937" },
-  { slug: "forestal", name: "Forestal", href: "/productos?categoria=forestal", icon: "trees", imageColor: "1e4620" },
-  { slug: "acuicultura", name: "Acuicultura", href: "/productos?categoria=acuicola", icon: "fish", imageColor: "1c3f5c" },
-  { slug: "proyectos-especiales", name: "Proyectos especiales", href: "/cotiza-tu-proyecto", icon: "star", imageColor: "141414" },
+  { slug: "agricola", name: "Agrícola", href: "/productos?categoria=agricola", icon: "leaf" },
+  { slug: "construccion", name: "Construcción", href: "/industrias/construccion", icon: "building-2" },
+  { slug: "logistica", name: "Logística", href: "/productos?categoria=almacenaje", icon: "truck" },
+  { slug: "forestal", name: "Forestal", href: "/productos?categoria=forestal", icon: "trees" },
+  { slug: "pesca", name: "Pesca", href: "/productos?categoria=pesca", icon: "fish" },
 ];
 
 export default async function Home() {
@@ -150,7 +148,7 @@ export default async function Home() {
           doc?.heroBadges?.length
             ? doc.heroBadges
             : [
-                { icon: "award", label: "+15 años\nfabricando en Chile" },
+                { icon: "award", label: "+15 años fabricando en Chile" },
                 { icon: "boxes", label: "+4.500 toneladas al año" },
                 { icon: "users", label: "+X clientes activos" },
                 { icon: "leaf", label: "100% energía renovable" },
@@ -170,24 +168,26 @@ export default async function Home() {
         clients={kdPackClients}
       />
 
-      <CategoryGrid
+      <FeatureRow
         eyebrow={doc?.industriesEyebrow || "Industrias"}
         title={
           doc?.industriesTitle ||
           "Soluciones especializadas para cada sector que impulsamos."
         }
-        variant="compact"
+        background="white"
+        layout="card"
         items={
           doc?.industriesItems?.length
-            ? doc.industriesItems.map((i, idx) => ({
-                slug: `industria-${idx}`,
-                name: i.name || "",
-                href: i.href || "/productos",
+            ? doc.industriesItems.map((i) => ({
                 icon: i.icon || "star",
-                imageColor: defaultIndustries[idx % defaultIndustries.length].imageColor,
-                image: i.image,
+                title: i.name || "",
+                href: i.href || "/productos",
               }))
-            : defaultIndustries
+            : defaultIndustries.map((i) => ({
+                icon: i.icon,
+                title: i.name,
+                href: i.href,
+              }))
         }
       />
 

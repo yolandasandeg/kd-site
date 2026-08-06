@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { cn } from "@/lib/utils";
 import { Icon } from "@/components/icon-map";
 import { Reveal } from "@/components/Reveal";
@@ -6,6 +8,7 @@ export interface FeatureItem {
   icon: string;
   title: string;
   description?: string;
+  href?: string;
 }
 
 const LG_COLS_CLASS: Record<1 | 2 | 3 | 4 | 5 | 6, string> = {
@@ -79,17 +82,16 @@ export function FeatureRow({
             LG_COLS_CLASS[Math.min(items.length, 6) as 1 | 2 | 3 | 4 | 5 | 6]
           )}
         >
-          {items.map((item, index) =>
-            layout === "card" ? (
-              <Reveal key={item.title} delay={index * 60}>
-              <div
-                className={cn(
-                  "h-full rounded-xl border p-5 transition-all duration-300 hover:-translate-y-1",
-                  isDark
-                    ? "border-white/15 bg-white/5 hover:bg-white/10"
-                    : "border-kd-border bg-white hover:shadow-lg"
-                )}
-              >
+          {items.map((item, index) => {
+            const cardClassName = cn(
+              "h-full rounded-xl border p-5 shadow-sm transition-all duration-300 hover:-translate-y-1",
+              isDark
+                ? "border-white/15 bg-white/5 hover:bg-white/10"
+                : "border-kd-border bg-white hover:shadow-lg",
+              item.href && "block"
+            );
+            const cardContent = (
+              <>
                 <div className="flex h-11 w-11 items-center justify-center rounded-full bg-kd-green-light">
                   <Icon name={item.icon} className="h-5 w-5 text-kd-green" />
                 </div>
@@ -111,7 +113,17 @@ export function FeatureRow({
                     {item.description}
                   </p>
                 )}
-              </div>
+              </>
+            );
+            return layout === "card" ? (
+              <Reveal key={item.title} delay={index * 60}>
+              {item.href ? (
+                <Link href={item.href} className={cardClassName}>
+                  {cardContent}
+                </Link>
+              ) : (
+                <div className={cardClassName}>{cardContent}</div>
+              )}
               </Reveal>
             ) : (
               <Reveal key={item.title} delay={index * 60}>
@@ -146,8 +158,8 @@ export function FeatureRow({
                 )}
               </div>
               </Reveal>
-            )
-          )}
+            );
+          })}
         </div>
       </div>
     </section>
