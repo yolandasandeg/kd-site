@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, ChevronRight, Ruler, Layers3, Tag, Boxes } from "lucide-react";
+import { ArrowRight, ChevronRight, Ruler, Layers3, Tag, Boxes, FileText } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/sections/ProductCard";
@@ -149,6 +149,30 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                       {feature}
                     </span>
                   ))}
+                </div>
+              </div>
+            )}
+
+            {product.documents && product.documents.length > 0 && (
+              <div className="mt-6">
+                <p className="text-xs font-semibold uppercase tracking-wide text-kd-text-secondary">
+                  Documentos
+                </p>
+                <div className="mt-2.5 flex flex-wrap gap-2">
+                  {product.documents
+                    .filter((doc) => doc.file?.asset?.url)
+                    .map((doc) => (
+                      <a
+                        key={doc.label}
+                        href={doc.file!.asset!.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 rounded-full border border-kd-border px-3.5 py-2 text-sm font-medium text-kd-text-primary hover:border-kd-green hover:text-kd-green transition-colors"
+                      >
+                        <FileText className="h-4 w-4 text-kd-green" />
+                        {doc.label}
+                      </a>
+                    ))}
                 </div>
               </div>
             )}

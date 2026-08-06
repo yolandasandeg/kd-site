@@ -148,8 +148,8 @@ export default async function Home() {
           doc?.heroBadges?.length
             ? doc.heroBadges
             : [
-                { icon: "award", label: "+15 años fabricando en Chile" },
-                { icon: "boxes", label: "+4.500 toneladas al año" },
+                { icon: "award", label: "+15 años en Chile" },
+                { icon: "boxes", label: "+4.500 ton al año" },
                 { icon: "users", label: "+X clientes activos" },
                 { icon: "leaf", label: "100% energía renovable" },
               ]

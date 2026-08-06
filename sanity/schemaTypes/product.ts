@@ -52,6 +52,13 @@ export const product = defineType({
       type: "array",
       of: [{ type: "image", options: { hotspot: true } }],
     }),
+    defineField({
+      name: "documents",
+      title: "Documentos (PDF)",
+      description: "Certificados, fichas técnicas o guías. Cada uno aparece como un botón en la ficha del producto.",
+      type: "array",
+      of: [{ type: "productDocument" }],
+    }),
     defineField({ name: "order", title: "Orden", type: "number" }),
   ],
   orderings: [

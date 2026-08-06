@@ -10,6 +10,7 @@ import {
   timelineItem,
   testimonialItem,
   teamMemberItem,
+  productDocument,
 } from "./objects";
 import { product } from "./product";
 import { project } from "./project";

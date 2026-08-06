@@ -3,6 +3,7 @@ import { MapPin, Phone, Mail } from "lucide-react";
 
 import { getContactInfo } from "@/sanity/lib/queries";
 import { Logo } from "@/components/layout/Logo";
+import { PRODUCTS_MENU } from "@/lib/data/productsMenu";
 import type { SanityImageRef } from "@/sanity/lib/image";
 
 function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -23,15 +24,6 @@ const navigationLinks = [
   { href: "/ubicacion", label: "Ubicación" },
   { href: "/proyectos", label: "Proyectos" },
   { href: "/contacto", label: "Contacto" },
-];
-
-const productLinks = [
-  { href: "/productos?categoria=agricola", label: "Agrícola" },
-  { href: "/productos?categoria=cajas-cosecheras", label: "Cajas cosecheras" },
-  { href: "/productos?categoria=forestal", label: "Forestal" },
-  { href: "/productos?categoria=almacenaje", label: "Almacenaje" },
-  { href: "/productos?categoria=pallets", label: "Pallets" },
-  { href: "/productos?categoria=pesca", label: "Pesca" },
 ];
 
 interface FooterProps {
@@ -85,13 +77,13 @@ export async function Footer({ logoImage }: FooterProps) {
             Industrias
           </h3>
           <ul className="mt-4 space-y-2.5">
-            {productLinks.map((link) => (
-              <li key={link.label}>
+            {PRODUCTS_MENU.map((industry) => (
+              <li key={industry.label}>
                 <Link
-                  href={link.href}
+                  href={industry.href}
                   className="text-sm text-white/60 hover:text-white transition-colors"
                 >
-                  {link.label}
+                  {industry.label}
                 </Link>
               </li>
             ))}

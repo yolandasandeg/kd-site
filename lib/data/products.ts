@@ -1,5 +1,10 @@
 export type Brand = "kdpack" | "konstruplast";
 
+export interface ProductDocument {
+  label: string;
+  file?: { asset?: { url?: string; originalFilename?: string } };
+}
+
 export interface Product {
   slug: string;
   name: string;
@@ -12,6 +17,7 @@ export interface Product {
   productType: string;
   features: string[];
   imageColor: string;
+  documents?: ProductDocument[];
 }
 
 export const productCategories: { slug: string; label: string }[] = [

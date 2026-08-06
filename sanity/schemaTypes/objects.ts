@@ -201,6 +201,29 @@ export const teamMemberItem = defineType({
   preview: { select: { title: "name", subtitle: "role", media: "photo" } },
 });
 
+export const productDocument = defineType({
+  name: "productDocument",
+  title: "Documento (PDF)",
+  type: "object",
+  fields: [
+    defineField({
+      name: "label",
+      title: "Nombre del botón",
+      description: "Ej: Ficha técnica, Certificado de calidad, Guía de uso.",
+      type: "string",
+      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: "file",
+      title: "Archivo PDF",
+      type: "file",
+      options: { accept: ".pdf" },
+      validation: (r) => r.required(),
+    }),
+  ],
+  preview: { select: { title: "label" } },
+});
+
 export const workingWayItem = defineType({
   name: "workingWayItem",
   title: "Ítem de manera de trabajar",

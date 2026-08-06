@@ -19,7 +19,8 @@ import { DEFAULT_NAV_LINKS } from "@/lib/constants";
 
 const PRODUCT_PROJECTION = `{
   "slug": slug.current,
-  name, code, size, material, category, brand, description, productType, features, image, gallery
+  name, code, size, material, category, brand, description, productType, features, image, gallery,
+  documents[]{ label, file{ asset->{url, originalFilename} } }
 }`;
 
 export async function getProducts(): Promise<
