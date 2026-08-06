@@ -43,6 +43,7 @@ export const schemaTypes = [
   timelineItem,
   testimonialItem,
   teamMemberItem,
+  productDocument,
   // Colecciones
   product,
   project,
