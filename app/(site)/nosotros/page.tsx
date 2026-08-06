@@ -6,8 +6,10 @@ import { ArrowRight } from "lucide-react";
 import { Hero, type HeroTitlePart } from "@/components/sections/Hero";
 import { FeatureRow, type FeatureItem } from "@/components/sections/FeatureRow";
 import { LogoStrip } from "@/components/sections/LogoStrip";
+import { TestimonialCarousel } from "@/components/sections/TestimonialCarousel";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { Icon } from "@/components/icon-map";
+import { Reveal } from "@/components/Reveal";
 import { getClients, getPageDoc } from "@/sanity/lib/queries";
 import { resolveImageSrc, type SanityImageRef } from "@/sanity/lib/image";
 
@@ -154,13 +156,25 @@ const defaultEngelSpecs: SpecItemDoc[] = [
 const defaultTestimonials: TestimonialItemDoc[] = [
   {
     quote: "PLACEHOLDER: testimonio real de un cliente sobre su experiencia trabajando con KD Pack.",
-    author: "Nombre Apellido",
+    author: "Nombre Apellido 1",
     role: "Cargo",
     company: "Empresa cliente",
   },
   {
     quote: "PLACEHOLDER: testimonio real de un cliente sobre su experiencia trabajando con KD Pack.",
-    author: "Nombre Apellido",
+    author: "Nombre Apellido 2",
+    role: "Cargo",
+    company: "Empresa cliente",
+  },
+  {
+    quote: "PLACEHOLDER: testimonio real de un cliente sobre su experiencia trabajando con KD Pack.",
+    author: "Nombre Apellido 3",
+    role: "Cargo",
+    company: "Empresa cliente",
+  },
+  {
+    quote: "PLACEHOLDER: testimonio real de un cliente sobre su experiencia trabajando con KD Pack.",
+    author: "Nombre Apellido 4",
     role: "Cargo",
     company: "Empresa cliente",
   },
@@ -229,16 +243,18 @@ export default async function NosotrosPage() {
 
       <section className="py-10 border-y border-kd-border bg-white">
         <div className="container grid grid-cols-2 sm:grid-cols-4 gap-8">
-          {stats.map((stat) => (
-            <div key={stat.label} className="flex flex-col items-center text-center gap-2">
-              <Icon name={stat.icon} className="h-6 w-6 text-kd-green" />
-              <div>
-                <p className="text-base font-semibold text-kd-text-primary">
-                  {stat.value}
-                </p>
-                <p className="text-xs text-kd-text-secondary">{stat.label}</p>
+          {stats.map((stat, i) => (
+            <Reveal key={stat.label} delay={i * 60}>
+              <div className="flex flex-col items-center text-center gap-2">
+                <Icon name={stat.icon} className="h-6 w-6 text-kd-green" />
+                <div>
+                  <p className="text-base font-semibold text-kd-text-primary">
+                    {stat.value}
+                  </p>
+                  <p className="text-xs text-kd-text-secondary">{stat.label}</p>
+                </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -272,8 +288,8 @@ export default async function NosotrosPage() {
 
         <div className="container mt-14">
           <div className="relative border-l-2 border-kd-border pl-8 space-y-10 max-w-2xl">
-            {timeline.map((item) => (
-              <div key={item.year} className="relative">
+            {timeline.map((item, i) => (
+              <Reveal key={item.year} delay={i * 80} className="relative">
                 <div className="absolute -left-[41px] top-0.5 h-4 w-4 rounded-full bg-kd-green border-4 border-white ring-1 ring-kd-border" />
                 <p className="eyebrow font-semibold">{item.year}</p>
                 <h3 className="mt-1 text-base font-semibold text-kd-text-primary">
@@ -284,7 +300,7 @@ export default async function NosotrosPage() {
                     {item.description}
                   </p>
                 )}
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -383,36 +399,8 @@ export default async function NosotrosPage() {
               {doc?.testimonialsTitle || "Clientes que confían en nuestro trabajo."}
             </h2>
           </div>
-          <div className="mt-9 grid sm:grid-cols-2 gap-6">
-            {testimonials.map((t) => (
-              <div
-                key={t.author}
-                className="rounded-xl border border-kd-border bg-white p-6"
-              >
-                <p className="text-sm sm:text-base text-kd-text-secondary leading-relaxed">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-                <div className="mt-5 flex items-center gap-3">
-                  <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-kd-surface-alt">
-                    <Image
-                      src={resolveImageSrc(t.photo, "1f2937", "88x88")}
-                      alt={t.author}
-                      fill
-                      className="object-cover"
-                      sizes="44px"
-                    />
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-kd-text-primary">
-                      {t.author}
-                    </p>
-                    <p className="text-xs text-kd-text-secondary">
-                      {[t.role, t.company].filter(Boolean).join(" · ")}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div className="mt-9">
+            <TestimonialCarousel testimonials={testimonials} />
           </div>
         </div>
       </section>

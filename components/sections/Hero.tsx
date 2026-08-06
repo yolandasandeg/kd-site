@@ -159,7 +159,7 @@ export function Hero({
             alt=""
             fill
             priority
-            className="object-cover"
+            className="object-cover animate-hero-zoom-in motion-reduce:animate-none"
             sizes="100vw"
           />
           {/* Fixed legibility gradient behind the text zone: never controlled
@@ -211,7 +211,7 @@ export function Hero({
             alt={imageAlt}
             fill
             priority
-            className="object-cover"
+            className="object-cover animate-hero-zoom-in motion-reduce:animate-none"
             style={{ objectPosition: imagePosition }}
             sizes="(min-width: 1024px) 50vw, 100vw"
           />

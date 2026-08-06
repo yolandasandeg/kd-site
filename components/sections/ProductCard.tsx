@@ -25,7 +25,7 @@ export function ProductCard({
     <div className="group relative flex flex-col rounded-xl border border-kd-border bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
       <Link
         href={`/productos/${product.slug}`}
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-10"
         aria-hidden="true"
         tabIndex={-1}
       />
@@ -56,7 +56,7 @@ export function ProductCard({
           </div>
         </div>
 
-        <div className="relative z-10 mt-4 flex items-center justify-between gap-2">
+        <div className="relative z-20 mt-4 flex items-center justify-between gap-2">
           <Link
             href={`/productos/${product.slug}`}
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-kd-green hover:text-kd-green-dark"

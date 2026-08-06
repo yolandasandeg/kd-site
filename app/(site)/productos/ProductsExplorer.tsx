@@ -390,7 +390,7 @@ export function ProductsExplorer({
                   "mt-6 grid gap-5",
                   view === "grid"
                     ? "grid-cols-2 sm:grid-cols-3 xl:grid-cols-4"
-                    : "grid-cols-1"
+                    : "grid-cols-2"
                 )}
               >
                 {paginated.map((product) => (
