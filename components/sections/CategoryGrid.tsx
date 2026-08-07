@@ -11,6 +11,7 @@ export interface CategoryGridItem {
   name: string;
   description?: string;
   href: string;
+  productsHref?: string;
   icon: string;
   imageColor: string;
   image?: SanityImageRef;
@@ -93,6 +94,51 @@ export function CategoryGrid({
                   <ArrowRight className="h-4 w-4 text-white shrink-0" />
                 </div>
               </Link>
+              </Reveal>
+            ) : item.productsHref ? (
+              <Reveal key={item.slug} delay={index * 60}>
+              <div className="group flex flex-col rounded-xl border border-kd-border bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                <Link href={item.href} className="relative aspect-[16/10] overflow-hidden block">
+                  <Image
+                    src={resolveImageSrc(item.image, item.imageColor, "640x400")}
+                    alt={item.name}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    sizes="(min-width: 1024px) 33vw, 100vw"
+                  />
+                  <div className="absolute bottom-3 left-3 flex h-10 w-10 items-center justify-center rounded-full bg-kd-green">
+                    <Icon name={item.icon} className="h-5 w-5 text-white" />
+                  </div>
+                </Link>
+                <div className="p-5">
+                  <Link href={item.href}>
+                    <h3 className="text-base font-semibold text-kd-text-primary hover:text-kd-green transition-colors">
+                      {item.name}
+                    </h3>
+                  </Link>
+                  {item.description && (
+                    <p className="mt-1.5 text-sm text-kd-text-secondary leading-relaxed">
+                      {item.description}
+                    </p>
+                  )}
+                  <div className="mt-3 flex items-center gap-4">
+                    <Link
+                      href={item.href}
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-kd-green hover:text-kd-green-dark"
+                    >
+                      Ver más
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                    <Link
+                      href={item.productsHref}
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-kd-text-primary hover:text-kd-green"
+                    >
+                      Ver productos
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
               </Reveal>
             ) : (
               <Reveal key={item.slug} delay={index * 60}>

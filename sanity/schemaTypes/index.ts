@@ -21,6 +21,10 @@ import { konstruplastApplication } from "./konstruplastApplication";
 import { siteSettings } from "./siteSettings";
 import { homePage } from "./homePage";
 import { construccionPage } from "./construccionPage";
+import { agricolaPage } from "./agricolaPage";
+import { logisticaPage } from "./logisticaPage";
+import { forestalPage } from "./forestalPage";
+import { pescaPage } from "./pescaPage";
 import { productosPage } from "./productosPage";
 import { industriasPage } from "./industriasPage";
 import { nosotrosPage } from "./nosotrosPage";
@@ -56,6 +60,10 @@ export const schemaTypes = [
   // Páginas (singletons)
   homePage,
   construccionPage,
+  agricolaPage,
+  logisticaPage,
+  forestalPage,
+  pescaPage,
   productosPage,
   industriasPage,
   nosotrosPage,
@@ -70,6 +78,10 @@ export const singletonTypes = new Set([
   "siteSettings",
   "homePage",
   "construccionPage",
+  "agricolaPage",
+  "logisticaPage",
+  "forestalPage",
+  "pescaPage",
   "productosPage",
   "industriasPage",
   "nosotrosPage",

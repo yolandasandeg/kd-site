@@ -33,6 +33,7 @@ import {
   MessageCircle,
   Mail,
   Search,
+  Waves,
   type LucideIcon,
 } from "lucide-react";
 
@@ -48,6 +49,7 @@ export const iconMap: Record<string, LucideIcon> = {
   building: Building2,
   "building-2": Building,
   fish: Fish,
+  waves: Waves,
   star: Star,
   trees: Trees,
   warehouse: Warehouse,

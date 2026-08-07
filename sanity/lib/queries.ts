@@ -19,8 +19,11 @@ import { DEFAULT_NAV_LINKS } from "@/lib/constants";
 
 const PRODUCT_PROJECTION = `{
   "slug": slug.current,
-  name, code, size, material, category, industries, brand, description, productType, features, image, gallery,
-  documents[]{ label, file{ asset->{url, originalFilename} } }
+  name, code, size, material, category, brand, description, productType, image,
+  "industries": coalesce(industries, []),
+  "features": coalesce(features, []),
+  "gallery": coalesce(gallery, []),
+  "documents": coalesce(documents[]{ label, file{ asset->{url, originalFilename} } }, [])
 }`;
 
 export async function getProducts(): Promise<

@@ -105,8 +105,7 @@ export function Navbar({ kdpackLogo, navLinks = DEFAULT_NAV_LINKS }: NavbarProps
 
         <nav className="hidden lg:flex items-center gap-7" aria-label="Navegación principal">
           {navLinks.map((link) => {
-            const hasDropdown =
-              link.href.startsWith("/productos") || link.href.startsWith("/industrias");
+            const hasDropdown = link.href.startsWith("/productos");
             return (
               <div key={link.href} className={cn(hasDropdown && "group relative")}>
                 <Link
@@ -148,8 +147,7 @@ export function Navbar({ kdpackLogo, navLinks = DEFAULT_NAV_LINKS }: NavbarProps
             </SheetHeader>
             <nav className="mt-6 flex flex-col gap-1 overflow-y-auto" aria-label="Navegación móvil">
               {navLinks.map((link) => {
-                const hasDropdown =
-                  link.href.startsWith("/productos") || link.href.startsWith("/industrias");
+                const hasDropdown = link.href.startsWith("/productos");
                 return (
                   <div key={link.href}>
                     <Link

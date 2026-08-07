@@ -9,7 +9,8 @@ export const industry = defineType({
     defineField({ name: "name", title: "Nombre", type: "string", validation: (r) => r.required() }),
     defineField({ name: "slug", title: "Slug", type: "slug", options: { source: "name" } }),
     defineField({ name: "description", title: "Descripción", type: "text", rows: 2 }),
-    defineField({ name: "href", title: "Link", type: "string" }),
+    defineField({ name: "href", title: "Link \"Ver más\" (página de la industria)", type: "string" }),
+    defineField({ name: "productsHref", title: "Link \"Ver productos\"", type: "string" }),
     defineField({ name: "icon", title: "Ícono", type: "string", options: { list: ICON_OPTIONS } }),
     defineField({ name: "image", title: "Imagen", type: "image", options: { hotspot: true } }),
     defineField({
