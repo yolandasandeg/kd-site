@@ -155,6 +155,11 @@ export function ProductsExplorer({
   const [mobileFiltersOpen, setMobileFiltersOpen] = React.useState(false);
 
   React.useEffect(() => {
+    setIndustriesFilter(new Set(initialIndustria ? [initialIndustria] : []));
+    setCategories(new Set(initialCategory ? [initialCategory] : []));
+  }, [initialIndustria, initialCategory]);
+
+  React.useEffect(() => {
     setPage(1);
   }, [search, industriesFilter, categories, characteristics, materials]);
 
