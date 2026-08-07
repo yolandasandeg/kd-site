@@ -61,7 +61,7 @@ interface HomePageDoc {
 
 const defaultIndustries = [
   { slug: "agricola", name: "Agrícola", href: "/productos?categoria=agricola", icon: "leaf" },
-  { slug: "construccion", name: "Construcción", href: "/industrias/construccion", icon: "building-2" },
+  { slug: "construccion", name: "Construcción", href: "/productos?industria=Construcci%C3%B3n", icon: "building-2" },
   { slug: "logistica", name: "Logística", href: "/productos?categoria=almacenaje", icon: "truck" },
   { slug: "forestal", name: "Forestal", href: "/productos?categoria=forestal", icon: "trees" },
   { slug: "pesca", name: "Pesca", href: "/productos?categoria=pesca", icon: "fish" },
@@ -190,7 +190,7 @@ export default async function Home() {
         }
       />
 
-      <section className="py-10 lg:py-14">
+      <section className="pt-10 lg:pt-14">
         <div className="container">
           <div className="flex items-end justify-between gap-4 flex-wrap">
             <div className="border-l-2 border-kd-green pl-4">

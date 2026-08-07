@@ -93,6 +93,7 @@ export function ProductsExplorer({
 }: ProductsExplorerProps) {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get("categoria");
+  const initialIndustria = searchParams.get("industria");
   const marcaParam = searchParams.get("marca");
 
   const resolvedBrand: Brand =
@@ -134,7 +135,7 @@ export function ProductsExplorer({
 
   const [search, setSearch] = React.useState("");
   const [industriesFilter, setIndustriesFilter] = React.useState<Set<string>>(
-    new Set()
+    () => new Set(initialIndustria ? [initialIndustria] : [])
   );
   const [categories, setCategories] = React.useState<Set<string>>(
     () => new Set(initialCategory ? [initialCategory] : [])

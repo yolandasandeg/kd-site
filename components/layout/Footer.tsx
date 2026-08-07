@@ -18,7 +18,7 @@ const navigationLinks = [
   { href: "/", label: "Inicio" },
   { href: "/productos", label: "Productos" },
   { href: "/industrias", label: "Industrias" },
-  { href: "/industrias/construccion", label: "Construcción" },
+  { href: "/productos?industria=Construcci%C3%B3n", label: "Construcción" },
   { href: "/nosotros", label: "Nosotros" },
   { href: "/sustentabilidad", label: "Sustentabilidad" },
   { href: "/ubicacion", label: "Ubicación" },

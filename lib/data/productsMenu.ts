@@ -17,7 +17,7 @@ export const PRODUCTS_MENU: ProductsMenuIndustry[] = [
       { label: "Otros", href: "/productos?categoria=agricola" },
     ],
   },
-  { label: "Construcción", href: "/industrias/construccion" },
+  { label: "Construcción", href: "/productos?industria=Construcci%C3%B3n" },
   { label: "Logística", href: "/productos?categoria=almacenaje" },
   { label: "Forestal", href: "/productos?categoria=forestal" },
   { label: "Pesca", href: "/productos?categoria=pesca" },
