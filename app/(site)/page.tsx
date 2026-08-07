@@ -213,8 +213,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="py-10 lg:py-14">
-        <FeatureRow
+      <FeatureRow
           eyebrow={doc?.whyEyebrow || "¿Por qué elegir KD Pack?"}
           title={
             doc?.whyTitle ||
@@ -254,41 +253,42 @@ export default async function Home() {
           }
         />
 
-        <SealsStrip
-          title={doc?.whySealsTitle}
-          items={
-            doc?.whySeals?.length
-              ? doc.whySeals
-              : [
-                  {
-                    icon: "shield",
-                    label: "ISO 9001",
-                    description: "Norma internacional de gestión de calidad que certifica procesos consistentes y orientados a la mejora continua.",
-                  },
-                  {
-                    icon: "building",
-                    label: "SERVIU",
-                    description: "Servicio de Vivienda y Urbanización de Chile: supervisa el cumplimiento de estándares técnicos en obras de construcción.",
-                  },
-                  {
-                    icon: "award",
-                    label: "DICTUC",
-                    description: "Organismo de certificación técnica ligado a la Universidad Católica que valida el cumplimiento de normas de calidad e ingeniería.",
-                  },
-                  {
-                    icon: "leaf",
-                    label: "Energía renovable",
-                    description: "Certificado RENOVA que acredita que nuestra planta opera con energía eléctrica 100% renovable.",
-                  },
-                  {
-                    icon: "recycle",
-                    label: "Materia prima reciclada",
-                    description: "Incorporamos materiales reciclables y reciclados en nuestros procesos, reduciendo el impacto ambiental de cada producto.",
-                  },
-                ]
-          }
-        />
-      </section>
+        <div className="bg-white pb-16 lg:pb-20">
+          <SealsStrip
+            title={doc?.whySealsTitle}
+            items={
+              doc?.whySeals?.length
+                ? doc.whySeals
+                : [
+                    {
+                      icon: "shield",
+                      label: "ISO 9001",
+                      description: "Norma internacional de gestión de calidad que certifica procesos consistentes y orientados a la mejora continua.",
+                    },
+                    {
+                      icon: "building",
+                      label: "SERVIU",
+                      description: "Servicio de Vivienda y Urbanización de Chile: supervisa el cumplimiento de estándares técnicos en obras de construcción.",
+                    },
+                    {
+                      icon: "award",
+                      label: "DICTUC",
+                      description: "Organismo de certificación técnica ligado a la Universidad Católica que valida el cumplimiento de normas de calidad e ingeniería.",
+                    },
+                    {
+                      icon: "leaf",
+                      label: "Energía renovable",
+                      description: "Certificado RENOVA que acredita que nuestra planta opera con energía eléctrica 100% renovable.",
+                    },
+                    {
+                      icon: "recycle",
+                      label: "Materia prima reciclada",
+                      description: "Incorporamos materiales reciclables y reciclados en nuestros procesos, reduciendo el impacto ambiental de cada producto.",
+                    },
+                  ]
+            }
+          />
+        </div>
 
       <section className="py-16 lg:py-20 bg-kd-black">
         <div className="container">

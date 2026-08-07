@@ -106,7 +106,7 @@ export function FeatureRow({
                 {item.description && (
                   <p
                     className={cn(
-                      "mt-1.5 text-xs leading-relaxed",
+                      "mt-1.5 text-xs leading-relaxed text-justify",
                       isDark ? "text-white/60" : "text-kd-text-secondary"
                     )}
                   >
@@ -149,7 +149,7 @@ export function FeatureRow({
                 {item.description && (
                   <p
                     className={cn(
-                      "mt-1.5 text-xs leading-relaxed",
+                      "mt-1.5 text-xs leading-relaxed text-justify",
                       isDark ? "text-white/60" : "text-kd-text-secondary"
                     )}
                   >

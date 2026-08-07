@@ -105,9 +105,10 @@ export function Navbar({ kdpackLogo, navLinks = DEFAULT_NAV_LINKS }: NavbarProps
 
         <nav className="hidden lg:flex items-center gap-7" aria-label="Navegación principal">
           {navLinks.map((link) => {
-            const isProductos = link.href.startsWith("/productos");
+            const hasDropdown =
+              link.href.startsWith("/productos") || link.href.startsWith("/industrias");
             return (
-              <div key={link.href} className={cn(isProductos && "group relative")}>
+              <div key={link.href} className={cn(hasDropdown && "group relative")}>
                 <Link
                   href={link.href}
                   className={cn(
@@ -117,7 +118,7 @@ export function Navbar({ kdpackLogo, navLinks = DEFAULT_NAV_LINKS }: NavbarProps
                 >
                   {link.label}
                 </Link>
-                {isProductos && <ProductsDropdown />}
+                {hasDropdown && <ProductsDropdown />}
               </div>
             );
           })}
@@ -147,7 +148,8 @@ export function Navbar({ kdpackLogo, navLinks = DEFAULT_NAV_LINKS }: NavbarProps
             </SheetHeader>
             <nav className="mt-6 flex flex-col gap-1 overflow-y-auto" aria-label="Navegación móvil">
               {navLinks.map((link) => {
-                const isProductos = link.href.startsWith("/productos");
+                const hasDropdown =
+                  link.href.startsWith("/productos") || link.href.startsWith("/industrias");
                 return (
                   <div key={link.href}>
                     <Link
@@ -160,7 +162,7 @@ export function Navbar({ kdpackLogo, navLinks = DEFAULT_NAV_LINKS }: NavbarProps
                     >
                       {link.label}
                     </Link>
-                    {isProductos && (
+                    {hasDropdown && (
                       <div className="ml-4 border-l border-kd-border pl-3">
                         {PRODUCTS_MENU.map((industry) => (
                           <div key={industry.label}>

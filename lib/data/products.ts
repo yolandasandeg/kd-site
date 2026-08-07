@@ -60,6 +60,29 @@ export const categoryBrand: Record<string, Brand> = {
   pasos: "kdpack",
 };
 
+export const industries = ["Agrícola", "Construcción", "Logística", "Forestal", "Pesca"];
+
+// Coarser grouping used by the "Industria" filter on /productos: maps each
+// granular category to the industry it belongs to.
+export const categoryIndustry: Record<string, string> = {
+  agricola: "Agrícola",
+  "cajas-expo": "Agrícola",
+  "cajas-cosecheras": "Agrícola",
+  especificos: "Agrícola",
+  encofrados: "Construcción",
+  separadores: "Construcción",
+  tapas: "Construcción",
+  terminaciones: "Construcción",
+  alivianantes: "Construcción",
+  drenaje: "Construcción",
+  pasos: "Construcción",
+  almacenaje: "Logística",
+  pallets: "Logística",
+  forestal: "Forestal",
+  pesca: "Pesca",
+  acuicola: "Pesca",
+};
+
 export const productTypes = [
   "Bins y contenedores",
   "Cajas y bandejas",

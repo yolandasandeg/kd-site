@@ -13,10 +13,11 @@ import { Label } from "@/components/ui/label";
 import { ProductCard } from "@/components/sections/ProductCard";
 import {
   productCategories,
-  productTypes,
   productCharacteristics,
   productMaterials,
   categoryBrand,
+  categoryIndustry,
+  industries as INDUSTRY_ORDER,
   type Product,
   type Brand,
 } from "@/lib/data/products";
@@ -112,11 +113,11 @@ export function ProductsExplorer({
     [brandProducts]
   );
 
-  const availableTypes = React.useMemo(() => {
-    const present = new Set(brandProducts.map((p) => p.productType));
-    const ordered = productTypes.filter((t) => present.has(t));
-    const extra = Array.from(present).filter((t) => !productTypes.includes(t));
-    return [...ordered, ...extra];
+  const availableIndustries = React.useMemo(() => {
+    const present = new Set(
+      brandProducts.map((p) => categoryIndustry[p.category]).filter(Boolean)
+    );
+    return INDUSTRY_ORDER.filter((i) => present.has(i));
   }, [brandProducts]);
 
   const availableCharacteristics = React.useMemo(() => {
@@ -130,10 +131,12 @@ export function ProductsExplorer({
   }, [brandProducts]);
 
   const [search, setSearch] = React.useState("");
+  const [industriesFilter, setIndustriesFilter] = React.useState<Set<string>>(
+    new Set()
+  );
   const [categories, setCategories] = React.useState<Set<string>>(
     () => new Set(initialCategory ? [initialCategory] : [])
   );
-  const [types, setTypes] = React.useState<Set<string>>(new Set());
   const [characteristics, setCharacteristics] = React.useState<Set<string>>(
     new Set()
   );
@@ -144,7 +147,7 @@ export function ProductsExplorer({
 
   React.useEffect(() => {
     setPage(1);
-  }, [search, categories, types, characteristics, materials]);
+  }, [search, industriesFilter, categories, characteristics, materials]);
 
   const filtered = React.useMemo(() => {
     return brandProducts.filter((p) => {
@@ -153,8 +156,12 @@ export function ProductsExplorer({
         !`${p.name} ${p.code}`.toLowerCase().includes(search.toLowerCase())
       )
         return false;
+      if (
+        industriesFilter.size > 0 &&
+        !industriesFilter.has(categoryIndustry[p.category])
+      )
+        return false;
       if (categories.size > 0 && !categories.has(p.category)) return false;
-      if (types.size > 0 && !types.has(p.productType)) return false;
       if (
         characteristics.size > 0 &&
         !p.features.some((f) => characteristics.has(f))
@@ -167,7 +174,7 @@ export function ProductsExplorer({
         return false;
       return true;
     });
-  }, [brandProducts, search, categories, types, characteristics, materials]);
+  }, [brandProducts, search, industriesFilter, categories, characteristics, materials]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
@@ -179,11 +186,11 @@ export function ProductsExplorer({
   const activeTab = categories.size === 1 ? Array.from(categories)[0] : null;
 
   const hasActiveFilters =
-    categories.size + types.size + characteristics.size + materials.size > 0;
+    industriesFilter.size + categories.size + characteristics.size + materials.size > 0;
 
   function clearFilters() {
+    setIndustriesFilter(new Set());
     setCategories(new Set());
-    setTypes(new Set());
     setCharacteristics(new Set());
     setMaterials(new Set());
   }
@@ -196,7 +203,13 @@ export function ProductsExplorer({
         </h2>
       </div>
       <FilterGroup
-        title="Categoría"
+        title="Industria"
+        options={availableIndustries}
+        selected={industriesFilter}
+        onToggle={(v) => setIndustriesFilter((prev) => toggle(prev, v))}
+      />
+      <FilterGroup
+        title="Tipo de producto"
         options={availableCategories.map((c) => c.label)}
         selected={
           new Set(
@@ -211,12 +224,6 @@ export function ProductsExplorer({
             availableCategories.find((c) => c.label === label)?.slug ?? label;
           setCategories((prev) => toggle(prev, slug));
         }}
-      />
-      <FilterGroup
-        title="Tipo de producto"
-        options={availableTypes}
-        selected={types}
-        onToggle={(v) => setTypes((prev) => toggle(prev, v))}
       />
       <FilterGroup
         title="Características"
@@ -287,7 +294,7 @@ export function ProductsExplorer({
       </section>
 
       <div className="border-b border-kd-border bg-white">
-        <div className="container flex items-center gap-6 overflow-x-auto py-4 scrollbar-hide">
+        <div className="container flex items-center gap-6 overflow-x-auto py-3 scrollbar-hide">
           <button
             onClick={() => setCategories(new Set())}
             className={cn(
@@ -316,7 +323,7 @@ export function ProductsExplorer({
         </div>
       </div>
 
-      <section className="py-10 lg:py-14">
+      <section className="py-5 lg:py-6">
         <div className="container grid lg:grid-cols-[260px_1fr] gap-10">
           <aside className="hidden lg:block">{filtersPanel}</aside>
 
@@ -387,7 +394,7 @@ export function ProductsExplorer({
             {paginated.length > 0 ? (
               <div
                 className={cn(
-                  "mt-6 grid gap-5",
+                  "mt-4 grid gap-5",
                   view === "grid"
                     ? "grid-cols-2 sm:grid-cols-3 xl:grid-cols-4"
                     : "grid-cols-2"

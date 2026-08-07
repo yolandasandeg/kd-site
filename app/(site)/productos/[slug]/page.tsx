@@ -177,7 +177,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               </div>
             )}
 
-            <div className="mt-8 flex flex-col sm:flex-row gap-3">
+            <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg">
                 <Link href="/cotiza-tu-proyecto">
                   Cotizar este producto
