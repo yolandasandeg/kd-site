@@ -9,6 +9,7 @@ export const nosotrosPage = defineType({
     { name: "stats", title: "Estadísticas" },
     { name: "historia", title: "Nuestra historia" },
     { name: "valores", title: "Valores" },
+    { name: "mision", title: "Misión, visión y calidad" },
     { name: "engel", title: "Máquina Engel" },
     { name: "workingWays", title: "Manera de trabajar" },
     { name: "testimonials", title: "Testimonios" },
@@ -64,6 +65,24 @@ export const nosotrosPage = defineType({
       type: "array",
       of: [{ type: "featureItem" }],
       group: "valores",
+    }),
+
+    defineField({ name: "misionTitle", title: "Título de la sección", type: "string", group: "mision" }),
+    defineField({ name: "mision", title: "Misión", type: "text", rows: 4, group: "mision" }),
+    defineField({ name: "vision", title: "Visión", type: "text", rows: 4, group: "mision" }),
+    defineField({
+      name: "politicaCalidad",
+      title: "Política de calidad",
+      type: "text",
+      rows: 6,
+      group: "mision",
+    }),
+    defineField({
+      name: "objetivosCalidad",
+      title: "Objetivos de calidad",
+      type: "array",
+      of: [{ type: "string" }],
+      group: "mision",
     }),
 
     defineField({ name: "engelTitle", title: "Título", type: "string", group: "engel" }),

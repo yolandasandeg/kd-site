@@ -69,6 +69,33 @@ export const siteSettings = defineType({
     defineField({ name: "whatsappMessage", title: "Mensaje predefinido de WhatsApp", type: "string" }),
     defineField({ name: "linkedinUrl", title: "URL LinkedIn", type: "url" }),
     defineField({ name: "instagramUrl", title: "URL Instagram", type: "url" }),
+
+    defineField({
+      name: "quoteEmails",
+      title: "Correos que reciben las COTIZACIONES",
+      description:
+        'Formulario "Cotiza tu proyecto". Puedes agregar más de uno: todos reciben una copia. Si lo dejas vacío se usa purzua@kdpack.cl.',
+      type: "array",
+      of: [{ type: "string" }],
+      validation: (r) =>
+        r.custom((emails?: string[]) => {
+          const bad = (emails ?? []).filter((e) => !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.trim()));
+          return bad.length ? `Correo inválido: ${bad.join(", ")}` : true;
+        }),
+    }),
+    defineField({
+      name: "contactEmails",
+      title: "Correos que reciben el formulario de CONTACTO",
+      description:
+        'Formulario de la página Contacto. Puedes agregar más de uno. Si lo dejas vacío se usa secretaria@kdpack.cl.',
+      type: "array",
+      of: [{ type: "string" }],
+      validation: (r) =>
+        r.custom((emails?: string[]) => {
+          const bad = (emails ?? []).filter((e) => !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.trim()));
+          return bad.length ? `Correo inválido: ${bad.join(", ")}` : true;
+        }),
+    }),
   ],
   preview: {
     prepare() {

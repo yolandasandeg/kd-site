@@ -2,63 +2,64 @@ export interface Industry {
   slug: string;
   name: string;
   description: string;
+  /** Página propia de la industria ("Ver más"). */
   href: string;
-  icon: "leaf" | "truck" | "trees" | "warehouse" | "layers" | "fish";
+  /** Catálogo filtrado por esta industria ("Ver productos"). */
+  productsHref: string;
+  icon: "leaf" | "building-2" | "truck" | "trees" | "fish";
   imageColor: string;
 }
 
+// Las 5 industrias oficiales de KD Pack. Deben coincidir con `industries`
+// en lib/data/products.ts (filtro de /productos) y con PRODUCTS_MENU.
 export const industries: Industry[] = [
   {
     slug: "agricola",
     name: "Agrícola",
     description:
       "Soluciones diseñadas para la cosecha, transporte y almacenamiento de frutas, hortalizas y otros productos agrícolas.",
-    href: "/productos?categoria=agricola",
+    href: "/industrias/agricola",
+    productsHref: "/productos?industria=Agr%C3%ADcola",
     icon: "leaf",
     imageColor: "2d5a3f",
   },
   {
-    slug: "almacenaje",
-    name: "Almacenaje Industrial",
+    slug: "construccion",
+    name: "Construcción",
     description:
-      "Contenedores y bins de alta resistencia para el almacenamiento seguro y organizado en la industria.",
-    href: "/productos?categoria=almacenaje",
-    icon: "warehouse",
-    imageColor: "141414",
+      "Encofrados, separadores, tapas de seguridad y alivianantes plásticos para obras más eficientes y seguras.",
+    href: "/industrias/construccion",
+    productsHref: "/productos?industria=Construcci%C3%B3n",
+    icon: "building-2",
+    imageColor: "3f3f3a",
+  },
+  {
+    slug: "logistica",
+    name: "Logística",
+    description:
+      "Bins, contenedores y pallets reutilizables que optimizan el almacenaje, la distribución y el manejo de carga.",
+    href: "/industrias/logistica",
+    productsHref: "/productos?industria=Log%C3%ADstica",
+    icon: "truck",
+    imageColor: "1f2937",
   },
   {
     slug: "forestal",
     name: "Forestal",
     description:
       "Productos resistentes para viveros, transporte de plantas y operaciones forestales en condiciones exigentes.",
-    href: "/productos?categoria=forestal",
+    href: "/industrias/forestal",
+    productsHref: "/productos?industria=Forestal",
     icon: "trees",
     imageColor: "3d5c3a",
   },
   {
-    slug: "logistica",
-    name: "Logística y Distribución",
+    slug: "pesca",
+    name: "Pesca",
     description:
-      "Optimización de procesos logísticos con contenedores y pallets reutilizables que mejoran la eficiencia y reducen costos.",
-    href: "/productos?categoria=pallets",
-    icon: "truck",
-    imageColor: "1f2937",
-  },
-  {
-    slug: "pallets",
-    name: "Pallets y Bases",
-    description:
-      "Pallets plásticos reutilizables, higiénicos y de larga vida útil para todo tipo de operaciones industriales.",
-    href: "/productos?categoria=pallets",
-    icon: "layers",
-    imageColor: "3f3f3a",
-  },
-  {
-    slug: "pesquera",
-    name: "Pesquera",
-    description:
-      "Cajas y contenedores plásticos diseñados para la industria pesquera, resistentes a la humedad y fáciles de limpiar.",
-    href: "/productos?categoria=pesca",
+      "Cajas y contenedores plásticos diseñados para la industria pesquera y acuícola, resistentes a la humedad y fáciles de limpiar.",
+    href: "/industrias/pesca",
+    productsHref: "/productos?industria=Pesca",
     icon: "fish",
     imageColor: "1c3f5c",
   },

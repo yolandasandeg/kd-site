@@ -50,6 +50,7 @@ export default async function IndustriasPage() {
     name: i.name,
     description: i.description,
     href: i.href,
+    productsHref: i.productsHref,
     icon: i.icon,
     imageColor: i.imageColor,
     image: (i as { image?: SanityImageRef }).image,

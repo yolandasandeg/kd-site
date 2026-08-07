@@ -11,6 +11,7 @@ import { AddToQuoteButton } from "@/components/cart/AddToQuoteButton";
 import { products as staticProducts, productCategories } from "@/lib/data/products";
 import { getProducts } from "@/sanity/lib/queries";
 import { resolveImageSrc } from "@/sanity/lib/image";
+import { JsonLd, breadcrumbSchema, productSchema } from "@/components/JsonLd";
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;
@@ -63,6 +64,26 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
   return (
     <>
+      <JsonLd
+        data={productSchema({
+          slug: product.slug,
+          name: product.name,
+          code: product.code,
+          description: product.description,
+          material: product.material,
+          size: product.size,
+          category: categoryLabel,
+          imageUrl: imageSrc,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Inicio", url: "/" },
+          { name: "Productos", url: "/productos" },
+          { name: product.name, url: `/productos/${product.slug}` },
+        ])}
+      />
+
       <section className="border-b border-kd-border bg-white">
         <div className="container py-4">
           <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-kd-text-secondary">

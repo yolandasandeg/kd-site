@@ -4,7 +4,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { ArrowRight, CheckCircle2, ShieldCheck, Upload, File as FileIcon, X } from "lucide-react";
+import { AlertCircle, ArrowRight, CheckCircle2, ShieldCheck, Upload, File as FileIcon, X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -23,11 +23,10 @@ import { useCart } from "@/components/cart/CartContext";
 
 const industries = [
   "Agrícola",
-  "Logística y distribución",
-  "Forestal",
-  "Almacenaje industrial",
-  "Pesquera",
   "Construcción",
+  "Logística",
+  "Forestal",
+  "Pesca",
   "Otra",
 ];
 
@@ -66,6 +65,7 @@ export function QuoteForm() {
   const [submitted, setSubmitted] = React.useState(false);
   const [file, setFile] = React.useState<File | null>(null);
   const [fileError, setFileError] = React.useState<string | null>(null);
+  const [sendError, setSendError] = React.useState<string | null>(null);
   const [isDragging, setIsDragging] = React.useState(false);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
@@ -119,12 +119,40 @@ export function QuoteForm() {
   }
 
   async function onSubmit(values: QuoteFormValues) {
-    // TODO: conectar a backend/CRM (incluir adjunto `file` vía FormData)
-    await new Promise((resolve) => setTimeout(resolve, 600));
-    console.log("Quote form submission", values, file);
-    setSubmitted(true);
-    reset();
-    setFile(null);
+    setSendError(null);
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          kind: "quote",
+          fields: {
+            ...values,
+            // El archivo no viaja en el correo todavía: al menos avisamos a
+            // ventas que existe para que lo pidan al responder.
+            fileName: file ? `${file.name} (el cliente adjuntó un archivo)` : "",
+          },
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        // Nunca mostramos "enviado" si el correo no salió: el lead se perdería.
+        setSendError(
+          data?.error ??
+            "No pudimos enviar tu solicitud. Inténtalo de nuevo o escríbenos por WhatsApp."
+        );
+        return;
+      }
+
+      setSubmitted(true);
+      reset();
+      setFile(null);
+    } catch {
+      setSendError(
+        "No pudimos conectar con el servidor. Revisa tu conexión e inténtalo de nuevo."
+      );
+    }
   }
 
   if (submitted) {
@@ -324,6 +352,29 @@ export function QuoteForm() {
         )}
       </div>
 
+      {sendError && (
+        <div
+          role="alert"
+          className="mt-6 flex items-start gap-2.5 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800"
+        >
+          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-600" />
+          <div>
+            <p className="font-medium">{sendError}</p>
+            <p className="mt-1 text-red-700">
+              También puedes escribirnos a{" "}
+              <a href="mailto:contacto@kdpack.cl" className="underline">
+                contacto@kdpack.cl
+              </a>{" "}
+              o llamarnos al{" "}
+              <a href="tel:+56228249870" className="underline">
+                +56 2 2824 9870
+              </a>
+              .
+            </p>
+          </div>
+        </div>
+      )}
+
       <Button type="submit" size="lg" className="mt-6 w-full sm:w-auto" disabled={isSubmitting}>
         {isSubmitting ? "Enviando..." : "Enviar solicitud de cotización"}
         <ArrowRight className="h-4 w-4" />
@@ -331,7 +382,11 @@ export function QuoteForm() {
 
       <p className="mt-4 flex items-center gap-1.5 text-xs text-kd-text-secondary">
         <ShieldCheck className="h-3.5 w-3.5 text-kd-green" />
-        Tus datos están protegidos. No compartimos tu información con terceros.
+        Tus datos están protegidos. Revisa nuestra{" "}
+        <a href="/politica-de-privacidad" className="underline hover:text-kd-green">
+          política de privacidad
+        </a>
+        .
       </p>
     </form>
   );

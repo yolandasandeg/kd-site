@@ -64,6 +64,25 @@ interface TeamMemberItemDoc {
   photo?: SanityImageRef;
 }
 
+// Contenido oficial entregado por KD Pack (misión, visión y SGI).
+const defaultMision =
+  "Acompañar a nuestros clientes y asociados de manera activa y permanente en sus desafíos tecnológicos, mediante la propuesta de soluciones integrales de diseño, ingeniería y fabricación de productos plásticos inyectados, que por su naturaleza representen ventajas técnico-económicas sustantivas.";
+
+const defaultVision =
+  "Convertirnos en un aliado estratégico para nuestros clientes, asegurando su continuidad operacional y contribuyendo a la economía circular de nuestros productos, siendo líderes en la implementación de nuevas tecnologías que aporten a la fabricación de productos plásticos.";
+
+const defaultPoliticaCalidad =
+  "KD Pack S.A. establece como Política del SGI producir artículos plásticos para uso agrícola, forestal, industrial, de la construcción y acuícola, seguros e inocuos, satisfaciendo los requerimientos de nuestras partes interesadas y asegurando la productividad en las operaciones, lo que nos permite mantener el crecimiento de nuestro negocio cumpliendo los requisitos normativos, legales y reglamentarios vigentes. Para ello buscamos mejorar continuamente los procesos, a través del uso y cumplimiento de la mejora continua y eficacia del SGI, creando condiciones que aporten al desarrollo de las personas, respaldado por un equipo de colaboradores continuamente capacitados.";
+
+const defaultObjetivosCalidad = [
+  "Mejorar la calidad de los productos.",
+  "Mejorar continuamente la eficacia del SGI.",
+  "Lograr niveles satisfactorios de productividad.",
+  "Satisfacer los requerimientos de nuestros clientes.",
+  "Aportar al crecimiento y desarrollo de nuestros colaboradores.",
+  "Producir productos inocuos para el mercado de exportación.",
+];
+
 interface NosotrosPageDoc {
   heroEyebrow?: string;
   heroTitleParts?: HeroTitlePart[];
@@ -79,6 +98,11 @@ interface NosotrosPageDoc {
   valoresEyebrow?: string;
   valoresTitle?: string;
   valoresItems?: FeatureItem[];
+  misionTitle?: string;
+  mision?: string;
+  vision?: string;
+  politicaCalidad?: string;
+  objetivosCalidad?: string[];
   engelTitle?: string;
   engelIntro?: string;
   engelImage?: SanityImageRef;
@@ -195,6 +219,9 @@ export default async function NosotrosPage() {
 
   const stats = doc?.stats?.length ? doc.stats : defaultStats;
   const values = doc?.valoresItems?.length ? doc.valoresItems : defaultValues;
+  const objetivosCalidad = doc?.objetivosCalidad?.length
+    ? doc.objetivosCalidad
+    : defaultObjetivosCalidad;
   const workingWays = doc?.workingWaysItems?.length
     ? doc.workingWaysItems.map((item, i) => ({
         ...item,
@@ -313,6 +340,61 @@ export default async function NosotrosPage() {
         layout="card"
         items={values}
       />
+
+      <section className="py-16 lg:py-20 bg-white">
+        <div className="container">
+          <Reveal className="border-l-2 border-kd-green pl-4 max-w-2xl">
+            <p className="eyebrow font-semibold">Compromiso</p>
+            <h2 className="mt-1.5 text-h2-mobile lg:text-h2-desktop text-kd-text-primary">
+              {doc?.misionTitle || "Misión, visión y política de calidad."}
+            </h2>
+          </Reveal>
+
+          <div className="mt-9 grid lg:grid-cols-2 gap-6">
+            <Reveal>
+              <div className="h-full rounded-xl border border-kd-border bg-white p-6 shadow-sm">
+                <h3 className="text-base font-semibold text-kd-text-primary">Misión</h3>
+                <p className="mt-2.5 text-sm text-kd-text-secondary leading-relaxed text-justify">
+                  {doc?.mision || defaultMision}
+                </p>
+              </div>
+            </Reveal>
+            <Reveal delay={80}>
+              <div className="h-full rounded-xl border border-kd-border bg-white p-6 shadow-sm">
+                <h3 className="text-base font-semibold text-kd-text-primary">Visión</h3>
+                <p className="mt-2.5 text-sm text-kd-text-secondary leading-relaxed text-justify">
+                  {doc?.vision || defaultVision}
+                </p>
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal delay={160}>
+            <div className="mt-6 rounded-xl border border-kd-border bg-kd-surface-alt p-6 lg:p-8">
+              <h3 className="text-base font-semibold text-kd-text-primary">
+                Política de calidad
+              </h3>
+              <p className="mt-2.5 text-sm text-kd-text-secondary leading-relaxed text-justify">
+                {doc?.politicaCalidad || defaultPoliticaCalidad}
+              </p>
+
+              <h3 className="mt-7 text-base font-semibold text-kd-text-primary">
+                Objetivos de calidad
+              </h3>
+              <ol className="mt-3 grid sm:grid-cols-2 gap-x-8 gap-y-2.5">
+                {objetivosCalidad.map((objetivo, i) => (
+                  <li key={objetivo} className="flex gap-2.5 text-sm text-kd-text-secondary">
+                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-kd-green text-[11px] font-semibold text-white">
+                      {i + 1}
+                    </span>
+                    {objetivo}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
       <section className="py-16 lg:py-20 bg-kd-black">
         <div className="container grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">

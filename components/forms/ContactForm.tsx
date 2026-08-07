@@ -4,7 +4,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
+import { AlertCircle, ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,11 +20,10 @@ import {
 
 const industries = [
   "Agrícola",
-  "Logística y distribución",
-  "Forestal",
-  "Almacenaje industrial",
-  "Pesquera",
   "Construcción",
+  "Logística",
+  "Forestal",
+  "Pesca",
   "Otra",
 ];
 
@@ -43,6 +42,7 @@ type ContactFormValues = z.infer<typeof contactSchema>;
 
 export function ContactForm() {
   const [submitted, setSubmitted] = React.useState(false);
+  const [sendError, setSendError] = React.useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -63,11 +63,31 @@ export function ContactForm() {
   });
 
   async function onSubmit(values: ContactFormValues) {
-    // TODO: conectar a backend/CRM
-    await new Promise((resolve) => setTimeout(resolve, 600));
-    console.log("Contact form submission", values);
-    setSubmitted(true);
-    reset();
+    setSendError(null);
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ kind: "contact", fields: values }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        // Nunca mostramos "enviado" si el correo no salió: el lead se perdería.
+        setSendError(
+          data?.error ??
+            "No pudimos enviar tu mensaje. Inténtalo de nuevo o escríbenos por WhatsApp."
+        );
+        return;
+      }
+
+      setSubmitted(true);
+      reset();
+    } catch {
+      setSendError(
+        "No pudimos conectar con el servidor. Revisa tu conexión e inténtalo de nuevo."
+      );
+    }
   }
 
   if (submitted) {
@@ -159,6 +179,29 @@ export function ContactForm() {
         </div>
       </div>
 
+      {sendError && (
+        <div
+          role="alert"
+          className="mt-6 flex items-start gap-2.5 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800"
+        >
+          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-600" />
+          <div>
+            <p className="font-medium">{sendError}</p>
+            <p className="mt-1 text-red-700">
+              También puedes escribirnos a{" "}
+              <a href="mailto:contacto@kdpack.cl" className="underline">
+                contacto@kdpack.cl
+              </a>{" "}
+              o llamarnos al{" "}
+              <a href="tel:+56228249870" className="underline">
+                +56 2 2824 9870
+              </a>
+              .
+            </p>
+          </div>
+        </div>
+      )}
+
       <Button type="submit" size="lg" className="mt-6 w-full sm:w-auto" disabled={isSubmitting}>
         {isSubmitting ? "Enviando..." : "Enviar mensaje"}
         <ArrowRight className="h-4 w-4" />
@@ -166,7 +209,11 @@ export function ContactForm() {
 
       <p className="mt-4 flex items-center gap-1.5 text-xs text-kd-text-secondary">
         <ShieldCheck className="h-3.5 w-3.5 text-kd-green" />
-        Tus datos están protegidos. No compartimos tu información con terceros.
+        Tus datos están protegidos. Revisa nuestra{" "}
+        <a href="/politica-de-privacidad" className="underline hover:text-kd-green">
+          política de privacidad
+        </a>
+        .
       </p>
     </form>
   );

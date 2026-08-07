@@ -408,14 +408,18 @@ export function ProductsExplorer({
             {paginated.length > 0 ? (
               <div
                 className={cn(
-                  "mt-4 grid gap-5",
+                  "mt-4 grid",
                   view === "grid"
-                    ? "grid-cols-2 sm:grid-cols-3 xl:grid-cols-4"
-                    : "grid-cols-2"
+                    ? "gap-5 grid-cols-2 sm:grid-cols-3 xl:grid-cols-4"
+                    : "gap-2.5 grid-cols-1 xl:grid-cols-2"
                 )}
               >
                 {paginated.map((product) => (
-                  <ProductCard key={product.slug} product={product} />
+                  <ProductCard
+                    key={product.slug}
+                    product={product}
+                    variant={view === "list" ? "list" : "grid"}
+                  />
                 ))}
               </div>
             ) : (
