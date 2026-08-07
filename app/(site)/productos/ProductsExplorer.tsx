@@ -35,6 +35,12 @@ interface ProductsExplorerProps {
   heroOverlayOpacity?: number;
 }
 
+function getProductIndustries(p: Product): string[] {
+  if (p.industries && p.industries.length > 0) return p.industries;
+  const fallback = categoryIndustry[p.category];
+  return fallback ? [fallback] : [];
+}
+
 function toggle(set: Set<string>, value: string) {
   const next = new Set(set);
   if (next.has(value)) {
@@ -118,7 +124,7 @@ export function ProductsExplorer({
 
   const availableIndustries = React.useMemo(() => {
     const present = new Set(
-      brandProducts.map((p) => categoryIndustry[p.category]).filter(Boolean)
+      brandProducts.flatMap((p) => getProductIndustries(p))
     );
     return INDUSTRY_ORDER.filter((i) => present.has(i));
   }, [brandProducts]);
@@ -161,7 +167,7 @@ export function ProductsExplorer({
         return false;
       if (
         industriesFilter.size > 0 &&
-        !industriesFilter.has(categoryIndustry[p.category])
+        !getProductIndustries(p).some((i) => industriesFilter.has(i))
       )
         return false;
       if (categories.size > 0 && !categories.has(p.category)) return false;

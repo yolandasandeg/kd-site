@@ -12,6 +12,7 @@ export interface Product {
   size: string;
   material: string;
   category: string;
+  industries?: string[];
   brand: Brand;
   description: string;
   productType: string;
