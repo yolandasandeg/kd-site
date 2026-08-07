@@ -11,7 +11,7 @@ interface LogoStripProps {
 
 function LogoItem({ client }: { client: Client & { logo?: SanityImageRef } }) {
   return client.logo?.asset?._ref ? (
-    <div className="relative h-10 w-28 sm:h-12 sm:w-32 shrink-0 grayscale opacity-70 transition-all duration-300 hover:grayscale-0 hover:opacity-100">
+    <div className="relative h-10 w-28 sm:h-12 sm:w-32 shrink-0 grayscale opacity-80 sm:opacity-70 transition-all duration-300 hover:grayscale-0 hover:opacity-100">
       <Image
         src={urlFor(client.logo as SanityImage).height(96).fit("max").auto("format").url()}
         alt={client.name}
