@@ -11,7 +11,9 @@ interface LogoStripProps {
 
 function LogoItem({ client }: { client: Client & { logo?: SanityImageRef } }) {
   return client.logo?.asset?._ref ? (
-    <div className="relative h-10 w-28 sm:h-12 sm:w-32 shrink-0 grayscale opacity-80 sm:opacity-70 transition-all duration-300 hover:grayscale-0 hover:opacity-100">
+    // Logos siempre a color. En desktop 60% y 100% al pasar el mouse; en
+    // mobile quedan al 80% fijo porque ahí no existe el hover.
+    <div className="relative h-10 w-28 sm:h-12 sm:w-32 shrink-0 opacity-80 sm:opacity-60 transition-opacity duration-300 hover:opacity-100">
       <Image
         src={urlFor(client.logo as SanityImage).height(96).fit("max").auto("format").url()}
         alt={client.name}
@@ -21,7 +23,7 @@ function LogoItem({ client }: { client: Client & { logo?: SanityImageRef } }) {
       />
     </div>
   ) : (
-    <span className="shrink-0 text-base sm:text-lg font-bold uppercase tracking-wide text-kd-text-secondary/70 grayscale">
+    <span className="shrink-0 text-base sm:text-lg font-bold uppercase tracking-wide text-kd-text-secondary/70">
       {client.name}
     </span>
   );
