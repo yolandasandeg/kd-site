@@ -123,7 +123,6 @@ export default async function Home() {
       <Hero
         variant="dark"
         layout="full"
-        eyebrow={doc?.heroEyebrow || "KD Pack"}
         titleParts={
           doc?.heroTitleParts?.length
             ? doc.heroTitleParts

@@ -27,7 +27,7 @@ export interface HeroTitlePart {
 interface HeroProps {
   variant?: "dark" | "light";
   layout?: "split" | "full";
-  eyebrow: string;
+  eyebrow?: string;
   titleParts: HeroTitlePart[];
   subtitle: string;
   primaryCta: HeroCta;
@@ -174,7 +174,7 @@ export function Hero({
           />
         </div>
         <div className="relative container pt-10 pb-20 lg:pt-16 lg:pb-24 animate-fade-in-up">
-          <p className="eyebrow font-semibold drop-shadow-sm">{eyebrow}</p>
+          {eyebrow && <p className="eyebrow font-semibold drop-shadow-sm">{eyebrow}</p>}
           <div className="mt-4 drop-shadow-sm">{title}</div>
           <p className="mt-5 max-w-xl text-base sm:text-lg text-white/90 drop-shadow-sm">
             {subtitle}
@@ -191,7 +191,7 @@ export function Hero({
     <section className={cn(isDark ? "bg-kd-black" : "bg-white")}>
       <div className="container grid lg:grid-cols-2 gap-10 lg:gap-8 items-center py-14 lg:py-20">
         <div className="animate-fade-in-up">
-          <p className="eyebrow font-semibold">{eyebrow}</p>
+          {eyebrow && <p className="eyebrow font-semibold">{eyebrow}</p>}
           <div className="mt-4">{title}</div>
           <p
             className={cn(
