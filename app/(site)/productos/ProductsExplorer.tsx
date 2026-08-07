@@ -107,8 +107,10 @@ export function ProductsExplorer({
 
   const availableCategories = React.useMemo(
     () =>
-      productCategories.filter((c) =>
-        brandProducts.some((p) => p.category === c.slug)
+      productCategories.filter(
+        (c) =>
+          c.slug !== "agricola" &&
+          brandProducts.some((p) => p.category === c.slug)
       ),
     [brandProducts]
   );
