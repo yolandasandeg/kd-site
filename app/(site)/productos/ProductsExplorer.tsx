@@ -218,6 +218,18 @@ export function ProductsExplorer({
         onToggle={(v) => setIndustriesFilter((prev) => toggle(prev, v))}
       />
       <FilterGroup
+        title="Características"
+        options={availableCharacteristics}
+        selected={characteristics}
+        onToggle={(v) => setCharacteristics((prev) => toggle(prev, v))}
+      />
+      <FilterGroup
+        title="Material"
+        options={availableMaterials}
+        selected={materials}
+        onToggle={(v) => setMaterials((prev) => toggle(prev, v))}
+      />
+      <FilterGroup
         title="Tipo de producto"
         options={availableCategories.map((c) => c.label)}
         selected={
@@ -233,18 +245,6 @@ export function ProductsExplorer({
             availableCategories.find((c) => c.label === label)?.slug ?? label;
           setCategories((prev) => toggle(prev, slug));
         }}
-      />
-      <FilterGroup
-        title="Características"
-        options={availableCharacteristics}
-        selected={characteristics}
-        onToggle={(v) => setCharacteristics((prev) => toggle(prev, v))}
-      />
-      <FilterGroup
-        title="Material"
-        options={availableMaterials}
-        selected={materials}
-        onToggle={(v) => setMaterials((prev) => toggle(prev, v))}
       />
       {hasActiveFilters && (
         <Button variant="outline" size="sm" className="mt-2 w-full" onClick={clearFilters}>
